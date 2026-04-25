@@ -3,3 +3,6 @@
 
 # assets
 /assets
+
+# Generated output
+card_pipeline/output/
