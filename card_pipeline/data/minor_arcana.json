@@ -1,0 +1,338 @@
+[
+  {
+    "id": 22,
+    "name": "Ace of Cups",
+    "filename": "ace_of_cups",
+    "description": "single golden chalice held by hand emerging from clouds, water flowing down into pool, white dove descending with wafer in beak, lotus flowers floating on water"
+  },
+  {
+    "id": 23,
+    "name": "Two of Cups",
+    "filename": "two_of_cups",
+    "description": "young man and woman exchanging two golden chalices, caduceus with lion head floating above between them, romantic scene, mountain background"
+  },
+  {
+    "id": 24,
+    "name": "Three of Cups",
+    "filename": "three_of_cups",
+    "description": "three women in flowing dresses raising chalices in celebration, dancing in joy, fruits and flowers around them, harvest scene"
+  },
+  {
+    "id": 25,
+    "name": "Four of Cups",
+    "filename": "four_of_cups",
+    "description": "young man sitting cross-legged under tree with three chalices on ground, fourth chalice offered by hand from cloud, contemplative mood"
+  },
+  {
+    "id": 26,
+    "name": "Five of Cups",
+    "filename": "five_of_cups",
+    "description": "figure in long black cloak looking down at three spilled chalices, two upright chalices behind, river and bridge to castle in distance"
+  },
+  {
+    "id": 27,
+    "name": "Six of Cups",
+    "filename": "six_of_cups",
+    "description": "child giving flower in chalice to younger child in old village courtyard, six chalices filled with white flowers around them, nostalgic warm scene"
+  },
+  {
+    "id": 28,
+    "name": "Seven of Cups",
+    "filename": "seven_of_cups",
+    "description": "silhouette figure looking at seven floating chalices in clouds, each containing different vision treasure dragon castle laurel wreath jewels veiled figure snake"
+  },
+  {
+    "id": 29,
+    "name": "Eight of Cups",
+    "filename": "eight_of_cups",
+    "description": "lone figure in red cloak walking away into mountains under crescent moon, eight chalices stacked on ground left behind, journey scene"
+  },
+  {
+    "id": 30,
+    "name": "Nine of Cups",
+    "filename": "nine_of_cups",
+    "description": "satisfied man sitting with arms crossed in front of nine golden chalices arranged on curved table behind him, abundance feast"
+  },
+  {
+    "id": 31,
+    "name": "Ten of Cups",
+    "filename": "ten_of_cups",
+    "description": "happy family with man woman and two dancing children under rainbow with ten chalices arranged in arch, cottage and stream nearby"
+  },
+  {
+    "id": 32,
+    "name": "Page of Cups",
+    "filename": "page_of_cups",
+    "description": "young page in flowery tunic by seashore holding golden chalice with fish emerging from inside, surprised expression, ocean waves background"
+  },
+  {
+    "id": 33,
+    "name": "Knight of Cups",
+    "filename": "knight_of_cups",
+    "description": "knight in winged helmet on white horse offering golden chalice forward, calm gentle expression, river and mountains in background"
+  },
+  {
+    "id": 34,
+    "name": "Queen of Cups",
+    "filename": "queen_of_cups",
+    "description": "elegant queen on stone throne by seashore holding ornate covered chalice with handles, contemplative mood, sea and rocks background"
+  },
+  {
+    "id": 35,
+    "name": "King of Cups",
+    "filename": "king_of_cups",
+    "description": "regal king on stone throne floating on stormy sea holding chalice and scepter, fish jumping from waves, ship in background"
+  },
+  {
+    "id": 36,
+    "name": "Ace of Wands",
+    "filename": "ace_of_wands",
+    "description": "single flowering wooden staff held by hand emerging from clouds, fresh leaves sprouting from staff, mountain and castle in distance"
+  },
+  {
+    "id": 37,
+    "name": "Two of Wands",
+    "filename": "two_of_wands",
+    "description": "wealthy man on castle balcony holding small globe in one hand, two wands behind him one mounted on wall, looking out over sea and mountains"
+  },
+  {
+    "id": 38,
+    "name": "Three of Wands",
+    "filename": "three_of_wands",
+    "description": "merchant standing on cliff with back to viewer watching ships at sea, three wands planted in ground beside him, golden sunset"
+  },
+  {
+    "id": 39,
+    "name": "Four of Wands",
+    "filename": "four_of_wands",
+    "description": "two figures holding flower bouquets under garland canopy hanging between four wands, celebration scene with castle in background"
+  },
+  {
+    "id": 40,
+    "name": "Five of Wands",
+    "filename": "five_of_wands",
+    "description": "five young men in colorful tunics raising wooden staves in mock battle or competition, lively energetic scene"
+  },
+  {
+    "id": 41,
+    "name": "Six of Wands",
+    "filename": "six_of_wands",
+    "description": "victorious man riding white horse with laurel wreath on head and on raised wand, surrounded by five followers carrying wands, triumphal scene"
+  },
+  {
+    "id": 42,
+    "name": "Seven of Wands",
+    "filename": "seven_of_wands",
+    "description": "man on hilltop defending against six wands rising up at him from below, holding seventh wand defensively, courage and challenge"
+  },
+  {
+    "id": 43,
+    "name": "Eight of Wands",
+    "filename": "eight_of_wands",
+    "description": "eight wooden wands flying through clear sky over green countryside with river, swift motion energy"
+  },
+  {
+    "id": 44,
+    "name": "Nine of Wands",
+    "filename": "nine_of_wands",
+    "description": "wounded warrior leaning on wand with bandaged head, eight wands standing as fence behind him, weary but determined"
+  },
+  {
+    "id": 45,
+    "name": "Ten of Wands",
+    "filename": "ten_of_wands",
+    "description": "burdened figure carrying ten heavy wooden wands toward distant village, struggling under heavy load"
+  },
+  {
+    "id": 46,
+    "name": "Page of Wands",
+    "filename": "page_of_wands",
+    "description": "young page in feathered cap and yellow tunic holding tall flowering wand, standing in desert landscape with pyramids in distance"
+  },
+  {
+    "id": 47,
+    "name": "Knight of Wands",
+    "filename": "knight_of_wands",
+    "description": "knight in armor with flame patterns on rearing horse holding flowering wand, desert background with pyramids, dynamic action pose"
+  },
+  {
+    "id": 48,
+    "name": "Queen of Wands",
+    "filename": "queen_of_wands",
+    "description": "queen on stone throne with lion carvings holding sunflower and flowering wand, black cat at feet, sunny golden atmosphere"
+  },
+  {
+    "id": 49,
+    "name": "King of Wands",
+    "filename": "king_of_wands",
+    "description": "king on stone throne with lion and salamander symbols holding flowering wand and scepter, fiery confident expression, salamander at feet"
+  },
+  {
+    "id": 50,
+    "name": "Ace of Swords",
+    "filename": "ace_of_swords",
+    "description": "single upright silver sword held by hand emerging from clouds, golden crown adorning sword tip with palm and olive branches, mountain peaks below"
+  },
+  {
+    "id": 51,
+    "name": "Two of Swords",
+    "filename": "two_of_swords",
+    "description": "blindfolded woman seated on stone bench holding two crossed swords against chest, crescent moon above, calm sea behind"
+  },
+  {
+    "id": 52,
+    "name": "Three of Swords",
+    "filename": "three_of_swords",
+    "description": "red heart pierced by three crossed silver swords against stormy gray cloudy sky with rain, sorrowful symbolic image"
+  },
+  {
+    "id": 53,
+    "name": "Four of Swords",
+    "filename": "four_of_swords",
+    "description": "stone effigy of knight lying on tomb in chapel with hands in prayer, three swords hanging on wall above and one beneath, peaceful rest"
+  },
+  {
+    "id": 54,
+    "name": "Five of Swords",
+    "filename": "five_of_swords",
+    "description": "smug victorious man holding three swords with two more on ground, two defeated figures walking away in distance, stormy sky"
+  },
+  {
+    "id": 55,
+    "name": "Six of Swords",
+    "filename": "six_of_swords",
+    "description": "ferryman in cloak rowing wooden boat with woman and child passengers across calm water, six swords standing upright in front of boat, journey scene"
+  },
+  {
+    "id": 56,
+    "name": "Seven of Swords",
+    "filename": "seven_of_swords",
+    "description": "stealthy figure tiptoeing away from camp carrying five swords, two swords still planted in ground, sneaky cunning scene"
+  },
+  {
+    "id": 57,
+    "name": "Eight of Swords",
+    "filename": "eight_of_swords",
+    "description": "blindfolded bound woman in red dress surrounded by eight swords planted in ground around her, gray castle on hill in background"
+  },
+  {
+    "id": 58,
+    "name": "Nine of Swords",
+    "filename": "nine_of_swords",
+    "description": "person sitting up in bed with hands covering face in despair, nine swords hanging on wall behind them, dark night scene"
+  },
+  {
+    "id": 59,
+    "name": "Ten of Swords",
+    "filename": "ten_of_swords",
+    "description": "fallen figure lying face down with ten swords pierced into back, dark stormy sky above with golden sunrise breaking through on horizon"
+  },
+  {
+    "id": 60,
+    "name": "Page of Swords",
+    "filename": "page_of_swords",
+    "description": "young page in tunic on hilltop holding upright sword with both hands, windswept hair and clouds, alert vigilant pose"
+  },
+  {
+    "id": 61,
+    "name": "Knight of Swords",
+    "filename": "knight_of_swords",
+    "description": "knight in full armor on charging white horse holding sword high in attack pose, windswept dramatic action scene"
+  },
+  {
+    "id": 62,
+    "name": "Queen of Swords",
+    "filename": "queen_of_swords",
+    "description": "stern queen on stone throne with butterfly motifs holding upright sword and gesturing forward, clouds and birds in sky behind"
+  },
+  {
+    "id": 63,
+    "name": "King of Swords",
+    "filename": "king_of_swords",
+    "description": "authoritative king on stone throne with butterfly and angel motifs holding upright sword, blue robe, stern wise expression"
+  },
+  {
+    "id": 64,
+    "name": "Ace of Pentacles",
+    "filename": "ace_of_pentacles",
+    "description": "single golden pentacle coin with five-pointed star held by hand emerging from clouds, lush garden with arch of flowers and mountain in distance"
+  },
+  {
+    "id": 65,
+    "name": "Two of Pentacles",
+    "filename": "two_of_pentacles",
+    "description": "young man dancing while juggling two golden pentacles connected by infinity symbol ribbon, ships rising and falling on waves behind"
+  },
+  {
+    "id": 66,
+    "name": "Three of Pentacles",
+    "filename": "three_of_pentacles",
+    "description": "stonemason craftsman on bench with tools showing work to monk and architect with plans, three pentacles carved on cathedral arch above"
+  },
+  {
+    "id": 67,
+    "name": "Four of Pentacles",
+    "filename": "four_of_pentacles",
+    "description": "miser figure on stone seat holding one pentacle close to chest, one on head crown, two under feet, city background, hoarding pose"
+  },
+  {
+    "id": 68,
+    "name": "Five of Pentacles",
+    "filename": "five_of_pentacles",
+    "description": "two poor beggars one on crutches walking through snow past stained glass church window with five pentacles, hardship scene"
+  },
+  {
+    "id": 69,
+    "name": "Six of Pentacles",
+    "filename": "six_of_pentacles",
+    "description": "wealthy merchant in red robe giving coins to two kneeling beggars while holding scales of justice, six pentacles arranged above"
+  },
+  {
+    "id": 70,
+    "name": "Seven of Pentacles",
+    "filename": "seven_of_pentacles",
+    "description": "tired farmer leaning on hoe contemplating seven pentacles growing on lush green vine plant, harvest contemplation"
+  },
+  {
+    "id": 71,
+    "name": "Eight of Pentacles",
+    "filename": "eight_of_pentacles",
+    "description": "skilled craftsman sitting at workbench carving pentacle with hammer and chisel, six finished pentacles displayed on tree, one being worked on"
+  },
+  {
+    "id": 72,
+    "name": "Nine of Pentacles",
+    "filename": "nine_of_pentacles",
+    "description": "elegant noblewoman in lush vineyard garden with hooded falcon on gloved hand, nine pentacles arranged in golden vines around her, prosperity"
+  },
+  {
+    "id": 73,
+    "name": "Ten of Pentacles",
+    "filename": "ten_of_pentacles",
+    "description": "wealthy patriarch with two white dogs in courtyard archway with younger family members and child visible, ten pentacles arranged in tree of life pattern"
+  },
+  {
+    "id": 74,
+    "name": "Page of Pentacles",
+    "filename": "page_of_pentacles",
+    "description": "young page in green tunic in flowering meadow holding up single golden pentacle with both hands, studying it with focus, mountains in distance"
+  },
+  {
+    "id": 75,
+    "name": "Knight of Pentacles",
+    "filename": "knight_of_pentacles",
+    "description": "armored knight on motionless heavy black workhorse holding single pentacle, plowed fields in background, steady patient pose"
+  },
+  {
+    "id": 76,
+    "name": "Queen of Pentacles",
+    "filename": "queen_of_pentacles",
+    "description": "nurturing queen on stone throne in lush garden holding single pentacle in lap, surrounded by flowers and rabbit at feet, abundant scene"
+  },
+  {
+    "id": 77,
+    "name": "King of Pentacles",
+    "filename": "king_of_pentacles",
+    "description": "wealthy king on stone throne decorated with bull motifs holding single pentacle and scepter, grapevines and lush garden background, abundant prosperity"
+  }
+]
