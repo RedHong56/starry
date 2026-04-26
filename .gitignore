@@ -1,8 +1,101 @@
-# Plan File
+# docs file
 /docs
 
-# assets
-/assets
-
-# Generated output
+# ============================================
+# Python (pipeline)
 card_pipeline/output/
+# ============================================
+
+# ============================================
+# Python (pipeline, backend)
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# ============================================
+# 환경변수 (절대 커밋 금지!)
+# ============================================
+.env
+.env.local
+.env.*.local
+secrets.json
+firebase-config.json
+*.keystore
+service-account.json
+
+# ============================================
+# Unity
+# ============================================
+client/[Ll]ibrary/
+client/[Tt]emp/
+client/[Oo]bj/
+client/[Bb]uild/
+client/[Bb]uilds/
+client/[Ll]ogs/
+client/[Mm]emoryCaptures/
+client/[Uu]ser[Ss]ettings/
+client/.vs/
+client/*.csproj
+client/*.unityproj
+client/*.sln
+client/*.suo
+client/*.tmp
+client/*.user
+client/*.userprefs
+client/*.pidb
+client/*.booproj
+client/*.svd
+client/*.pdb
+client/*.mdb
+client/*.opendb
+client/*.VC.db
+client/sysinfo.txt
+client/*.apk
+client/*.aab
+client/*.unitypackage
+client/crashlytics-build.properties
+
+# ============================================
+# Pipeline 결과물 (용량 큼)
+# ============================================
+pipeline/output/raw/
+pipeline/output/optimized/
+# pipeline/output/final/ 은 커밋 (78장 최종본은 보관)
+
+# ============================================
+# 블렌더 자동 백업
+# ============================================
+*.blend1
+*.blend2
+*.blend@
+*.blend.orig
+
+# ============================================
+# IDE
+# ============================================
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ============================================
+# OS
+# ============================================
+.DS_Store
+Thumbs.db
+desktop.ini
