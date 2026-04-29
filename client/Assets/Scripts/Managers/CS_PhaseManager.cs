@@ -32,6 +32,7 @@ public class PhaseManager : MonoBehaviour
     private GamePhase _currentPhase;
     private string    _userWorry;
     private int[]     _selectedCardIndices;
+    private bool[]    _isReversed;
 
     private void Awake()
     {
@@ -97,20 +98,20 @@ public class PhaseManager : MonoBehaviour
         });
     }
 
-    private void HandleCardSelect()
+    private void HandleCardSelect() //callback when entering card select phase
     {
         cardDeck.SetActive(true);
         characterController.PlayWriting();
-        cardDeckController.StartSelection(indices =>
+        cardDeckController.StartSelection((indices, isReversed) =>
         {
             _selectedCardIndices = indices;
-            
+            _isReversed          = isReversed;
+            EnterPhase(GamePhase.Result);
         });
     }
 
     private void HandleResult()
     {
-        EnterPhase(GamePhase.Result);
         uiController.ShowDialogue("흠…", null);
         
         cardDeck.gameObject.SetActive(true); // 오브젝트 표시
@@ -118,7 +119,7 @@ public class PhaseManager : MonoBehaviour
         characterController.PlayClapping();
         uiController.ShowDialogue("결과를 말해주겠다", () =>
         {
-            cardResultController.StartReveal(_selectedCardIndices, _userWorry);
+            cardResultController.StartReveal(_selectedCardIndices, _isReversed, _userWorry);
         });
     }
 }

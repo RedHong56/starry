@@ -32,12 +32,16 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
     [SerializeField] private GameObject deckPanel;
     [SerializeField] private Button     confirmButton;
 
+    [Header("Reversed Card")]
+    [SerializeField, Range(0f, 1f)] private float reversedChance = 0.3f; // 역방향 확률 (30%)
+
     private RectTransform[]    _cards;
     private readonly HashSet<int> _usedIndices = new();
     private int                _currentIndex;
     private int                _confirmedCount;
     private int[]              _selectedIndices;
-    private Action<int[]>      _onComplete;
+    private bool[]             _isReversed;
+    private Action<int[], bool[]> _onComplete;
 
     private float _dragStartX;
     private float _containerStartAngle;
@@ -52,7 +56,7 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
         deckPanel.SetActive(false);
     }
 
-    public void StartSelection(Action<int[]> onComplete)
+    public void StartSelection(Action<int[], bool[]> onComplete)
     {
         _onComplete      = onComplete;
         _confirmedCount  = 0;
@@ -60,6 +64,7 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
         _currentAngle    = 0f;
         _highlightedIndex = -1;
         _selectedIndices = new int[RequiredSelects];
+        _isReversed      = new bool[RequiredSelects];
         _usedIndices.Clear();
 
         deckPanel.SetActive(true);
@@ -217,6 +222,7 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
 
         _usedIndices.Add(_currentIndex);
         _selectedIndices[_confirmedCount] = _currentIndex;
+        _isReversed[_confirmedCount]      = UnityEngine.Random.value < reversedChance;
 
         RectTransform card = _cards[_currentIndex];
         Transform     slot = selectedSlots[_confirmedCount];
@@ -236,7 +242,7 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
             DOVirtual.DelayedCall(0.6f, () =>
             {
                 deckPanel.SetActive(false);
-                _onComplete?.Invoke(_selectedIndices);
+                _onComplete?.Invoke(_selectedIndices, _isReversed);
             });
         }
         else
