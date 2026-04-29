@@ -6,7 +6,7 @@ public enum GamePhase
     Intro,       // CAM_Begin → Cam_Walk (자동)
     Welcome,     // Cam_Walk → Cam_Seat, Beckoning, "어서 오게나..."
     Question,    // AskingQuestion, "그래서 고민이 무엇이냐", 입력 모달
-    CardSelect,  // 카드 캐러셀, Writing, "Umm…"
+    CardSelect,  // 카드 캐러셀, Writing, "흠…"
     Result       // Clapping, "결과를 말해주겠다", 카드 공개, AI 해설
 }
 
@@ -25,6 +25,9 @@ public class PhaseManager : MonoBehaviour
 
     [Header("Start Button")]
     [SerializeField] private Button startButton;
+
+    [Header("Object")]
+    [SerializeField] private GameObject cardDeck;
 
     private GamePhase _currentPhase;
     private string    _userWorry;
@@ -59,8 +62,8 @@ public class PhaseManager : MonoBehaviour
 
     private void HandleIntro()
     {
+        startButton.gameObject.SetActive(false);
         cameraController.GoToBegin();
-        // Walk 이동이 끝나면 Start 버튼 활성화
         cameraController.GoToWalk(() => startButton.gameObject.SetActive(true));
     }
 
@@ -68,6 +71,7 @@ public class PhaseManager : MonoBehaviour
     {
         if (_currentPhase != GamePhase.Intro) return;
         startButton.gameObject.SetActive(false);
+        characterController.PlayBeckoning();
         EnterPhase(GamePhase.Welcome);
     }
 
@@ -75,18 +79,18 @@ public class PhaseManager : MonoBehaviour
     {
         cameraController.GoToSeat(() =>
         {
-            characterController.PlayBeckoning();
             uiController.ShowDialogue("어서 오게나...", () => EnterPhase(GamePhase.Question));
         });
     }
 
     private void HandleQuestion()
     {
-        characterController.PlayAskingQuestion();
         uiController.ShowDialogue("그래서 고민이 무엇이냐", () =>
         {
+            uiController.HideDialogue();
             uiController.ShowInputModal(worry =>
             {
+                cardDeck.gameObject.SetActive(false); // 오브젝트 숨기기
                 _userWorry = worry;
                 EnterPhase(GamePhase.CardSelect);
             });
@@ -95,17 +99,21 @@ public class PhaseManager : MonoBehaviour
 
     private void HandleCardSelect()
     {
+        cardDeck.SetActive(true);
         characterController.PlayWriting();
-        uiController.ShowDialogue("Umm…", null);
         cardDeckController.StartSelection(indices =>
         {
             _selectedCardIndices = indices;
-            EnterPhase(GamePhase.Result);
+            
         });
     }
 
     private void HandleResult()
     {
+        EnterPhase(GamePhase.Result);
+        uiController.ShowDialogue("흠…", null);
+        
+        cardDeck.gameObject.SetActive(true); // 오브젝트 표시
         uiController.HideDialogue();
         characterController.PlayClapping();
         uiController.ShowDialogue("결과를 말해주겠다", () =>
