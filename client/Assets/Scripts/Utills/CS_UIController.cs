@@ -15,7 +15,14 @@ public class UIController : MonoBehaviour
     [Header("Input Modal")]
     [SerializeField] private GameObject    inputModal;
     [SerializeField] private TMP_InputField worryInput;
+    
+    [SerializeField] private TMP_Dropdown monthInput;
+    [SerializeField] private TMP_Dropdown dayInput;
     [SerializeField] private Button         submitButton;
+
+    
+    public int BirthMonth { get; private set; }
+    public int BirthDay   { get; private set; }
 
     private Coroutine        _typewriterCoroutine;
     private Action<string>   _onSubmit;
@@ -57,6 +64,10 @@ public class UIController : MonoBehaviour
     {
         string text = worryInput.text.Trim();
         if (string.IsNullOrEmpty(text)) return;
+
+        
+        BirthMonth = monthInput.value + 1;
+        BirthDay   = dayInput.value + 1;
 
         inputModal.SetActive(false);
         _onSubmit?.Invoke(text);
