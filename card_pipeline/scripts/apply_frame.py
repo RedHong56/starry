@@ -3,7 +3,7 @@ raw 카드 이미지에 template_frame_front.png 프레임을 합성하는 스�
 
 - 입력:  output/raw/*.png
 - 프레임: output/template_frame_front.png  (RGBA, raw보다 큰 사이즈)
-- 출력:  output/framed/*.webp  (긴 변 768 이하, 비율 유지, quality=92)
+- 출력:  output/framed/*.png  (긴 변 768 이하, 비율 유지, optimize=True)
 """
 from pathlib import Path
 from PIL import Image
@@ -14,7 +14,6 @@ FRAME_PATH = ROOT / "output" / "template_frame_front.png"
 OUT_DIR = ROOT / "output" / "framed"
 
 MAX_SIDE = 768     # 긴 변 기준 다운스케일 (비율 유지)
-WEBP_QUALITY = 92  # 90~95 범위
 
 
 def _scaled_size(w: int, h: int) -> tuple[int, int]:
@@ -58,16 +57,16 @@ def main():
     out_w, out_h = _scaled_size(*frame.size)
 
     print(f"{'='*55}")
-    print(f"프레임 합성 시작 — {len(raw_files)}장")
+    print(f"프레임 합성 시작 - {len(raw_files)}장")
     print(f"프레임 크기: {frame.size[0]}x{frame.size[1]}  →  출력: {out_w}x{out_h}")
-    print(f"포맷: WebP  품질: {WEBP_QUALITY}")
+    print(f"포맷: PNG  (optimize=True)")
     print(f"출력 폴더:  {OUT_DIR.resolve()}")
     print(f"{'='*55}\n")
 
     for i, card_path in enumerate(raw_files, 1):
-        out_path = OUT_DIR / (card_path.stem + ".webp")
+        out_path = OUT_DIR / (card_path.stem + ".png")
         result = apply_frame(card_path, frame)
-        result.save(out_path, format="WEBP", quality=WEBP_QUALITY, lossless=False, method=6)
+        result.save(out_path, format="PNG", optimize=True)
         print(f"[{i:>2}/{len(raw_files)}] {card_path.name} → {out_path.name}")
 
     print(f"\n완료! {len(raw_files)}장 저장됨: {OUT_DIR.resolve()}\n")
@@ -75,3 +74,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
