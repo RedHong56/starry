@@ -18,7 +18,7 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
     [SerializeField] private float         radius          = 300f;
     [SerializeField] private float         cardScale       = 1f;    // 카드 크기 (밀도 조절)
     [SerializeField] private float         elevationOffset = 30f; // 선택중인 카드 높이
-    [SerializeField] private float         snapDuration    = 0.25f; //자동 정렬(snap)되는 애니메이션 시간
+    [SerializeField] private float         snapDuration    = 0.06f; //자동 정렬(snap)되는 애니메이션 시간
     [SerializeField] private float         dragSensitivity = 0.05f;
 
     [Header("Shuffle Animation")]
@@ -42,6 +42,8 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
     private int[]              _selectedIndices;
     private bool[]             _isReversed;
     private Action<int[], bool[]> _onComplete;
+    private Action<int>           _onEachConfirm;
+    private RectTransform[]       _placedCards;
 
     private float _dragStartX;
     private float _containerStartAngle;
@@ -56,15 +58,17 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
         deckPanel.SetActive(false);
     }
 
-    public void StartSelection(Action<int[], bool[]> onComplete)
+    public void StartSelection(Action<int[], bool[]> onComplete, Action<int> onEachConfirm = null)
     {
         _onComplete      = onComplete;
+        _onEachConfirm   = onEachConfirm;
         _confirmedCount  = 0;
         _currentIndex    = 0;
         _currentAngle    = 0f;
         _highlightedIndex = -1;
         _selectedIndices = new int[RequiredSelects];
         _isReversed      = new bool[RequiredSelects];
+        _placedCards     = new RectTransform[RequiredSelects];
         _usedIndices.Clear();
 
         deckPanel.SetActive(true);
@@ -213,6 +217,20 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
             _cards[i].anchoredPosition = pos;
     }
 
+    public void HideSelectedCards()
+    {
+        if (_placedCards == null) return;
+        foreach (var card in _placedCards)
+            if (card != null) card.gameObject.SetActive(false);
+    }
+
+    public void HideSelectedCard(int index)
+    {
+        if (_placedCards == null || index < 0 || index >= _placedCards.Length) return;
+        if (_placedCards[index] != null)
+            _placedCards[index].gameObject.SetActive(false);
+    }
+
     // ── 카드 확정 ─────────────────────────────────────────────────────────────
 
     private void OnConfirm()
@@ -229,12 +247,14 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
 
         card.GetComponent<Outline>().enabled = false;
         _highlightedIndex = -1;
+        _placedCards[_confirmedCount] = card;
 
         card.SetParent(slot, worldPositionStays: true);
         card.DOLocalMove(Vector3.zero, 0.5f).SetEase(Ease.OutQuad);
         card.DOLocalRotate(Vector3.zero, 0.5f).SetEase(Ease.OutQuad);
 
         _confirmedCount++;
+        _onEachConfirm?.Invoke(_confirmedCount - 1);
 
         if (_confirmedCount >= RequiredSelects)
         {

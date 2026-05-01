@@ -19,22 +19,33 @@ public class CardFlipView : MonoBehaviour
 
     public IEnumerator FlipRoutine(Sprite frontSprite)
     {
+        // Debug.Log($"[FlipRoutine] 시작 | cardImage={(cardImage != null ? "있음" : "null")} | frontSprite={(frontSprite != null ? frontSprite.name : "null")} | backSprite={(backSprite != null ? backSprite.name : "null")}");
+
+        if (cardImage != null)
+        {
+            cardImage.sprite  = backSprite;
+            cardImage.enabled = true;
+        }
+
         bool done = false;
 
-        // 1단계: 절반 축소 (뒷면 → 수직선)
         transform.DOScaleX(0f, halfFlipDuration)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
-                // 스프라이트 교체
+                if (cardImage == null) { done = true; return; }
+
+                // Debug.Log($"[FlipRoutine] 콜백 | frontSprite={(frontSprite != null ? frontSprite.name : "null")}");
                 cardImage.sprite = frontSprite;
 
-                // 2단계: 절반 확장 (수직선 → 앞면)
                 transform.DOScaleX(1f, halfFlipDuration)
                     .SetEase(Ease.OutSine)
                     .OnComplete(() => done = true);
             });
 
         yield return new WaitUntil(() => done);
+
+        // if (cardImage != null)
+        //     Debug.Log($"[FlipRoutine] 완료 | sprite={(cardImage.sprite != null ? cardImage.sprite.name : "null")} | enabled={cardImage.enabled} | scale={transform.localScale}");
     }
 }

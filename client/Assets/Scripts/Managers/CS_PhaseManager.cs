@@ -129,15 +129,15 @@ public class PhaseManager : MonoBehaviour
 
     private void HandleResult()
     {
-        cardDeckController.HideSelectedCards();
-        cardDeck.gameObject.SetActive(true); // 오브젝트 표시
+        cardDeck.gameObject.SetActive(true);
         uiController.ShowDialogue("흠…", null);   
         uiController.HideDialogue();
         characterController.PlayClapping();
         uiController.ShowDialogue("결과를 말해주겠다", () =>
         {
             uiController.HideDialogue();
-            cardResultController.StartReveal(_selectedCardIndices, _isReversed, _userWorry);
+            cardResultController.StartReveal(_selectedCardIndices, _isReversed, _userWorry,
+                beforeFlip: i => cardDeckController.HideSelectedCard(i));
             
         });
     }

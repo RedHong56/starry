@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,20 +19,15 @@ public class CardResultController : MonoBehaviour
     [SerializeField] private ScrollRect resultScroll;
 
     [Header("Dependencies")]
-    [SerializeField] private TarotAIService aiService;
-
-    private TarotCardData[] _cardDatabase;
+    [SerializeField] private TarotAIService   aiService;
+    [SerializeField] private TypewriterEffect typewriter;
 
     private void Awake()
     {
-        // 모든 슬롯 초기화
         foreach (var slot in cardSlots)
             slot.Clear();
 
         resultPanel.SetActive(false);
-
-        // ScriptableObject 기반 스프라이트 DB (뒤집기 애니메이션용)
-        _cardDatabase = Resources.LoadAll<TarotCardData>("TarotCards");
     }
 
     /// <summary>
@@ -39,9 +35,9 @@ public class CardResultController : MonoBehaviour
     /// cardIndices: 선택된 카드 id 배열 (0-77)
     /// isReversed: 각 카드의 역방향 여부
     /// </summary>
-    public void StartReveal(int[] cardIndices, bool[] isReversed, string userWorry)
+    public void StartReveal(int[] cardIndices, bool[] isReversed, string userWorry, Action<int> beforeFlip = null)
     {
-        StartCoroutine(RevealRoutine(cardIndices, isReversed, userWorry));
+        StartCoroutine(RevealRoutine(cardIndices, isReversed, userWorry, beforeFlip));
     }
 
     // 기존 호환용 오버로드 (전부 정방향)
@@ -51,7 +47,7 @@ public class CardResultController : MonoBehaviour
         StartReveal(cardIndices, upright, userWorry);
     }
 
-    private IEnumerator RevealRoutine(int[] cardIndices, bool[] isReversed, string userWorry)
+    private IEnumerator RevealRoutine(int[] cardIndices, bool[] isReversed, string userWorry, Action<int> beforeFlip)
     {
         // 결과 패널 활성화 + 텍스트 초기화
         resultPanel.SetActive(true);
@@ -65,14 +61,16 @@ public class CardResultController : MonoBehaviour
             // JSON 데이터에서 카드 정보 조회
             CardInfo info = CardInfoDatabase.Get(id);
 
-            // ScriptableObject 에서 스프라이트 조회
-            TarotCardData data = FindCard(id);
+            // Resources/Cards 경로에서 스프라이트 직접 로드
+            string spritePath = CardInfoDatabase.GetResourcePath(info);
+            Sprite frontSprite = spritePath != null ? Resources.Load<Sprite>(spritePath) : null;
 
-            // ── 해당 슬롯의 카드 정보 UI 업데이트 ──
+            // ── 선택된 덱 카드 hide 후 플립 ──
+            beforeFlip?.Invoke(i);
+            yield return StartCoroutine(cardSlots[i].FlipView.FlipRoutine(frontSprite));
+
+            // ── flip 후 카드 정보 UI 업데이트 ──
             cardSlots[i].ShowCardInfo(info, id);
-
-            // ── 카드 뒤집기 ──
-            yield return StartCoroutine(cardSlots[i].FlipView.FlipRoutine(data?.frontSprite));
 
             // ── 누적 스크롤에 설명 추가 ──
             string meaning = GetMeaning(info, reversed);
@@ -116,12 +114,5 @@ public class CardResultController : MonoBehaviour
     {
         Canvas.ForceUpdateCanvases();
         resultScroll.normalizedPosition = new Vector2(0f, 0f);
-    }
-
-    private TarotCardData FindCard(int id)
-    {
-        foreach (var card in _cardDatabase)
-            if (card.id == id) return card;
-        return null;
     }
 }
