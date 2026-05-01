@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -7,10 +6,8 @@ using TMPro;
 public class UIController : MonoBehaviour
 {
     [Header("Dialogue")]
-    [SerializeField] private GameObject  dialoguePanel;
-    [SerializeField] private TMP_Text    dialogueText;
-    [SerializeField] private float       typewriterSpeed = 0.05f;
-    [SerializeField] private float       postTypePause   = 1.2f;
+    [SerializeField] private GameObject      dialoguePanel;
+    [SerializeField] private TypewriterEffect typewriter;
 
     [Header("Input Modal")]
     [SerializeField] private GameObject    inputModal;
@@ -24,7 +21,6 @@ public class UIController : MonoBehaviour
     public int BirthMonth { get; private set; }
     public int BirthDay   { get; private set; }
 
-    private Coroutine        _typewriterCoroutine;
     private Action<string>   _onSubmit;
 
     private void Awake()
@@ -34,20 +30,15 @@ public class UIController : MonoBehaviour
         submitButton.onClick.AddListener(OnSubmitClicked);
     }
 
-    // 대사 표시 + 타이프라이터 효과. onComplete는 일시정지 후 호출(null 허용)
     public void ShowDialogue(string text, Action onComplete)
     {
         dialoguePanel.SetActive(true);
-
-        if (_typewriterCoroutine != null)
-            StopCoroutine(_typewriterCoroutine);
-
-        _typewriterCoroutine = StartCoroutine(TypewriterRoutine(text, onComplete));
+        typewriter.Play(text, onComplete);
     }
 
     public void HideDialogue()
     {
-        if (_typewriterCoroutine != null) StopCoroutine(_typewriterCoroutine);
+        typewriter.Stop();
         dialoguePanel.SetActive(false);
     }
 
@@ -72,21 +63,5 @@ public class UIController : MonoBehaviour
         inputModal.SetActive(false);
         _onSubmit?.Invoke(text);
         _onSubmit = null;
-    }
-
-    private IEnumerator TypewriterRoutine(string text, Action onComplete)
-    {
-        dialogueText.text = string.Empty;
-        foreach (char c in text)
-        {
-            dialogueText.text += c;
-            yield return new WaitForSeconds(typewriterSpeed);
-        }
-
-        if (onComplete != null)
-        {
-            yield return new WaitForSeconds(postTypePause);
-            onComplete.Invoke();
-        }
     }
 }
