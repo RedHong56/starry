@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c953c09b01acffc4cb432747b50dfe24, type: 3}
+  m_Name: Libra
+  m_EditorClassIdentifier: Assembly-CSharp::ConstellationData
+  constellationName: Libra
+  koreanName: "\uCC9C\uCE6D\uC790\uB9AC"
+  startMonth: 9
+  startDay: 23
+  endMonth: 10
+  endDay: 22
+  starPositions:
+  - {x: 0, y: 0.8, z: 0}
+  - {x: -0.7, y: -0.2, z: 0}
+  - {x: 0.7, y: -0.2, z: 0}
+  - {x: 0, y: -0.7, z: 0}
+  lineIndices: 0000000001000000000000000200000001000000030000000200000003000000

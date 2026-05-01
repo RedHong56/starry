@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c953c09b01acffc4cb432747b50dfe24, type: 3}
+  m_Name: Pisces
+  m_EditorClassIdentifier: Assembly-CSharp::ConstellationData
+  constellationName: Pisces
+  koreanName: "\uBB3C\uACE0\uAE30\uC790\uB9AC"
+  startMonth: 2
+  startDay: 19
+  endMonth: 3
+  endDay: 20
+  starPositions:
+  - {x: -1, y: 0.5, z: 0}
+  - {x: -0.7, y: 0, z: 0}
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.7, y: 0, z: 0}
+  - {x: 1, y: 0.5, z: 0}
+  lineIndices: 00000000010000000100000002000000020000000300000003000000040000000400000005000000

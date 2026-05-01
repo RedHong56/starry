@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c953c09b01acffc4cb432747b50dfe24, type: 3}
+  m_Name: Aries
+  m_EditorClassIdentifier: Assembly-CSharp::ConstellationData
+  constellationName: Aries
+  koreanName: "\uC591\uC790\uB9AC"
+  startMonth: 3
+  startDay: 21
+  endMonth: 4
+  endDay: 19
+  starPositions:
+  - {x: -0.8, y: 0.2, z: 0}
+  - {x: -0.3, y: 0.5, z: 0}
+  - {x: 0.4, y: 0.7, z: 0}
+  - {x: 1.2, y: 0.3, z: 0}
+  lineIndices: 000000000100000001000000020000000200000003000000
