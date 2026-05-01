@@ -27,7 +27,7 @@ public class PhaseManager : MonoBehaviour
     [SerializeField] private Button startButton;
 
     [Header("Object")]
-    [SerializeField] private GameObject cardDeck;
+    [SerializeField] private GameObject cardDeck; // 점쟁이 앞에 있는 카드 오브젝트
 
     private GamePhase _currentPhase;
     private string    _userWorry;
@@ -91,35 +91,54 @@ public class PhaseManager : MonoBehaviour
             uiController.HideDialogue();
             uiController.ShowInputModal(worry =>
             {
-                cardDeck.gameObject.SetActive(false); // 오브젝트 숨기기
+                
                 _userWorry = worry;
                 EnterPhase(GamePhase.CardSelect);
             });
         });
     }
 
-    private void HandleCardSelect() //callback when entering card select phase
+    private static readonly string[] PickDialogues = { "과거 카드를 고르게", "현재 카드를 고르게", "미래 카드를 고르게" };
+
+    private void HandleCardSelect()
     {
-        cardDeck.SetActive(true);
         characterController.PlayWriting();
-        cardDeckController.StartSelection((indices, isReversed) =>
+        cardDeck.gameObject.SetActive(false);
+
+        uiController.ShowDialogue(PickDialogues[0], () =>
         {
-            _selectedCardIndices = indices;
-            _isReversed          = isReversed;
-            EnterPhase(GamePhase.Result);
+            uiController.HideDialogue();
+            cardDeckController.StartSelection(
+                onComplete: (indices, isReversed) =>
+                {
+                    _selectedCardIndices = indices;
+                    _isReversed          = isReversed;
+                    EnterPhase(GamePhase.Result);
+                },
+                onEachConfirm: confirmedIdx =>
+                {
+                    if (confirmedIdx + 1 < PickDialogues.Length)
+                    {
+                        uiController.ShowDialogue(PickDialogues[confirmedIdx + 1], () =>
+                            uiController.HideDialogue());
+                    }
+                }
+            );
         });
     }
 
     private void HandleResult()
     {
-        uiController.ShowDialogue("흠…", null);
-        
+        cardDeckController.HideSelectedCards();
         cardDeck.gameObject.SetActive(true); // 오브젝트 표시
+        uiController.ShowDialogue("흠…", null);   
         uiController.HideDialogue();
         characterController.PlayClapping();
         uiController.ShowDialogue("결과를 말해주겠다", () =>
         {
+            uiController.HideDialogue();
             cardResultController.StartReveal(_selectedCardIndices, _isReversed, _userWorry);
+            
         });
     }
 }
