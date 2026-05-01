@@ -10,6 +10,7 @@ public class CardResultController : MonoBehaviour
     private static readonly string[] SlotLabels = { "과거", "현재", "미래" };
 
     [Header("Card Slots (0=과거, 1=현재, 2=미래)")]
+    [SerializeField] private GameObject SlotPannel;
     [SerializeField] private CardSlotView[] cardSlots;   // 슬롯마다 FlipView + arcana + name + image
     [SerializeField] private float          pauseBetweenCards = 2f;
 
@@ -35,9 +36,10 @@ public class CardResultController : MonoBehaviour
     /// cardIndices: 선택된 카드 id 배열 (0-77)
     /// isReversed: 각 카드의 역방향 여부
     /// </summary>
-    public void StartReveal(int[] cardIndices, bool[] isReversed, string userWorry, Action<int> beforeFlip = null)
+    public void StartReveal(int[] cardIndices, bool[] isReversed, string userWorry,
+                             Action<int> beforeFlip = null, Action onComplete = null)
     {
-        StartCoroutine(RevealRoutine(cardIndices, isReversed, userWorry, beforeFlip));
+        StartCoroutine(RevealRoutine(cardIndices, isReversed, userWorry, beforeFlip, onComplete));
     }
 
     // 기존 호환용 오버로드 (전부 정방향)
@@ -47,7 +49,8 @@ public class CardResultController : MonoBehaviour
         StartReveal(cardIndices, upright, userWorry);
     }
 
-    private IEnumerator RevealRoutine(int[] cardIndices, bool[] isReversed, string userWorry, Action<int> beforeFlip)
+    private IEnumerator RevealRoutine(int[] cardIndices, bool[] isReversed, string userWorry,
+                                       Action<int> beforeFlip, Action onComplete = null)
     {
         // 결과 패널 활성화 + 텍스트 초기화
         resultPanel.SetActive(true);
@@ -100,6 +103,14 @@ public class CardResultController : MonoBehaviour
         // "점괘를 읽는 중..." 제거 후 AI 결과 삽입
         resultText.text = resultText.text.Replace("점괘를 읽는 중...", aiResult);
         ScrollToBottom();
+
+        onComplete?.Invoke();
+    }
+
+    public void HideResultPanel()
+    {
+        resultPanel.SetActive(false);
+        SlotPannel.SetActive(false);
     }
 
     // ── 유틸 ──────────────────────────────────────────────────────────────────

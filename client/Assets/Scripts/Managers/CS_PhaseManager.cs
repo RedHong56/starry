@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum GamePhase
 {
@@ -17,17 +18,19 @@ public class PhaseManager : MonoBehaviour
     public static PhaseManager Instance { get; private set; }
 
     [Header("Controllers")]
-    [SerializeField] private CameraContorller        cameraController;
+    [SerializeField] private CameraContorller         cameraController;
     [SerializeField] private TarotCharacterController characterController;
-    [SerializeField] private UIController            uiController;
-    [SerializeField] private CardDeckController      cardDeckController;
-    [SerializeField] private CardResultController    cardResultController;
+    [SerializeField] private UIController             uiController;
+    [SerializeField] private CardDeckController       cardDeckController;
+    [SerializeField] private CardResultController     cardResultController;
+    [SerializeField] private StarFieldController      starField;
+    [SerializeField] private TarotAIService           aiService;
 
-    [Header("Start Button")]
+    [Header("Buttons")]
     [SerializeField] private Button startButton;
 
     [Header("Object")]
-    [SerializeField] private GameObject cardDeck; // 점쟁이 앞에 있는 카드 오브젝트
+    [SerializeField] private GameObject cardDeck;
 
     private GamePhase _currentPhase;
     private string    _userWorry;
@@ -91,7 +94,6 @@ public class PhaseManager : MonoBehaviour
             uiController.HideDialogue();
             uiController.ShowInputModal(worry =>
             {
-                
                 _userWorry = worry;
                 EnterPhase(GamePhase.CardSelect);
             });
@@ -130,15 +132,48 @@ public class PhaseManager : MonoBehaviour
     private void HandleResult()
     {
         cardDeck.gameObject.SetActive(true);
-        uiController.ShowDialogue("흠…", null);   
-        uiController.HideDialogue();
         characterController.PlayClapping();
-        uiController.ShowDialogue("결과를 말해주겠다", () =>
+        uiController.ShowDialogue("흠…", () =>
         {
-            uiController.HideDialogue();
-            cardResultController.StartReveal(_selectedCardIndices, _isReversed, _userWorry,
-                beforeFlip: i => cardDeckController.HideSelectedCard(i));
-            
+            uiController.ShowDialogue("결과를 말해주겠다", () =>
+            {
+                uiController.HideDialogue();
+                cardResultController.StartReveal(
+                    _selectedCardIndices, _isReversed, _userWorry,
+                    beforeFlip: i => cardDeckController.HideSelectedCard(i),
+                    onComplete: OnReadingComplete);
+            });
         });
+    }
+
+    // AI 해설까지 완료 → "별자리 확인" 버튼 표시
+    private void OnReadingComplete()
+    {
+        uiController.ShowViewConstellationButton(OnViewConstellationClicked);
+    }
+
+    // "별자리 확인" 버튼 눌림 → 카메라 하늘로 + 별자리 강조 (동시)
+    private void OnViewConstellationClicked()
+    {
+        cardResultController.HideResultPanel();
+        
+        cardDeckController.HideSelectedCards();
+        var data = starField.HighlightConstellation(uiController.BirthMonth, uiController.BirthDay);
+        string constellationName = data != null ? data.constellationName : string.Empty;
+        string koreanName        = data != null ? data.koreanName        : string.Empty;
+
+        // 카메라 이동 완료 후 패널 표시 + 운세 요청
+        cameraController.GoToSky(() =>
+        {
+            uiController.ShowConstellationPanel(koreanName, onRestart: OnRestartClicked);
+            aiService.GetHoroscope(constellationName, result =>
+                uiController.UpdateConstellationDesc(result));
+        });
+    }
+
+    // 재시작 버튼 → 씬 초기부터 다시
+    private void OnRestartClicked()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
