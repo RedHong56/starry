@@ -10,12 +10,21 @@
       "suit": null,
       "rank": "0",
       "keywords": {
-        "upright": ["new beginnings", "innocence", "spontaneity", "leap of faith"],
-        "reversed": ["recklessness", "naivety", "missed opportunity"]
+        "upright": [
+          "new beginnings",
+          "innocence",
+          "spontaneity",
+          "leap of faith"
+        ],
+        "reversed": [
+          "recklessness",
+          "naivety",
+          "missed opportunity"
+        ]
       },
       "meaning": {
-        "upright": "A fearless step into the unknown, guided by optimism and an open heart.",
-        "reversed": "Acting impulsively without considering consequences, or hesitating to begin."
+        "upright": "긍정적으로 새로운 일을 시작합니다.",
+        "reversed": "충동적이거나 시작을 주저합니다."
       }
     },
     {
@@ -26,12 +35,21 @@
       "suit": null,
       "rank": "1",
       "keywords": {
-        "upright": ["manifestation", "willpower", "skill", "resourcefulness"],
-        "reversed": ["manipulation", "untapped potential", "self-doubt"]
+        "upright": [
+          "manifestation",
+          "willpower",
+          "skill",
+          "resourcefulness"
+        ],
+        "reversed": [
+          "manipulation",
+          "untapped potential",
+          "self-doubt"
+        ]
       },
       "meaning": {
-        "upright": "You have the tools and focus to turn vision into reality.",
-        "reversed": "Talent left unused, or power used for deception."
+        "upright": "목표를 달성할 능력과 집중력이 있습니다.",
+        "reversed": "능력을 낭비하거나 남을 속이는 데 씁니다."
       }
     },
     {
@@ -42,12 +60,21 @@
       "suit": null,
       "rank": "2",
       "keywords": {
-        "upright": ["intuition", "mystery", "inner wisdom", "subconscious"],
-        "reversed": ["secrets", "disconnection from intuition", "withheld information"]
+        "upright": [
+          "intuition",
+          "mystery",
+          "inner wisdom",
+          "subconscious"
+        ],
+        "reversed": [
+          "secrets",
+          "disconnection from intuition",
+          "withheld information"
+        ]
       },
       "meaning": {
-        "upright": "Trust the quiet voice within; deeper truths are surfacing.",
-        "reversed": "Ignoring intuition or being blocked from inner knowing."
+        "upright": "직관을 믿으면 숨겨진 사실이 드러납니다.",
+        "reversed": "직관을 무시하거나 중요한 정보를 얻지 못합니다."
       }
     },
     {
@@ -58,12 +85,21 @@
       "suit": null,
       "rank": "3",
       "keywords": {
-        "upright": ["abundance", "nurturing", "creativity", "fertility"],
-        "reversed": ["creative block", "dependence", "emptiness"]
+        "upright": [
+          "abundance",
+          "nurturing",
+          "creativity",
+          "fertility"
+        ],
+        "reversed": [
+          "creative block",
+          "dependence",
+          "emptiness"
+        ]
       },
       "meaning": {
-        "upright": "A season of growth, sensual richness, and caring connection.",
-        "reversed": "Creative energy stalled, or care given without receiving."
+        "upright": "상황이 발전하고 물질적, 정서적으로 풍요로워집니다.",
+        "reversed": "창작이 막히거나 받지 못하고 주기만 합니다."
       }
     },
     {
@@ -74,12 +110,21 @@
       "suit": null,
       "rank": "4",
       "keywords": {
-        "upright": ["authority", "structure", "leadership", "stability"],
-        "reversed": ["domination", "rigidity", "lack of discipline"]
+        "upright": [
+          "authority",
+          "structure",
+          "leadership",
+          "stability"
+        ],
+        "reversed": [
+          "domination",
+          "rigidity",
+          "lack of discipline"
+        ]
       },
       "meaning": {
-        "upright": "Order and clear leadership build a foundation that lasts.",
-        "reversed": "Control becomes oppression, or structure collapses entirely."
+        "upright": "질서와 리더십으로 안정적인 기반을 다집니다.",
+        "reversed": "지나치게 통제하거나 기존 체계가 무너집니다."
       }
     },
     {
@@ -90,12 +135,21 @@
       "suit": null,
       "rank": "5",
       "keywords": {
-        "upright": ["tradition", "spiritual guidance", "conformity", "learning"],
-        "reversed": ["rebellion", "unconventionality", "questioning dogma"]
+        "upright": [
+          "tradition",
+          "spiritual guidance",
+          "conformity",
+          "learning"
+        ],
+        "reversed": [
+          "rebellion",
+          "unconventionality",
+          "questioning dogma"
+        ]
       },
       "meaning": {
-        "upright": "Wisdom passed through tradition, mentors, or shared belief.",
-        "reversed": "Breaking from convention to find your own path."
+        "upright": "전통이나 조력자를 통해 지혜를 얻습니다.",
+        "reversed": "관습을 깨고 자신만의 방식을 찾습니다."
       }
     },
     {
@@ -106,12 +160,21 @@
       "suit": null,
       "rank": "6",
       "keywords": {
-        "upright": ["love", "union", "values alignment", "meaningful choice"],
-        "reversed": ["disharmony", "misalignment", "avoiding decisions"]
+        "upright": [
+          "love",
+          "union",
+          "values alignment",
+          "meaningful choice"
+        ],
+        "reversed": [
+          "disharmony",
+          "misalignment",
+          "avoiding decisions"
+        ]
       },
       "meaning": {
-        "upright": "A deep bond or a choice that defines who you become.",
-        "reversed": "Imbalance in relationship or values pulling in different directions."
+        "upright": "깊은 관계를 맺거나 중요한 선택을 합니다.",
+        "reversed": "관계의 균형이 깨지거나 가치관이 충돌합니다."
       }
     },
     {
@@ -122,12 +185,21 @@
       "suit": null,
       "rank": "7",
       "keywords": {
-        "upright": ["determination", "willpower", "victory", "control"],
-        "reversed": ["lack of direction", "aggression", "loss of control"]
+        "upright": [
+          "determination",
+          "willpower",
+          "victory",
+          "control"
+        ],
+        "reversed": [
+          "lack of direction",
+          "aggression",
+          "loss of control"
+        ]
       },
       "meaning": {
-        "upright": "Focus and discipline drive you forward to a hard-won win.",
-        "reversed": "Effort scattered in many directions, or force without purpose."
+        "upright": "집중력과 자제력으로 어려운 목표를 달성합니다.",
+        "reversed": "노력이 분산되고 목적 없이 힘만 씁니다."
       }
     },
     {
@@ -138,12 +210,21 @@
       "suit": null,
       "rank": "8",
       "keywords": {
-        "upright": ["inner strength", "courage", "patience", "compassion"],
-        "reversed": ["self-doubt", "weakness", "raw impulse"]
+        "upright": [
+          "inner strength",
+          "courage",
+          "patience",
+          "compassion"
+        ],
+        "reversed": [
+          "self-doubt",
+          "weakness",
+          "raw impulse"
+        ]
       },
       "meaning": {
-        "upright": "Quiet courage tames what brute force cannot.",
-        "reversed": "Confidence wavers, or instinct overrides reason."
+        "upright": "차분한 태도로 어려운 상황을 통제합니다.",
+        "reversed": "자신감이 떨어지거나 충동적으로 행동합니다."
       }
     },
     {
@@ -154,12 +235,21 @@
       "suit": null,
       "rank": "9",
       "keywords": {
-        "upright": ["introspection", "solitude", "inner guidance", "soul-searching"],
-        "reversed": ["isolation", "loneliness", "withdrawal"]
+        "upright": [
+          "introspection",
+          "solitude",
+          "inner guidance",
+          "soul-searching"
+        ],
+        "reversed": [
+          "isolation",
+          "loneliness",
+          "withdrawal"
+        ]
       },
       "meaning": {
-        "upright": "Step away from noise; the answer is found in stillness.",
-        "reversed": "Withdrawal becomes loneliness, or guidance is rejected."
+        "upright": "혼자만의 시간을 가지며 해결책을 찾습니다.",
+        "reversed": "고립되어 외로움을 느끼거나 조언을 무시합니다."
       }
     },
     {
@@ -170,12 +260,21 @@
       "suit": null,
       "rank": "10",
       "keywords": {
-        "upright": ["change", "cycles", "turning point", "destiny"],
-        "reversed": ["bad luck", "resistance to change", "broken cycle"]
+        "upright": [
+          "change",
+          "cycles",
+          "turning point",
+          "destiny"
+        ],
+        "reversed": [
+          "bad luck",
+          "resistance to change",
+          "broken cycle"
+        ]
       },
       "meaning": {
-        "upright": "The tide turns; what was stuck begins to move again.",
-        "reversed": "A cycle stalls, or fortune turns against your effort."
+        "upright": "상황이 바뀌고 정체된 일이 다시 진행됩니다.",
+        "reversed": "상황이 멈추거나 운이 따르지 않습니다."
       }
     },
     {
@@ -186,12 +285,21 @@
       "suit": null,
       "rank": "11",
       "keywords": {
-        "upright": ["fairness", "truth", "accountability", "cause and effect"],
-        "reversed": ["unfairness", "dishonesty", "avoiding responsibility"]
+        "upright": [
+          "fairness",
+          "truth",
+          "accountability",
+          "cause and effect"
+        ],
+        "reversed": [
+          "unfairness",
+          "dishonesty",
+          "avoiding responsibility"
+        ]
       },
       "meaning": {
-        "upright": "Truth surfaces, and consequences arrive fairly.",
-        "reversed": "An imbalance left unaddressed, or facts denied."
+        "upright": "사실이 밝혀지고 공정한 결과가 나옵니다.",
+        "reversed": "불공정한 상황이 유지되거나 사실을 회피합니다."
       }
     },
     {
@@ -202,12 +310,21 @@
       "suit": null,
       "rank": "12",
       "keywords": {
-        "upright": ["surrender", "new perspective", "letting go", "pause"],
-        "reversed": ["stalling", "indecision", "useless sacrifice"]
+        "upright": [
+          "surrender",
+          "new perspective",
+          "letting go",
+          "pause"
+        ],
+        "reversed": [
+          "stalling",
+          "indecision",
+          "useless sacrifice"
+        ]
       },
       "meaning": {
-        "upright": "Suspending action reveals what striving could not.",
-        "reversed": "Stuck without insight, or sacrificing for nothing."
+        "upright": "행동을 멈추고 새로운 시각으로 상황을 파악합니다.",
+        "reversed": "해결책 없이 정체되거나 헛된 희생을 합니다."
       }
     },
     {
@@ -218,12 +335,21 @@
       "suit": null,
       "rank": "13",
       "keywords": {
-        "upright": ["endings", "transformation", "release", "rebirth"],
-        "reversed": ["resistance to change", "stagnation", "fear of endings"]
+        "upright": [
+          "endings",
+          "transformation",
+          "release",
+          "rebirth"
+        ],
+        "reversed": [
+          "resistance to change",
+          "stagnation",
+          "fear of endings"
+        ]
       },
       "meaning": {
-        "upright": "An ending clears the ground for what is meant to grow next.",
-        "reversed": "Holding on to what is already over, blocking renewal."
+        "upright": "한 상황이 완전히 끝나고 새로운 단계를 준비합니다.",
+        "reversed": "끝난 일에 집착하여 새로운 시작을 막습니다."
       }
     },
     {
@@ -234,12 +360,21 @@
       "suit": null,
       "rank": "14",
       "keywords": {
-        "upright": ["balance", "moderation", "patience", "blending"],
-        "reversed": ["imbalance", "excess", "impatience"]
+        "upright": [
+          "balance",
+          "moderation",
+          "patience",
+          "blending"
+        ],
+        "reversed": [
+          "imbalance",
+          "excess",
+          "impatience"
+        ]
       },
       "meaning": {
-        "upright": "Patient blending of opposites brings harmony.",
-        "reversed": "Pushed too far one way; the mixture sours."
+        "upright": "서로 다른 요소를 잘 조율하여 안정을 찾습니다.",
+        "reversed": "한쪽으로 치우쳐 상황이 나빠집니다."
       }
     },
     {
@@ -250,12 +385,21 @@
       "suit": null,
       "rank": "15",
       "keywords": {
-        "upright": ["bondage", "attachment", "addiction", "shadow self"],
-        "reversed": ["release", "breaking free", "reclaiming power"]
+        "upright": [
+          "bondage",
+          "attachment",
+          "addiction",
+          "shadow self"
+        ],
+        "reversed": [
+          "release",
+          "breaking free",
+          "reclaiming power"
+        ]
       },
       "meaning": {
-        "upright": "Chains you forget are chosen; an unhealthy attachment binds you.",
-        "reversed": "Awareness breaks the spell; freedom is reclaimed."
+        "upright": "해로운 습관이나 관계에 얽매여 있습니다.",
+        "reversed": "문제를 깨닫고 억압에서 벗어납니다."
       }
     },
     {
@@ -266,12 +410,21 @@
       "suit": null,
       "rank": "16",
       "keywords": {
-        "upright": ["sudden upheaval", "revelation", "collapse of falsehood", "awakening"],
-        "reversed": ["averted disaster", "delayed change", "resisting truth"]
+        "upright": [
+          "sudden upheaval",
+          "revelation",
+          "collapse of falsehood",
+          "awakening"
+        ],
+        "reversed": [
+          "averted disaster",
+          "delayed change",
+          "resisting truth"
+        ]
       },
       "meaning": {
-        "upright": "What was built on illusion comes down so truth can stand.",
-        "reversed": "A crisis narrowly avoided, or change postponed not escaped."
+        "upright": "잘못된 상황이 무너지고 진실이 드러나는 큰 변화가 옵니다.",
+        "reversed": "위기를 간신히 피하거나 변화를 미룹니다."
       }
     },
     {
@@ -282,12 +435,21 @@
       "suit": null,
       "rank": "17",
       "keywords": {
-        "upright": ["hope", "renewal", "inspiration", "serenity"],
-        "reversed": ["hopelessness", "disconnection", "lost faith"]
+        "upright": [
+          "hope",
+          "renewal",
+          "inspiration",
+          "serenity"
+        ],
+        "reversed": [
+          "hopelessness",
+          "disconnection",
+          "lost faith"
+        ]
       },
       "meaning": {
-        "upright": "After the storm, a calm light returns; healing begins.",
-        "reversed": "Faith feels distant; reconnect to what once inspired you."
+        "upright": "힘든 시기가 지나고 마음이 안정되며 회복됩니다.",
+        "reversed": "희망이 없습니다. 예전의 목표를 다시 찾아야 합니다."
       }
     },
     {
@@ -298,12 +460,21 @@
       "suit": null,
       "rank": "18",
       "keywords": {
-        "upright": ["illusion", "intuition", "fear", "uncertainty"],
-        "reversed": ["clarity returns", "truth revealed", "release of fear"]
+        "upright": [
+          "illusion",
+          "intuition",
+          "fear",
+          "uncertainty"
+        ],
+        "reversed": [
+          "clarity returns",
+          "truth revealed",
+          "release of fear"
+        ]
       },
       "meaning": {
-        "upright": "What seems real may not be; trust feeling more than appearance.",
-        "reversed": "Fog lifts; what was hidden becomes plain."
+        "upright": "겉모습보다 자신의 직관을 믿어야 합니다.",
+        "reversed": "혼란이 사라지고 숨겨진 사실이 명확해집니다."
       }
     },
     {
@@ -314,12 +485,21 @@
       "suit": null,
       "rank": "19",
       "keywords": {
-        "upright": ["joy", "vitality", "success", "clarity"],
-        "reversed": ["temporary setback", "dimmed enthusiasm", "lack of clarity"]
+        "upright": [
+          "joy",
+          "vitality",
+          "success",
+          "clarity"
+        ],
+        "reversed": [
+          "temporary setback",
+          "dimmed enthusiasm",
+          "lack of clarity"
+        ]
       },
       "meaning": {
-        "upright": "A bright, generous moment of warmth and visible success.",
-        "reversed": "Joy is muted but not lost; the sun still rises."
+        "upright": "확실한 성공을 거두고 기쁨을 누립니다.",
+        "reversed": "기쁨이 줄어들지만 긍정적인 상황은 유지됩니다."
       }
     },
     {
@@ -330,12 +510,21 @@
       "suit": null,
       "rank": "20",
       "keywords": {
-        "upright": ["awakening", "reckoning", "rebirth", "calling"],
-        "reversed": ["self-doubt", "ignoring the call", "harsh judgment"]
+        "upright": [
+          "awakening",
+          "reckoning",
+          "rebirth",
+          "calling"
+        ],
+        "reversed": [
+          "self-doubt",
+          "ignoring the call",
+          "harsh judgment"
+        ]
       },
       "meaning": {
-        "upright": "A moment of honest self-reckoning leads to a new beginning.",
-        "reversed": "Hearing the call but turning away, or judging too harshly."
+        "upright": "자신을 객관적으로 평가하고 새롭게 시작합니다.",
+        "reversed": "기회를 피하거나 자신을 너무 가혹하게 평가합니다."
       }
     },
     {
@@ -346,15 +535,23 @@
       "suit": null,
       "rank": "21",
       "keywords": {
-        "upright": ["completion", "wholeness", "accomplishment", "integration"],
-        "reversed": ["incompletion", "loose ends", "delayed closure"]
+        "upright": [
+          "completion",
+          "wholeness",
+          "accomplishment",
+          "integration"
+        ],
+        "reversed": [
+          "incompletion",
+          "loose ends",
+          "delayed closure"
+        ]
       },
       "meaning": {
-        "upright": "A long journey closes; everything fits together.",
-        "reversed": "Almost there; one piece still keeps the cycle from closing."
+        "upright": "긴 과정이 성공적으로 끝나고 목표를 달성합니다.",
+        "reversed": "거의 끝났으나 작은 문제로 마무리가 지연됩니다."
       }
     },
-
     {
       "id": 22,
       "name": "Ace of Cups",
@@ -363,12 +560,21 @@
       "suit": "cup",
       "rank": "ace",
       "keywords": {
-        "upright": ["new feelings", "love beginning", "spiritual opening", "intuition"],
-        "reversed": ["blocked emotions", "suppressed feelings", "emptiness"]
+        "upright": [
+          "new feelings",
+          "love beginning",
+          "spiritual opening",
+          "intuition"
+        ],
+        "reversed": [
+          "blocked emotions",
+          "suppressed feelings",
+          "emptiness"
+        ]
       },
       "meaning": {
-        "upright": "An emotional cup overflows; a tender new feeling arrives.",
-        "reversed": "Feelings held back, or a love that struggles to flow."
+        "upright": "긍정적인 감정이 생기고 새로운 관계를 시작합니다.",
+        "reversed": "감정을 숨기거나 관계 발전이 어렵습니다."
       }
     },
     {
@@ -379,12 +585,21 @@
       "suit": "cup",
       "rank": "2",
       "keywords": {
-        "upright": ["partnership", "mutual attraction", "harmony", "connection"],
-        "reversed": ["imbalance", "broken connection", "miscommunication"]
+        "upright": [
+          "partnership",
+          "mutual attraction",
+          "harmony",
+          "connection"
+        ],
+        "reversed": [
+          "imbalance",
+          "broken connection",
+          "miscommunication"
+        ]
       },
       "meaning": {
-        "upright": "A meeting of equals; mutual feeling forms a true bond.",
-        "reversed": "Connection is one-sided, or words and feelings misalign."
+        "upright": "서로 마음이 맞아 좋은 관계를 맺습니다.",
+        "reversed": "일방적인 관계이거나 소통이 안 됩니다."
       }
     },
     {
@@ -395,12 +610,21 @@
       "suit": "cup",
       "rank": "3",
       "keywords": {
-        "upright": ["celebration", "friendship", "community", "shared joy"],
-        "reversed": ["isolation", "gossip", "third-party intrusion"]
+        "upright": [
+          "celebration",
+          "friendship",
+          "community",
+          "shared joy"
+        ],
+        "reversed": [
+          "isolation",
+          "gossip",
+          "third-party intrusion"
+        ]
       },
       "meaning": {
-        "upright": "Joy multiplies in good company; a moment worth toasting.",
-        "reversed": "The circle feels off, or someone disrupts the harmony."
+        "upright": "좋은 사람들과 함께 기쁨을 나눕니다.",
+        "reversed": "무리에서 겉돌거나 누군가 관계를 방해합니다."
       }
     },
     {
@@ -411,12 +635,21 @@
       "suit": "cup",
       "rank": "4",
       "keywords": {
-        "upright": ["apathy", "contemplation", "reevaluation", "missed offers"],
-        "reversed": ["renewed interest", "acceptance", "new awareness"]
+        "upright": [
+          "apathy",
+          "contemplation",
+          "reevaluation",
+          "missed offers"
+        ],
+        "reversed": [
+          "renewed interest",
+          "acceptance",
+          "new awareness"
+        ]
       },
       "meaning": {
-        "upright": "Looking inward so deeply that gifts in front of you go unseen.",
-        "reversed": "Eyes open again; an offer is finally noticed."
+        "upright": "생각에 빠져 주변의 좋은 기회를 놓칩니다.",
+        "reversed": "다시 주변을 살피고 새로운 제안을 받아들입니다."
       }
     },
     {
@@ -427,12 +660,21 @@
       "suit": "cup",
       "rank": "5",
       "keywords": {
-        "upright": ["loss", "grief", "regret", "disappointment"],
-        "reversed": ["acceptance", "moving on", "finding what remains"]
+        "upright": [
+          "loss",
+          "grief",
+          "regret",
+          "disappointment"
+        ],
+        "reversed": [
+          "acceptance",
+          "moving on",
+          "finding what remains"
+        ]
       },
       "meaning": {
-        "upright": "Grief draws the eye to what spilled, hiding what is still full.",
-        "reversed": "Turning around to see what was always there to keep."
+        "upright": "잃어버린 것에 집중해 남은 긍정적 요소를 못 봅니다.",
+        "reversed": "상황을 객관적으로 보고 남은 것을 소중히 여깁니다."
       }
     },
     {
@@ -443,12 +685,21 @@
       "suit": "cup",
       "rank": "6",
       "keywords": {
-        "upright": ["nostalgia", "innocence", "childhood", "reunion"],
-        "reversed": ["stuck in the past", "unrealistic memory", "moving forward"]
+        "upright": [
+          "nostalgia",
+          "innocence",
+          "childhood",
+          "reunion"
+        ],
+        "reversed": [
+          "stuck in the past",
+          "unrealistic memory",
+          "moving forward"
+        ]
       },
       "meaning": {
-        "upright": "A sweet memory or familiar face brings simple comfort.",
-        "reversed": "The past tugs too strongly, holding the present hostage."
+        "upright": "과거의 기억이나 익숙한 사람에게서 편안함을 느낍니다.",
+        "reversed": "과거에 지나치게 얽매여 현재에 집중하지 못합니다."
       }
     },
     {
@@ -459,12 +710,21 @@
       "suit": "cup",
       "rank": "7",
       "keywords": {
-        "upright": ["choices", "fantasy", "illusion", "wishful thinking"],
-        "reversed": ["clarity", "decisive action", "cutting through illusion"]
+        "upright": [
+          "choices",
+          "fantasy",
+          "illusion",
+          "wishful thinking"
+        ],
+        "reversed": [
+          "clarity",
+          "decisive action",
+          "cutting through illusion"
+        ]
       },
       "meaning": {
-        "upright": "Many tempting options, but not all are real; choose with eyes open.",
-        "reversed": "The fog clears and a clear path becomes choosable."
+        "upright": "선택지가 많지만 허상이 있을 수 있으니 신중해야 합니다.",
+        "reversed": "혼란이 사라지고 명확한 선택을 내립니다."
       }
     },
     {
@@ -475,12 +735,20 @@
       "suit": "cup",
       "rank": "8",
       "keywords": {
-        "upright": ["walking away", "seeking deeper meaning", "abandonment"],
-        "reversed": ["fear of change", "staying out of obligation", "returning"]
+        "upright": [
+          "walking away",
+          "seeking deeper meaning",
+          "abandonment"
+        ],
+        "reversed": [
+          "fear of change",
+          "staying out of obligation",
+          "returning"
+        ]
       },
       "meaning": {
-        "upright": "Leaving what no longer feeds the soul, even when it looks like enough.",
-        "reversed": "Lingering past the time to leave, or returning to test it again."
+        "upright": "더 이상 만족을 주지 않는 상황을 스스로 떠납니다.",
+        "reversed": "떠날 때를 놓치거나 미련 때문에 돌아옵니다."
       }
     },
     {
@@ -491,12 +759,21 @@
       "suit": "cup",
       "rank": "9",
       "keywords": {
-        "upright": ["contentment", "wishes fulfilled", "satisfaction", "gratitude"],
-        "reversed": ["dissatisfaction", "shallow pleasure", "unfulfilled wish"]
+        "upright": [
+          "contentment",
+          "wishes fulfilled",
+          "satisfaction",
+          "gratitude"
+        ],
+        "reversed": [
+          "dissatisfaction",
+          "shallow pleasure",
+          "unfulfilled wish"
+        ]
       },
       "meaning": {
-        "upright": "A wished-for feeling lands and proves itself real.",
-        "reversed": "The wish came true but feels hollow, or has not arrived yet."
+        "upright": "바라는 바를 이루고 만족감을 느낍니다.",
+        "reversed": "목표를 이뤘지만 허무하거나 아직 이루지 못했습니다."
       }
     },
     {
@@ -507,12 +784,20 @@
       "suit": "cup",
       "rank": "10",
       "keywords": {
-        "upright": ["lasting happiness", "family harmony", "emotional fulfillment"],
-        "reversed": ["disconnection", "broken bonds", "unrealized harmony"]
+        "upright": [
+          "lasting happiness",
+          "family harmony",
+          "emotional fulfillment"
+        ],
+        "reversed": [
+          "disconnection",
+          "broken bonds",
+          "unrealized harmony"
+        ]
       },
       "meaning": {
-        "upright": "The love that lasts; people who feel like home.",
-        "reversed": "A picture of harmony with cracks underneath."
+        "upright": "편안한 사람들과 지속적인 정서적 만족을 누립니다.",
+        "reversed": "겉으로는 좋아 보이지만 내부적인 문제가 있습니다."
       }
     },
     {
@@ -523,12 +808,21 @@
       "suit": "cup",
       "rank": "page",
       "keywords": {
-        "upright": ["creative spark", "openness", "playful feeling", "intuitive message"],
-        "reversed": ["emotional immaturity", "creative block", "moodiness"]
+        "upright": [
+          "creative spark",
+          "openness",
+          "playful feeling",
+          "intuitive message"
+        ],
+        "reversed": [
+          "emotional immaturity",
+          "creative block",
+          "moodiness"
+        ]
       },
       "meaning": {
-        "upright": "An unexpected feeling, message, or creative idea arrives gently.",
-        "reversed": "Feelings out of proportion to the moment, or inspiration stalled."
+        "upright": "예상치 못한 감정, 소식, 또는 새로운 아이디어가 생깁니다.",
+        "reversed": "감정을 심하게 드러내거나 아이디어가 실행되지 않습니다."
       }
     },
     {
@@ -539,12 +833,21 @@
       "suit": "cup",
       "rank": "knight",
       "keywords": {
-        "upright": ["romantic", "idealistic", "following the heart", "charming"],
-        "reversed": ["moodiness", "unrealistic", "false charm"]
+        "upright": [
+          "romantic",
+          "idealistic",
+          "following the heart",
+          "charming"
+        ],
+        "reversed": [
+          "moodiness",
+          "unrealistic",
+          "false charm"
+        ]
       },
       "meaning": {
-        "upright": "A romantic offer or heartfelt pursuit moves toward you.",
-        "reversed": "Feelings shift like weather, or charm hides shallowness."
+        "upright": "진심 어린 제안이나 호의적인 관계가 다가옵니다.",
+        "reversed": "감정 변화가 심하거나 겉모습만 그럴듯합니다."
       }
     },
     {
@@ -555,12 +858,21 @@
       "suit": "cup",
       "rank": "queen",
       "keywords": {
-        "upright": ["compassion", "intuition", "emotional security", "empathy"],
-        "reversed": ["emotional overwhelm", "co-dependence", "self-neglect"]
+        "upright": [
+          "compassion",
+          "intuition",
+          "emotional security",
+          "empathy"
+        ],
+        "reversed": [
+          "emotional overwhelm",
+          "co-dependence",
+          "self-neglect"
+        ]
       },
       "meaning": {
-        "upright": "Hold space for feeling; intuition is unusually clear.",
-        "reversed": "Carrying too many feelings, or losing yourself in caring."
+        "upright": "감정을 잘 이해하고 직관력이 매우 뛰어납니다.",
+        "reversed": "감정을 주체하지 못하거나 남을 돌보느라 자신을 희생합니다."
       }
     },
     {
@@ -571,15 +883,23 @@
       "suit": "cup",
       "rank": "king",
       "keywords": {
-        "upright": ["emotional balance", "wise compassion", "diplomacy", "calm"],
-        "reversed": ["emotional manipulation", "moodiness", "cold detachment"]
+        "upright": [
+          "emotional balance",
+          "wise compassion",
+          "diplomacy",
+          "calm"
+        ],
+        "reversed": [
+          "emotional manipulation",
+          "moodiness",
+          "cold detachment"
+        ]
       },
       "meaning": {
-        "upright": "Mastery of feeling; calm leadership in emotional waters.",
-        "reversed": "Feelings turned into pressure, or cut off entirely."
+        "upright": "감정을 잘 조절하고 차분하게 상황을 주도합니다.",
+        "reversed": "감정으로 상대를 압박하거나 감정을 완전히 숨깁니다."
       }
     },
-
     {
       "id": 36,
       "name": "Ace of Wands",
@@ -588,12 +908,21 @@
       "suit": "wand",
       "rank": "ace",
       "keywords": {
-        "upright": ["inspiration", "new opportunity", "creative spark", "passion"],
-        "reversed": ["delays", "lack of motivation", "false start"]
+        "upright": [
+          "inspiration",
+          "new opportunity",
+          "creative spark",
+          "passion"
+        ],
+        "reversed": [
+          "delays",
+          "lack of motivation",
+          "false start"
+        ]
       },
       "meaning": {
-        "upright": "A bright spark of inspiration; the courage to begin shows up.",
-        "reversed": "Energy fizzles before it catches, or the timing is wrong."
+        "upright": "좋은 아이디어가 떠오르고 시작할 용기가 생깁니다.",
+        "reversed": "의욕이 식거나 시작할 타이밍이 맞지 않습니다."
       }
     },
     {
@@ -604,12 +933,21 @@
       "suit": "wand",
       "rank": "2",
       "keywords": {
-        "upright": ["planning", "decisions", "future vision", "personal power"],
-        "reversed": ["fear of unknown", "playing it safe", "overplanning"]
+        "upright": [
+          "planning",
+          "decisions",
+          "future vision",
+          "personal power"
+        ],
+        "reversed": [
+          "fear of unknown",
+          "playing it safe",
+          "overplanning"
+        ]
       },
       "meaning": {
-        "upright": "Standing at the edge of the map, choosing where to point next.",
-        "reversed": "Sticking to what is known when bigger horizons are calling."
+        "upright": "다음 목표를 정하고 나아갈 방향을 결정합니다.",
+        "reversed": "새로운 시도를 두려워하고 익숙한 것에 머뭅니다."
       }
     },
     {
@@ -620,12 +958,21 @@
       "suit": "wand",
       "rank": "3",
       "keywords": {
-        "upright": ["expansion", "foresight", "progress", "looking ahead"],
-        "reversed": ["delays", "lack of foresight", "obstacles to growth"]
+        "upright": [
+          "expansion",
+          "foresight",
+          "progress",
+          "looking ahead"
+        ],
+        "reversed": [
+          "delays",
+          "lack of foresight",
+          "obstacles to growth"
+        ]
       },
       "meaning": {
-        "upright": "Plans set into motion begin returning; expand your view.",
-        "reversed": "What you sent out comes back slower than expected."
+        "upright": "계획대로 일이 진행되며 시야를 넓힐 때입니다.",
+        "reversed": "기대했던 것보다 결과가 늦게 나타납니다."
       }
     },
     {
@@ -636,12 +983,21 @@
       "suit": "wand",
       "rank": "4",
       "keywords": {
-        "upright": ["celebration", "homecoming", "milestone", "stability"],
-        "reversed": ["transition", "instability", "delayed celebration"]
+        "upright": [
+          "celebration",
+          "homecoming",
+          "milestone",
+          "stability"
+        ],
+        "reversed": [
+          "transition",
+          "instability",
+          "delayed celebration"
+        ]
       },
       "meaning": {
-        "upright": "A milestone earned; pause to mark the moment with people you love.",
-        "reversed": "Foundations still settling, or celebration postponed."
+        "upright": "목표를 달성하고 주변 사람들과 기쁨을 나눕니다.",
+        "reversed": "아직 상황이 불안정하거나 성과 공유가 미뤄집니다."
       }
     },
     {
@@ -652,12 +1008,21 @@
       "suit": "wand",
       "rank": "5",
       "keywords": {
-        "upright": ["competition", "conflict", "tension", "lively disagreement"],
-        "reversed": ["resolution", "avoiding conflict", "inner conflict"]
+        "upright": [
+          "competition",
+          "conflict",
+          "tension",
+          "lively disagreement"
+        ],
+        "reversed": [
+          "resolution",
+          "avoiding conflict",
+          "inner conflict"
+        ]
       },
       "meaning": {
-        "upright": "Many voices, many directions; productive friction or just noise.",
-        "reversed": "Tension settles, or conflict goes underground instead of out."
+        "upright": "의견이 다양해 갈등이 생기거나 소란스럽습니다.",
+        "reversed": "긴장이 풀리거나 겉으로 드러나지 않는 갈등이 생깁니다."
       }
     },
     {
@@ -668,12 +1033,21 @@
       "suit": "wand",
       "rank": "6",
       "keywords": {
-        "upright": ["victory", "recognition", "success", "public acclaim"],
-        "reversed": ["delayed success", "private win", "ego inflation"]
+        "upright": [
+          "victory",
+          "recognition",
+          "success",
+          "public acclaim"
+        ],
+        "reversed": [
+          "delayed success",
+          "private win",
+          "ego inflation"
+        ]
       },
       "meaning": {
-        "upright": "Effort pays off and the win is seen by others.",
-        "reversed": "The win is real but quieter, or recognition is held back."
+        "upright": "노력이 결과를 맺고 다른 사람들에게 인정받습니다.",
+        "reversed": "성과는 있지만 주목받지 못하거나 인정이 늦어집니다."
       }
     },
     {
@@ -684,12 +1058,21 @@
       "suit": "wand",
       "rank": "7",
       "keywords": {
-        "upright": ["defense", "perseverance", "standing your ground", "conviction"],
-        "reversed": ["overwhelm", "giving up", "losing position"]
+        "upright": [
+          "defense",
+          "perseverance",
+          "standing your ground",
+          "conviction"
+        ],
+        "reversed": [
+          "overwhelm",
+          "giving up",
+          "losing position"
+        ]
       },
       "meaning": {
-        "upright": "Hold the higher ground; what you built is worth defending.",
-        "reversed": "Pressure mounts; the urge to drop the shield grows."
+        "upright": "자신의 위치나 성과를 지키기 위해 당당히 맞섭니다.",
+        "reversed": "압박감이 심해져 포기하고 싶은 마음이 듭니다."
       }
     },
     {
@@ -700,12 +1083,21 @@
       "suit": "wand",
       "rank": "8",
       "keywords": {
-        "upright": ["swift action", "movement", "fast progress", "messages"],
-        "reversed": ["delays", "frustration", "scattered energy"]
+        "upright": [
+          "swift action",
+          "movement",
+          "fast progress",
+          "messages"
+        ],
+        "reversed": [
+          "delays",
+          "frustration",
+          "scattered energy"
+        ]
       },
       "meaning": {
-        "upright": "Things move fast; news, travel, or progress arrives quickly.",
-        "reversed": "Momentum stalls, or messages cross past each other."
+        "upright": "상황이 빠르게 진행되고 소식이나 결과가 곧 도착합니다.",
+        "reversed": "진행이 멈추거나 소통이 어긋납니다."
       }
     },
     {
@@ -716,12 +1108,21 @@
       "suit": "wand",
       "rank": "9",
       "keywords": {
-        "upright": ["resilience", "last stand", "perseverance", "guarded strength"],
-        "reversed": ["exhaustion", "burnout", "stubborn defense"]
+        "upright": [
+          "resilience",
+          "last stand",
+          "perseverance",
+          "guarded strength"
+        ],
+        "reversed": [
+          "exhaustion",
+          "burnout",
+          "stubborn defense"
+        ]
       },
       "meaning": {
-        "upright": "Tired but standing; one more push finishes what you started.",
-        "reversed": "The wall is held by stubbornness alone; rest is overdue."
+        "upright": "지쳤지만 끝까지 버티며 하던 일을 마무리합니다.",
+        "reversed": "고집으로만 버티고 있으며 휴식이 필요합니다."
       }
     },
     {
@@ -732,12 +1133,21 @@
       "suit": "wand",
       "rank": "10",
       "keywords": {
-        "upright": ["burden", "responsibility", "hard work", "carrying too much"],
-        "reversed": ["releasing burden", "delegation", "burnout breaking"]
+        "upright": [
+          "burden",
+          "responsibility",
+          "hard work",
+          "carrying too much"
+        ],
+        "reversed": [
+          "releasing burden",
+          "delegation",
+          "burnout breaking"
+        ]
       },
       "meaning": {
-        "upright": "Many things have been said yes to; the load is real.",
-        "reversed": "Time to set something down or share the weight."
+        "upright": "너무 많은 책임을 맡아 부담감이 큽니다.",
+        "reversed": "책임을 내려놓거나 다른 사람에게 일을 나눕니다."
       }
     },
     {
@@ -748,12 +1158,21 @@
       "suit": "wand",
       "rank": "page",
       "keywords": {
-        "upright": ["enthusiasm", "exploration", "free spirit", "discovery"],
-        "reversed": ["restlessness", "lack of direction", "all talk"]
+        "upright": [
+          "enthusiasm",
+          "exploration",
+          "free spirit",
+          "discovery"
+        ],
+        "reversed": [
+          "restlessness",
+          "lack of direction",
+          "all talk"
+        ]
       },
       "meaning": {
-        "upright": "An eager curiosity opens a door worth walking through.",
-        "reversed": "Excitement without follow-through, or scattered starts."
+        "upright": "호기심을 가지고 새로운 일을 즐겁게 탐색합니다.",
+        "reversed": "말만 앞서고 실행력이 부족합니다."
       }
     },
     {
@@ -764,12 +1183,21 @@
       "suit": "wand",
       "rank": "knight",
       "keywords": {
-        "upright": ["action", "adventure", "boldness", "passion"],
-        "reversed": ["impulsiveness", "recklessness", "loss of momentum"]
+        "upright": [
+          "action",
+          "adventure",
+          "boldness",
+          "passion"
+        ],
+        "reversed": [
+          "impulsiveness",
+          "recklessness",
+          "loss of momentum"
+        ]
       },
       "meaning": {
-        "upright": "Move fast and trust the heat; hesitation costs more than risk.",
-        "reversed": "Rushing past what mattered, or stalling when it is time to ride."
+        "upright": "과감하게 행동해야 합니다. 망설이면 기회를 잃습니다.",
+        "reversed": "중요한 것을 놓치며 서두르거나, 행동할 때 멈춥니다."
       }
     },
     {
@@ -780,12 +1208,21 @@
       "suit": "wand",
       "rank": "queen",
       "keywords": {
-        "upright": ["confidence", "warmth", "magnetism", "creative drive"],
-        "reversed": ["jealousy", "self-doubt", "burnout"]
+        "upright": [
+          "confidence",
+          "warmth",
+          "magnetism",
+          "creative drive"
+        ],
+        "reversed": [
+          "jealousy",
+          "self-doubt",
+          "burnout"
+        ]
       },
       "meaning": {
-        "upright": "Show up fully; your presence draws what you need.",
-        "reversed": "Inner spark dimmed by comparison or exhaustion."
+        "upright": "자신감 있는 태도가 필요한 것들을 끌어당깁니다.",
+        "reversed": "남과 비교하거나 지쳐서 자신감을 잃습니다."
       }
     },
     {
@@ -796,15 +1233,23 @@
       "suit": "wand",
       "rank": "king",
       "keywords": {
-        "upright": ["visionary leadership", "charisma", "bold direction", "mastery"],
-        "reversed": ["arrogance", "impulsive leadership", "overreach"]
+        "upright": [
+          "visionary leadership",
+          "charisma",
+          "bold direction",
+          "mastery"
+        ],
+        "reversed": [
+          "arrogance",
+          "impulsive leadership",
+          "overreach"
+        ]
       },
       "meaning": {
-        "upright": "Lead with conviction; the long view rewards bold steps.",
-        "reversed": "Vision detaches from the people meant to follow it."
+        "upright": "확신을 가지고 장기적인 목표를 향해 리더십을 발휘합니다.",
+        "reversed": "주변 사람들을 고려하지 않고 혼자만 앞서갑니다."
       }
     },
-
     {
       "id": 50,
       "name": "Ace of Swords",
@@ -813,12 +1258,21 @@
       "suit": "sword",
       "rank": "ace",
       "keywords": {
-        "upright": ["clarity", "breakthrough", "truth", "mental focus"],
-        "reversed": ["confusion", "miscommunication", "harsh truth"]
+        "upright": [
+          "clarity",
+          "breakthrough",
+          "truth",
+          "mental focus"
+        ],
+        "reversed": [
+          "confusion",
+          "miscommunication",
+          "harsh truth"
+        ]
       },
       "meaning": {
-        "upright": "A clean cut of insight; what was tangled becomes plain.",
-        "reversed": "Insight arrives as a blow, or thinking goes in circles."
+        "upright": "상황을 명확하게 파악하고 복잡한 문제를 해결합니다.",
+        "reversed": "충격적 사실을 알게 되거나 생각이 맴돌아 혼란스럽습니다."
       }
     },
     {
@@ -829,12 +1283,21 @@
       "suit": "sword",
       "rank": "2",
       "keywords": {
-        "upright": ["stalemate", "difficult choice", "blocked emotions", "indecision"],
-        "reversed": ["decision made", "lifting the blindfold", "moving past stalemate"]
+        "upright": [
+          "stalemate",
+          "difficult choice",
+          "blocked emotions",
+          "indecision"
+        ],
+        "reversed": [
+          "decision made",
+          "lifting the blindfold",
+          "moving past stalemate"
+        ]
       },
       "meaning": {
-        "upright": "Two truths balanced by refusing to look; the choice waits.",
-        "reversed": "The blindfold drops; the decision finally happens."
+        "upright": "결정을 내리지 못하고 문제를 외면하고 있습니다.",
+        "reversed": "현실을 직시하고 마침내 결정을 내립니다."
       }
     },
     {
@@ -845,12 +1308,21 @@
       "suit": "sword",
       "rank": "3",
       "keywords": {
-        "upright": ["heartbreak", "sorrow", "painful truth", "grief"],
-        "reversed": ["healing", "forgiveness", "releasing pain"]
+        "upright": [
+          "heartbreak",
+          "sorrow",
+          "painful truth",
+          "grief"
+        ],
+        "reversed": [
+          "healing",
+          "forgiveness",
+          "releasing pain"
+        ]
       },
       "meaning": {
-        "upright": "A truth lands and it hurts; the wound is part of growing.",
-        "reversed": "The pain begins to leave; healing returns slowly."
+        "upright": "고통스러운 사실을 받아들이며 이는 성장의 과정입니다.",
+        "reversed": "고통에서 서서히 벗어나며 회복을 시작합니다."
       }
     },
     {
@@ -861,12 +1333,21 @@
       "suit": "sword",
       "rank": "4",
       "keywords": {
-        "upright": ["rest", "recovery", "contemplation", "pause"],
-        "reversed": ["restlessness", "burnout", "forced re-entry"]
+        "upright": [
+          "rest",
+          "recovery",
+          "contemplation",
+          "pause"
+        ],
+        "reversed": [
+          "restlessness",
+          "burnout",
+          "forced re-entry"
+        ]
       },
       "meaning": {
-        "upright": "Step out of the fight; the mind needs quiet to repair.",
-        "reversed": "Rest avoided too long, or returning before fully ready."
+        "upright": "갈등에서 벗어나 조용히 정신적인 휴식을 취해야 합니다.",
+        "reversed": "휴식을 피하거나 완전히 회복되기 전에 복귀합니다."
       }
     },
     {
@@ -877,12 +1358,21 @@
       "suit": "sword",
       "rank": "5",
       "keywords": {
-        "upright": ["conflict", "winning at a cost", "discord", "tension"],
-        "reversed": ["reconciliation", "letting go of the win", "regret"]
+        "upright": [
+          "conflict",
+          "winning at a cost",
+          "discord",
+          "tension"
+        ],
+        "reversed": [
+          "reconciliation",
+          "letting go of the win",
+          "regret"
+        ]
       },
       "meaning": {
-        "upright": "Winning the argument may cost the relationship.",
-        "reversed": "Stepping back from the fight; pride loosens its grip."
+        "upright": "논쟁에서 이기더라도 관계가 나빠질 수 있습니다.",
+        "reversed": "자존심을 버리고 싸움을 멈추며 한발 물러섭니다."
       }
     },
     {
@@ -893,12 +1383,21 @@
       "suit": "sword",
       "rank": "6",
       "keywords": {
-        "upright": ["transition", "moving on", "leaving troubled waters", "passage"],
-        "reversed": ["resistance to change", "unfinished business", "stuck"]
+        "upright": [
+          "transition",
+          "moving on",
+          "leaving troubled waters",
+          "passage"
+        ],
+        "reversed": [
+          "resistance to change",
+          "unfinished business",
+          "stuck"
+        ]
       },
       "meaning": {
-        "upright": "Quietly leaving harder waters for calmer ones; the journey itself heals.",
-        "reversed": "Carrying old waters into new ground, or refusing to leave."
+        "upright": "힘든 상황에서 조용히 벗어나며 점차 안정을 찾습니다.",
+        "reversed": "옛 문제를 안고 가거나 현재 상황을 떠나려 하지 않습니다."
       }
     },
     {
@@ -909,12 +1408,21 @@
       "suit": "sword",
       "rank": "7",
       "keywords": {
-        "upright": ["deception", "strategy", "stealth", "getting away with something"],
-        "reversed": ["confession", "coming clean", "exposed deceit"]
+        "upright": [
+          "deception",
+          "strategy",
+          "stealth",
+          "getting away with something"
+        ],
+        "reversed": [
+          "confession",
+          "coming clean",
+          "exposed deceit"
+        ]
       },
       "meaning": {
-        "upright": "Cleverness over confrontation; not everyone is showing their hand.",
-        "reversed": "What was hidden surfaces, by choice or by accident."
+        "upright": "정면 승부보다 요령을 피우며 속마음을 숨깁니다.",
+        "reversed": "의도적이든 실수든 숨겼던 사실이 드러납니다."
       }
     },
     {
@@ -925,12 +1433,21 @@
       "suit": "sword",
       "rank": "8",
       "keywords": {
-        "upright": ["restriction", "self-imposed limits", "victim mindset", "trapped feeling"],
-        "reversed": ["freedom from the trap", "new perspective", "self-empowerment"]
+        "upright": [
+          "restriction",
+          "self-imposed limits",
+          "victim mindset",
+          "trapped feeling"
+        ],
+        "reversed": [
+          "freedom from the trap",
+          "new perspective",
+          "self-empowerment"
+        ]
       },
       "meaning": {
-        "upright": "The cage is real, but the door is unlocked; sight has been refused.",
-        "reversed": "Realizing the limits were chosen; stepping out of the story."
+        "upright": "스스로 한계를 만들고 상황을 외면하여 갇혀있다고 느낍니다.",
+        "reversed": "스스로 한계를 만들었음을 깨닫고 상황에서 벗어납니다."
       }
     },
     {
@@ -941,12 +1458,21 @@
       "suit": "sword",
       "rank": "9",
       "keywords": {
-        "upright": ["anxiety", "worry", "nightmares", "guilt"],
-        "reversed": ["relief", "facing fears", "anxiety easing"]
+        "upright": [
+          "anxiety",
+          "worry",
+          "nightmares",
+          "guilt"
+        ],
+        "reversed": [
+          "relief",
+          "facing fears",
+          "anxiety easing"
+        ]
       },
       "meaning": {
-        "upright": "Fear amplified at night; the threat is mostly inside the mind.",
-        "reversed": "The grip of worry loosens; daylight returns to the room."
+        "upright": "걱정이 많아지며 실제보다 상황을 더 두렵게 생각합니다.",
+        "reversed": "걱정이 줄어들고 마음의 안정을 찾습니다."
       }
     },
     {
@@ -957,12 +1483,21 @@
       "suit": "sword",
       "rank": "10",
       "keywords": {
-        "upright": ["painful ending", "rock bottom", "betrayal", "completion of a hard cycle"],
-        "reversed": ["recovery", "survival", "the worst is over"]
+        "upright": [
+          "painful ending",
+          "rock bottom",
+          "betrayal",
+          "completion of a hard cycle"
+        ],
+        "reversed": [
+          "recovery",
+          "survival",
+          "the worst is over"
+        ]
       },
       "meaning": {
-        "upright": "The full ending of a hard chapter; the floor has finally been hit.",
-        "reversed": "Standing up after the fall; the only way is forward."
+        "upright": "힘든 상황이 완전히 끝나고 최악의 상황에 도달했습니다.",
+        "reversed": "실패를 딛고 일어나 다시 앞으로 나아갑니다."
       }
     },
     {
@@ -973,12 +1508,21 @@
       "suit": "sword",
       "rank": "page",
       "keywords": {
-        "upright": ["curiosity", "vigilance", "new ideas", "sharp questions"],
-        "reversed": ["scattered thinking", "harsh words", "paranoia"]
+        "upright": [
+          "curiosity",
+          "vigilance",
+          "new ideas",
+          "sharp questions"
+        ],
+        "reversed": [
+          "scattered thinking",
+          "harsh words",
+          "paranoia"
+        ]
       },
       "meaning": {
-        "upright": "Ask the question others avoid; answers reward the curious.",
-        "reversed": "Sharp tongue cuts where it did not need to."
+        "upright": "질문을 통해 필요한 답을 얻고 새로운 아이디어를 찾습니다.",
+        "reversed": "날카로운 말로 다른 사람에게 불필요한 상처를 줍니다."
       }
     },
     {
@@ -989,12 +1533,21 @@
       "suit": "sword",
       "rank": "knight",
       "keywords": {
-        "upright": ["ambition", "drive", "direct action", "swift mind"],
-        "reversed": ["recklessness", "tactlessness", "burning bridges"]
+        "upright": [
+          "ambition",
+          "drive",
+          "direct action",
+          "swift mind"
+        ],
+        "reversed": [
+          "recklessness",
+          "tactlessness",
+          "burning bridges"
+        ]
       },
       "meaning": {
-        "upright": "Move with purpose and speak plainly; speed cuts through fog.",
-        "reversed": "Speed without aim leaves wreckage behind."
+        "upright": "명확한 목표를 가지고 빠르고 직접적으로 행동합니다.",
+        "reversed": "목적 없이 서두르다가 주변에 피해를 줍니다."
       }
     },
     {
@@ -1005,12 +1558,21 @@
       "suit": "sword",
       "rank": "queen",
       "keywords": {
-        "upright": ["independent clarity", "honest communication", "discernment", "unflinching truth"],
-        "reversed": ["coldness", "bitterness", "harsh judgment"]
+        "upright": [
+          "independent clarity",
+          "honest communication",
+          "discernment",
+          "unflinching truth"
+        ],
+        "reversed": [
+          "coldness",
+          "bitterness",
+          "harsh judgment"
+        ]
       },
       "meaning": {
-        "upright": "Stand on your own and speak the truth without coating it.",
-        "reversed": "Truth used as a weapon; old hurt sharpens the words."
+        "upright": "독립적인 태도로 타협 없이 솔직하게 진실을 말합니다.",
+        "reversed": "과거의 상처 때문에 날이 선 말로 상대를 공격합니다."
       }
     },
     {
@@ -1021,15 +1583,23 @@
       "suit": "sword",
       "rank": "king",
       "keywords": {
-        "upright": ["intellectual authority", "ethical leadership", "strategic mind", "fairness"],
-        "reversed": ["cold logic", "manipulation", "abuse of authority"]
+        "upright": [
+          "intellectual authority",
+          "ethical leadership",
+          "strategic mind",
+          "fairness"
+        ],
+        "reversed": [
+          "cold logic",
+          "manipulation",
+          "abuse of authority"
+        ]
       },
       "meaning": {
-        "upright": "Decide with reason and principle; clarity earns trust.",
-        "reversed": "Logic without warmth, or rules bent to serve power."
+        "upright": "논리와 원칙에 따라 판단하여 신뢰를 얻습니다.",
+        "reversed": "인간미 없이 논리만 따지거나 권력을 남용합니다."
       }
     },
-
     {
       "id": 64,
       "name": "Ace of Pentacles",
@@ -1038,12 +1608,21 @@
       "suit": "pentacle",
       "rank": "ace",
       "keywords": {
-        "upright": ["new opportunity", "prosperity", "manifestation", "tangible beginning"],
-        "reversed": ["missed opportunity", "delayed gain", "scarcity mindset"]
+        "upright": [
+          "new opportunity",
+          "prosperity",
+          "manifestation",
+          "tangible beginning"
+        ],
+        "reversed": [
+          "missed opportunity",
+          "delayed gain",
+          "scarcity mindset"
+        ]
       },
       "meaning": {
-        "upright": "A solid offer or seed of prosperity; something real begins.",
-        "reversed": "An opportunity slips, or fear of lack closes the door."
+        "upright": "확실한 제안을 받거나 실질적인 결과가 나타나기 시작합니다.",
+        "reversed": "기회를 놓치거나 부족함에 대한 두려움 때문에 포기합니다."
       }
     },
     {
@@ -1054,12 +1633,21 @@
       "suit": "pentacle",
       "rank": "2",
       "keywords": {
-        "upright": ["balance", "juggling priorities", "adaptability", "flow"],
-        "reversed": ["overwhelm", "dropped balls", "imbalance"]
+        "upright": [
+          "balance",
+          "juggling priorities",
+          "adaptability",
+          "flow"
+        ],
+        "reversed": [
+          "overwhelm",
+          "dropped balls",
+          "imbalance"
+        ]
       },
       "meaning": {
-        "upright": "Many demands; rhythm is the way through.",
-        "reversed": "Too much in motion; something needs to be set down."
+        "upright": "여러 가지 일을 동시에 유연하게 처리하고 있습니다.",
+        "reversed": "너무 많은 일을 감당하지 못해 하나를 포기해야 합니다."
       }
     },
     {
@@ -1070,12 +1658,21 @@
       "suit": "pentacle",
       "rank": "3",
       "keywords": {
-        "upright": ["teamwork", "collaboration", "craftsmanship", "skilled effort"],
-        "reversed": ["poor teamwork", "lack of recognition", "misaligned effort"]
+        "upright": [
+          "teamwork",
+          "collaboration",
+          "craftsmanship",
+          "skilled effort"
+        ],
+        "reversed": [
+          "poor teamwork",
+          "lack of recognition",
+          "misaligned effort"
+        ]
       },
       "meaning": {
-        "upright": "Skills combine; a project moves because the right people align.",
-        "reversed": "Roles unclear, or contribution goes unseen."
+        "upright": "알맞은 사람들과 협력하여 일이 잘 진행됩니다.",
+        "reversed": "역할 분담이 안 되거나 노력을 인정받지 못합니다."
       }
     },
     {
@@ -1086,12 +1683,21 @@
       "suit": "pentacle",
       "rank": "4",
       "keywords": {
-        "upright": ["security", "saving", "control", "holding tightly"],
-        "reversed": ["releasing control", "letting go", "generosity returning"]
+        "upright": [
+          "security",
+          "saving",
+          "control",
+          "holding tightly"
+        ],
+        "reversed": [
+          "releasing control",
+          "letting go",
+          "generosity returning"
+        ]
       },
       "meaning": {
-        "upright": "Holding what is yours; safety found in keeping things close.",
-        "reversed": "Loosening the grip; flow returns when fear releases."
+        "upright": "현재 가진 것을 지키고 현상 유지를 통해 안정을 찾습니다.",
+        "reversed": "통제를 풀고 두려움에서 벗어나 상황을 유연하게 대합니다."
       }
     },
     {
@@ -1102,12 +1708,21 @@
       "suit": "pentacle",
       "rank": "5",
       "keywords": {
-        "upright": ["hardship", "loss", "isolation", "feeling left out"],
-        "reversed": ["recovery", "help arriving", "end of hardship"]
+        "upright": [
+          "hardship",
+          "loss",
+          "isolation",
+          "feeling left out"
+        ],
+        "reversed": [
+          "recovery",
+          "help arriving",
+          "end of hardship"
+        ]
       },
       "meaning": {
-        "upright": "A cold stretch; help is closer than the cold makes it seem.",
-        "reversed": "Warmth returns; the door that was missed is found."
+        "upright": "힘든 시기이며, 가까운 곳에 있는 도움을 보지 못하고 있습니다.",
+        "reversed": "상황이 나아지고 놓쳤던 도움의 손길을 찾게 됩니다."
       }
     },
     {
@@ -1118,12 +1733,21 @@
       "suit": "pentacle",
       "rank": "6",
       "keywords": {
-        "upright": ["generosity", "giving and receiving", "fair exchange", "support"],
-        "reversed": ["strings attached", "imbalanced giving", "debt"]
+        "upright": [
+          "generosity",
+          "giving and receiving",
+          "fair exchange",
+          "support"
+        ],
+        "reversed": [
+          "strings attached",
+          "imbalanced giving",
+          "debt"
+        ]
       },
       "meaning": {
-        "upright": "What flows in and out is in fair proportion; help moves both ways.",
-        "reversed": "Generosity tips into control, or one side carries the rest."
+        "upright": "도움을 주고받는 과정이 공정하게 이루어집니다.",
+        "reversed": "호의를 이용해 통제하려 하거나 일방적으로 부담을 집니다."
       }
     },
     {
@@ -1134,12 +1758,21 @@
       "suit": "pentacle",
       "rank": "7",
       "keywords": {
-        "upright": ["assessment", "patience", "long-term view", "harvest pending"],
-        "reversed": ["impatience", "wasted effort", "wrong garden"]
+        "upright": [
+          "assessment",
+          "patience",
+          "long-term view",
+          "harvest pending"
+        ],
+        "reversed": [
+          "impatience",
+          "wasted effort",
+          "wrong garden"
+        ]
       },
       "meaning": {
-        "upright": "Step back and see what is growing; patience is part of the work.",
-        "reversed": "Effort poured into ground that will not return it."
+        "upright": "상황을 지켜보는 인내심이 필요하며 결과를 기다려야 합니다.",
+        "reversed": "성과가 없는 일에 계속 노력을 낭비하고 있습니다."
       }
     },
     {
@@ -1150,12 +1783,21 @@
       "suit": "pentacle",
       "rank": "8",
       "keywords": {
-        "upright": ["mastery", "diligent practice", "skill building", "dedication"],
-        "reversed": ["perfectionism", "going through motions", "skill plateau"]
+        "upright": [
+          "mastery",
+          "diligent practice",
+          "skill building",
+          "dedication"
+        ],
+        "reversed": [
+          "perfectionism",
+          "going through motions",
+          "skill plateau"
+        ]
       },
       "meaning": {
-        "upright": "Quiet, repeated effort sharpens the craft; mastery is near.",
-        "reversed": "Effort has gone autopilot, or perfectionism stalls progress."
+        "upright": "묵묵히 노력을 반복하여 실력이 향상되고 완성에 가까워집니다.",
+        "reversed": "기계적으로 일하거나 완벽주의 때문에 진전이 없습니다."
       }
     },
     {
@@ -1166,12 +1808,21 @@
       "suit": "pentacle",
       "rank": "9",
       "keywords": {
-        "upright": ["self-sufficiency", "earned comfort", "refinement", "independence"],
-        "reversed": ["over-reliance on others", "overspending", "loneliness in success"]
+        "upright": [
+          "self-sufficiency",
+          "earned comfort",
+          "refinement",
+          "independence"
+        ],
+        "reversed": [
+          "over-reliance on others",
+          "overspending",
+          "loneliness in success"
+        ]
       },
       "meaning": {
-        "upright": "A garden built by your own hand; enjoy what you have made.",
-        "reversed": "Comfort rests on others' effort, or the garden feels empty."
+        "upright": "스스로 이룬 성과를 바탕으로 편안함과 만족을 누립니다.",
+        "reversed": "타인의 노력에 기대어 편안함을 누리거나 공허함을 느낍니다."
       }
     },
     {
@@ -1182,12 +1833,21 @@
       "suit": "pentacle",
       "rank": "10",
       "keywords": {
-        "upright": ["legacy", "long-term wealth", "family", "established foundation"],
-        "reversed": ["family conflict", "financial setback", "broken legacy"]
+        "upright": [
+          "legacy",
+          "long-term wealth",
+          "family",
+          "established foundation"
+        ],
+        "reversed": [
+          "family conflict",
+          "financial setback",
+          "broken legacy"
+        ]
       },
       "meaning": {
-        "upright": "What was built is meant to last across people and time.",
-        "reversed": "Strain on what holds the family or fortune together."
+        "upright": "시간과 사람을 거쳐 오랫동안 유지될 안정적인 기반을 세웁니다.",
+        "reversed": "조직이나 재산을 유지하는 기반에 문제가 생깁니다."
       }
     },
     {
@@ -1198,12 +1858,21 @@
       "suit": "pentacle",
       "rank": "page",
       "keywords": {
-        "upright": ["ambition", "study", "new venture", "earnest beginning"],
-        "reversed": ["lack of follow-through", "procrastination", "missed opportunity"]
+        "upright": [
+          "ambition",
+          "study",
+          "new venture",
+          "earnest beginning"
+        ],
+        "reversed": [
+          "lack of follow-through",
+          "procrastination",
+          "missed opportunity"
+        ]
       },
       "meaning": {
-        "upright": "A serious new pursuit takes root; learning is the right move.",
-        "reversed": "Plans without practice; a beginning that never starts."
+        "upright": "진지하게 새로운 일을 배우고 준비하기 시작합니다.",
+        "reversed": "계획만 세우고 실제로 시작하지 않습니다."
       }
     },
     {
@@ -1214,12 +1883,21 @@
       "suit": "pentacle",
       "rank": "knight",
       "keywords": {
-        "upright": ["routine", "reliability", "steady effort", "dedication"],
-        "reversed": ["stagnation", "boredom", "stubborn pace"]
+        "upright": [
+          "routine",
+          "reliability",
+          "steady effort",
+          "dedication"
+        ],
+        "reversed": [
+          "stagnation",
+          "boredom",
+          "stubborn pace"
+        ]
       },
       "meaning": {
-        "upright": "Slow and steady wins; consistency now becomes mastery later.",
-        "reversed": "The same step taken too long; routine has become a rut."
+        "upright": "느리지만 꾸준한 노력이 결국 큰 성과로 이어집니다.",
+        "reversed": "너무 같은 방식만 고집하여 발전이 없습니다."
       }
     },
     {
@@ -1230,12 +1908,21 @@
       "suit": "pentacle",
       "rank": "queen",
       "keywords": {
-        "upright": ["nurturing abundance", "practical care", "groundedness", "resourcefulness"],
-        "reversed": ["self-neglect", "overcommitment", "smothering"]
+        "upright": [
+          "nurturing abundance",
+          "practical care",
+          "groundedness",
+          "resourcefulness"
+        ],
+        "reversed": [
+          "self-neglect",
+          "overcommitment",
+          "smothering"
+        ]
       },
       "meaning": {
-        "upright": "Care expressed practically; a stable space where things thrive.",
-        "reversed": "Caring for everything but yourself; balance has tipped."
+        "upright": "현실적인 보살핌으로 안정적이고 발전적인 환경을 만듭니다.",
+        "reversed": "남을 돌보느라 자신을 소홀히 하여 균형을 잃습니다."
       }
     },
     {
@@ -1246,12 +1933,21 @@
       "suit": "pentacle",
       "rank": "king",
       "keywords": {
-        "upright": ["wealth", "business mastery", "stability", "generous leadership"],
-        "reversed": ["greed", "materialism", "stubborn control"]
+        "upright": [
+          "wealth",
+          "business mastery",
+          "stability",
+          "generous leadership"
+        ],
+        "reversed": [
+          "greed",
+          "materialism",
+          "stubborn control"
+        ]
       },
       "meaning": {
-        "upright": "Steward what you have built; share generously without losing footing.",
-        "reversed": "Possession over purpose; success becomes a small kingdom."
+        "upright": "이룬 것을 잘 관리하고 안정적으로 나누어 줍니다.",
+        "reversed": "물질에 집착하고 목적을 잃습니다."
       }
     }
   ]
