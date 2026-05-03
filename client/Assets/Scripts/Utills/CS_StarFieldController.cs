@@ -24,9 +24,14 @@ public class StarFieldController : MonoBehaviour
         public string   belongsTo; // null = 배경 별
     }
 
-    private readonly List<StarInstance>                     _stars = new();
-    private readonly List<(LineRenderer lr, string name)>  _lines = new();
-    private readonly MaterialPropertyBlock                  _propBlock = new();
+    private readonly List<StarInstance>                    _stars = new List<StarInstance>();
+    private readonly List<(LineRenderer lr, string name)> _lines = new List<(LineRenderer, string)>();
+    private MaterialPropertyBlock                          _propBlock;
+
+    private void Awake()
+    {
+        _propBlock = new MaterialPropertyBlock();
+    }
 
     private void Start()
     {
@@ -65,7 +70,8 @@ public class StarFieldController : MonoBehaviour
 
     private void SpawnStar(Vector3 pos, string belongsTo, float speed, float phase)
     {
-        var go = Instantiate(starPrefab, pos, Quaternion.identity, transform);
+        var go = Instantiate(starPrefab, transform);
+        go.transform.localPosition = pos;
         go.transform.localScale = Vector3.one * starScale;
 
         var r = go.GetComponent<Renderer>();
