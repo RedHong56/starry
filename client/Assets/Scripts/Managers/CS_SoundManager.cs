@@ -47,6 +47,39 @@ public class SoundManager : MonoBehaviour
         bgmSource.clip = bgmClip;
         bgmSource.loop = true;
         bgmSource.Play();
+
+        bgmSource.volume  = PlayerPrefs.GetFloat("bgmVolume", 1f);
+        sfxSource.volume  = PlayerPrefs.GetFloat("sfxVolume", 1f);
+        diaSource.volume  = PlayerPrefs.GetFloat("sfxVolume", 1f);
+        bgmSource.mute    = PlayerPrefs.GetInt("bgmMute", 0) == 1;
+        sfxSource.mute    = PlayerPrefs.GetInt("sfxMute", 0) == 1;
+        diaSource.mute    = PlayerPrefs.GetInt("sfxMute", 0) == 1;
+    }
+
+    public void SetBgmVolume(float value)
+    {
+        bgmSource.volume = value;
+        PlayerPrefs.SetFloat("bgmVolume", value);
+    }
+
+    public void SetBgmMute(bool mute)
+    {
+        bgmSource.mute = mute;
+        PlayerPrefs.SetInt("bgmMute", mute ? 1 : 0);
+    }
+
+    public void SetSfxVolume(float value)
+    {
+        sfxSource.volume = value;
+        diaSource.volume = value;
+        PlayerPrefs.SetFloat("sfxVolume", value);
+    }
+
+    public void SetSfxMute(bool mute)
+    {
+        sfxSource.mute = mute;
+        diaSource.mute = mute;
+        PlayerPrefs.SetInt("sfxMute", mute ? 1 : 0);
     }
 
     public void PlayChair()  => sfxSource.PlayOneShot(chairClip);

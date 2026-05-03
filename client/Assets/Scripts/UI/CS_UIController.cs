@@ -25,6 +25,10 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text   constellationDescText;
     [SerializeField] private Button     restartButton;
 
+    [Header("Settings")]
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private SettingsController settingsController;
+
     public int BirthMonth { get; private set; }
     public int BirthDay   { get; private set; }
 
@@ -37,6 +41,7 @@ public class UIController : MonoBehaviour
         viewConstellationButton.gameObject.SetActive(false);
         constellationPanel.SetActive(false);
         submitButton.onClick.AddListener(OnSubmitClicked);
+        settingsButton.onClick.AddListener(settingsController.Open);
     }
 
     // ── 대화 ─────────────────────────────────────────────────────────────────
