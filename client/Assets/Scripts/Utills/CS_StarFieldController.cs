@@ -14,9 +14,10 @@ public class StarFieldController : MonoBehaviour
     [SerializeField] private Color    lineColor = new Color(1f, 0.9f, 0.5f, 1f);
 
     [Header("Tuning")]
-    [SerializeField] private float starScale        = 0.1f;
-    [SerializeField] private float fieldRadius      = 20f;
-    [SerializeField] private int   ambientStarCount = 200;
+    [SerializeField] private float starScale           = 0.1f;
+    [SerializeField] private float fieldRadius         = 20f;
+    [SerializeField] private int   ambientStarCount    = 200;
+    [SerializeField] private float constellationSpread = 3f; // 별자리 별 간격 배율
 
     private struct StarInstance
     {
@@ -60,11 +61,11 @@ public class StarFieldController : MonoBehaviour
             Quaternion rot    = Quaternion.LookRotation(anchor.normalized);
 
             foreach (var localPos in data.starPositions)
-                SpawnStar(anchor + rot * localPos, data.constellationName,
+                SpawnStar(anchor + rot * (localPos * constellationSpread), data.constellationName,
                           UnityEngine.Random.Range(1f, 2f),
                           UnityEngine.Random.Range(0f, 6.28f));
 
-            SpawnLines(data, anchor, rot);
+            SpawnLines(data, anchor, rot, constellationSpread);
         }
     }
 
@@ -84,19 +85,20 @@ public class StarFieldController : MonoBehaviour
         _stars.Add(new StarInstance { renderer = r, belongsTo = belongsTo });
     }
 
-    private void SpawnLines(ConstellationData data, Vector3 anchor, Quaternion rot)
+    private void SpawnLines(ConstellationData data, Vector3 anchor, Quaternion rot, float spread = 1f)
     {
         for (int i = 0; i < data.lineIndices.Length; i += 2)
         {
             var go = new GameObject($"Line_{data.constellationName}_{i / 2}");
-            go.transform.SetParent(transform);
+            go.transform.SetParent(transform, false); // localPosition = (0,0,0) → 별과 같은 기준점
 
             var lr = go.AddComponent<LineRenderer>();
             lr.material          = new Material(lineMaterial);
+            lr.useWorldSpace     = false; // 로컬 좌표 사용 → StarFieldController 이동/회전에 자동으로 따라감
             lr.startWidth        = lr.endWidth = 0.02f;
             lr.positionCount     = 2;
-            lr.SetPosition(0, anchor + rot * data.starPositions[data.lineIndices[i]]);
-            lr.SetPosition(1, anchor + rot * data.starPositions[data.lineIndices[i + 1]]);
+            lr.SetPosition(0, anchor + rot * (data.starPositions[data.lineIndices[i]]     * spread));
+            lr.SetPosition(1, anchor + rot * (data.starPositions[data.lineIndices[i + 1]] * spread));
 
             Color c = lineColor; c.a = 0f;
             lr.startColor = lr.endColor = c;
