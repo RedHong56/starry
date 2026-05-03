@@ -25,6 +25,7 @@ public class PhaseManager : MonoBehaviour
     [SerializeField] private CardResultController     cardResultController;
     [SerializeField] private StarFieldController      starField;
     [SerializeField] private TarotAIService           aiService;
+    [SerializeField] private PaymentChoiceController  paymentChoiceController;
 
     [Header("Buttons")]
     [SerializeField] private Button startButton;
@@ -76,8 +77,18 @@ public class PhaseManager : MonoBehaviour
         if (_currentPhase != GamePhase.Intro) return;
         SoundManager.Instance?.PlayBtn();
         startButton.gameObject.SetActive(false);
-        characterController.PlayBeckoning();
-        EnterPhase(GamePhase.Welcome);
+
+        paymentChoiceController.Open(
+            onConfirm: () =>
+            {
+                characterController.PlayBeckoning();
+                EnterPhase(GamePhase.Welcome);
+            },
+            onCancel: () =>
+            {
+                startButton.gameObject.SetActive(true);
+            }
+        );
     }
 
     private void HandleWelcome()
