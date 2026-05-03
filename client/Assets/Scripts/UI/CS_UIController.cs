@@ -43,7 +43,6 @@ public class UIController : MonoBehaviour
 
     public void ShowDialogue(string text, Action onComplete)
     {
-        SoundManager.Instance?.PlayPannel();
         dialoguePanel.SetActive(true);
         typewriter.Play(text, onComplete);
     }
