@@ -74,6 +74,7 @@ public class PhaseManager : MonoBehaviour
     private void OnStartButtonClicked()
     {
         if (_currentPhase != GamePhase.Intro) return;
+        SoundManager.Instance?.PlayBtn();
         startButton.gameObject.SetActive(false);
         characterController.PlayBeckoning();
         EnterPhase(GamePhase.Welcome);
@@ -83,12 +84,14 @@ public class PhaseManager : MonoBehaviour
     {
         cameraController.GoToSeat(() =>
         {
+            SoundManager.Instance?.PlayDia(DiaType.Come);
             uiController.ShowDialogue("어서 오게나...", () => EnterPhase(GamePhase.Question));
         });
     }
 
     private void HandleQuestion()
     {
+        SoundManager.Instance?.PlayDia(DiaType.Worry);
         uiController.ShowDialogue("그래서 고민이 무엇이냐", () =>
         {
             uiController.HideDialogue();
@@ -107,6 +110,7 @@ public class PhaseManager : MonoBehaviour
         characterController.PlayWriting();
         cardDeck.gameObject.SetActive(false);
 
+        SoundManager.Instance?.PlayDia(DiaType.Past);
         uiController.ShowDialogue(PickDialogues[0], () =>
         {
             uiController.HideDialogue();
@@ -121,6 +125,8 @@ public class PhaseManager : MonoBehaviour
                 {
                     if (confirmedIdx + 1 < PickDialogues.Length)
                     {
+                        DiaType dia = confirmedIdx == 0 ? DiaType.Present : DiaType.Future;
+                        SoundManager.Instance?.PlayDia(dia);
                         uiController.ShowDialogue(PickDialogues[confirmedIdx + 1], () =>
                             uiController.HideDialogue());
                     }
@@ -133,8 +139,10 @@ public class PhaseManager : MonoBehaviour
     {
         cardDeck.gameObject.SetActive(true);
         characterController.PlayClapping();
+        SoundManager.Instance?.PlayDia(DiaType.Umm);
         uiController.ShowDialogue("흠…", () =>
         {
+            SoundManager.Instance?.PlayDia(DiaType.Result);
             uiController.ShowDialogue("결과를 말해주겠다", () =>
             {
                 uiController.HideDialogue();

@@ -106,6 +106,7 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     private void PlayShuffleAnimation()
     {
+        SoundManager.Instance?.PlayCard(CardSFX.Animation);
         cardContainer.localEulerAngles = Vector3.zero;
 
         for (int i = 0; i < TotalCards; i++)
@@ -141,6 +142,7 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     public void OnBeginDrag(PointerEventData e)
     {
+        SoundManager.Instance?.PlayCard(CardSFX.Swipe);
         _dragStartX          = e.position.x;
         _containerStartAngle = _currentAngle;
     }
@@ -237,6 +239,8 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
     {
         if (_confirmedCount >= RequiredSelects) return;
         if (_usedIndices.Contains(_currentIndex)) return;
+        SoundManager.Instance?.PlayCard(CardSFX.Select);
+        SoundManager.Instance?.PlayBtn();
 
         _usedIndices.Add(_currentIndex);
         _selectedIndices[_confirmedCount] = _currentIndex;

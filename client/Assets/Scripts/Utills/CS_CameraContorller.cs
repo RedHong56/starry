@@ -33,6 +33,7 @@ public class CameraContorller : MonoBehaviour
     // Z축 이동 먼저 → 이후 최종 위치 + X 회전
     public void GoToSeat(Action onComplete)
     {
+        SoundManager.Instance?.PlayChair();
         Sequence seq = DOTween.Sequence();
         seq.Append(cameraTransform.DOMoveZ(seatTarget.position.z, seatZDuration).SetEase(Ease.InOutSine));
         seq.Append(cameraTransform.DOMove(seatTarget.position, seatRotDuration).SetEase(Ease.InOutSine));

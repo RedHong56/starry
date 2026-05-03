@@ -19,7 +19,7 @@ public class CardFlipView : MonoBehaviour
 
     public IEnumerator FlipRoutine(Sprite frontSprite)
     {
-        // Debug.Log($"[FlipRoutine] 시작 | cardImage={(cardImage != null ? "있음" : "null")} | frontSprite={(frontSprite != null ? frontSprite.name : "null")} | backSprite={(backSprite != null ? backSprite.name : "null")}");
+        SoundManager.Instance?.PlayCard(CardSFX.Flip);
 
         if (cardImage != null)
         {

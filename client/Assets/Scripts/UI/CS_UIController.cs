@@ -43,6 +43,7 @@ public class UIController : MonoBehaviour
 
     public void ShowDialogue(string text, Action onComplete)
     {
+        SoundManager.Instance?.PlayPannel();
         dialoguePanel.SetActive(true);
         typewriter.Play(text, onComplete);
     }
@@ -57,6 +58,7 @@ public class UIController : MonoBehaviour
 
     public void ShowInputModal(Action<string> onSubmit)
     {
+        SoundManager.Instance?.PlayPannel();
         _onSubmit = onSubmit;
         worryInput.text = string.Empty;
         inputModal.SetActive(true);
@@ -67,6 +69,7 @@ public class UIController : MonoBehaviour
     {
         string text = worryInput.text.Trim();
         if (string.IsNullOrEmpty(text)) return;
+        SoundManager.Instance?.PlayBtn();
 
         BirthMonth = monthInput.value + 1;
         BirthDay   = dayInput.value + 1;
@@ -85,6 +88,7 @@ public class UIController : MonoBehaviour
         viewConstellationButton.onClick.RemoveAllListeners();
         viewConstellationButton.onClick.AddListener(() =>
         {
+            SoundManager.Instance?.PlayBtn();
             viewConstellationButton.gameObject.SetActive(false);
             onClicked?.Invoke();
         });
@@ -99,8 +103,13 @@ public class UIController : MonoBehaviour
         constellationDescText.text = "오늘의 운세를 읽는 중...";
 
         restartButton.onClick.RemoveAllListeners();
-        restartButton.onClick.AddListener(() => onRestart?.Invoke());
+        restartButton.onClick.AddListener(() =>
+        {
+            SoundManager.Instance?.PlayBtn();
+            onRestart?.Invoke();
+        });
 
+        SoundManager.Instance?.PlayPannel();
         constellationPanel.SetActive(true);
     }
 
