@@ -3,8 +3,9 @@ using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Purchasing;
+using UnityEngine.Purchasing.Extension;
 
-// 코인 상품 정의
 [Serializable]
 public class CoinProduct
 {
@@ -13,13 +14,12 @@ public class CoinProduct
     public string priceLabel;
 }
 
-public class PaymentController : MonoBehaviour
+public class PaymentController : MonoBehaviour, IDetailedStoreListener
 {
     public static PaymentController Instance { get; private set; }
 
     [SerializeField] private string purchaseApiUrl = "http://127.0.0.1:8000/api/payment/purchase";
 
-    // TODO: Unity IAP 상품 ID 설정
     public CoinProduct[] products = new CoinProduct[]
     {
         new CoinProduct { productId = "coins_10", coins = 10, priceLabel = "₩1,200" },
@@ -27,30 +27,80 @@ public class PaymentController : MonoBehaviour
         new CoinProduct { productId = "coins_60", coins = 60, priceLabel = "₩5,900" },
     };
 
+    private IStoreController _storeController;
+    private Action _onSuccess;
+    private Action _onFail;
+    private Product _pendingProduct;
+
     private void Awake()
     {
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // TODO: Unity IAP 초기화
-        // var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-        // foreach (var p in products)
-        //     builder.AddProduct(p.productId, ProductType.Consumable);
-        // UnityPurchasing.Initialize(this, builder);
+        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+        foreach (var p in products)
+            builder.AddProduct(p.productId, ProductType.Consumable);
+        UnityPurchasing.Initialize(this, builder);
     }
+
+    // ── IDetailedStoreListener ────────────────────────────────────────────────
+
+    public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
+    {
+        _storeController = controller;
+    }
+
+    public void OnInitializeFailed(InitializationFailureReason error)
+    {
+        Debug.LogWarning($"[PaymentController] IAP init failed: {error}");
+    }
+
+    public void OnInitializeFailed(InitializationFailureReason error, string message)
+    {
+        Debug.LogWarning($"[PaymentController] IAP init failed: {error} - {message}");
+    }
+
+    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
+    {
+        _pendingProduct = args.purchasedProduct;
+        string productId = args.purchasedProduct.definition.id;
+        string receipt   = args.purchasedProduct.receipt;
+        StartCoroutine(ValidatePurchaseRoutine(productId, receipt, _onSuccess, _onFail));
+        // 서버 검증 완료 후 ConfirmPendingPurchase 호출 → Pending 반환
+        return PurchaseProcessingResult.Pending;
+    }
+
+    public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
+    {
+        Debug.LogWarning($"[PaymentController] Purchase failed: {failureReason}");
+        _onFail?.Invoke();
+    }
+
+    public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
+    {
+        Debug.LogWarning($"[PaymentController] Purchase failed: {failureDescription.message}");
+        _onFail?.Invoke();
+    }
+
+    // ── 구매 시작 ─────────────────────────────────────────────────────────────
 
     public void Purchase(string productId, Action onSuccess, Action onFail)
     {
-        // TODO: Unity IAP SDK 연결 후 아래 주석 해제
-        // m_Controller.InitiatePurchase(productId);
-        // 구매 완료는 ProcessPurchase 콜백에서 처리
+        if (_storeController == null)
+        {
+            Debug.LogWarning("[PaymentController] IAP가 아직 초기화되지 않았습니다.");
+            onFail?.Invoke();
+            return;
+        }
 
-        // 임시: SDK 없을 때 바로 성공 처리
-        StartCoroutine(ValidatePurchaseRoutine(productId, "dummy_receipt", onSuccess, onFail));
+        _onSuccess = onSuccess;
+        _onFail    = onFail;
+        _storeController.InitiatePurchase(productId);
     }
 
-    // TODO: IStoreListener.ProcessPurchase 구현 시 receipt를 실제 영수증으로 교체
+    // ── 백엔드 영수증 검증 ────────────────────────────────────────────────────
+
     private IEnumerator ValidatePurchaseRoutine(string productId, string receipt, Action onSuccess, Action onFail)
     {
         var body = JsonUtility.ToJson(new PurchaseRequest { productId = productId, receipt = receipt });
@@ -70,6 +120,12 @@ public class PaymentController : MonoBehaviour
 
         if (req.result == UnityWebRequest.Result.Success)
         {
+            // 서버 검증 완료 → 구매 확정
+            if (_pendingProduct != null)
+            {
+                _storeController.ConfirmPendingPurchase(_pendingProduct);
+                _pendingProduct = null;
+            }
             yield return UserDataManager.Instance.FetchUserDataRoutine();
             onSuccess?.Invoke();
         }
