@@ -148,6 +148,15 @@ public class PhaseManager : MonoBehaviour
 
     private void HandleResult()
     {
+        // 흠… 제스처와 동시에 AI 요청 선발송 → 카드 공개 중 응답 대기
+        bool   aiReady  = false;
+        string aiResult = null;
+        aiService.GetTarotReading(_selectedCardIndices, _userWorry, result =>
+        {
+            aiResult = result;
+            aiReady  = true;
+        });
+
         cardDeck.gameObject.SetActive(true);
         characterController.PlayClapping();
         SoundManager.Instance?.PlayDia(DiaType.Umm);
@@ -159,8 +168,10 @@ public class PhaseManager : MonoBehaviour
                 uiController.HideDialogue();
                 cardResultController.StartReveal(
                     _selectedCardIndices, _isReversed, _userWorry,
-                    beforeFlip: i => cardDeckController.HideSelectedCard(i),
-                    onComplete: OnReadingComplete);
+                    isAiReady:   () => aiReady,
+                    getAiResult: () => aiResult,
+                    beforeFlip:  i => cardDeckController.HideSelectedCard(i),
+                    onComplete:  OnReadingComplete);
             });
         });
     }

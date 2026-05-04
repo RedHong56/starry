@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -36,10 +37,20 @@ public class CardResultController : MonoBehaviour
     /// cardIndices: 선택된 카드 id 배열 (0-77)
     /// isReversed: 각 카드의 역방향 여부
     /// </summary>
+    // PhaseManager에서 AI를 미리 요청한 경우 — isAiReady/getAiResult 로 결과 수령
+    public void StartReveal(int[] cardIndices, bool[] isReversed, string userWorry,
+                             Func<bool> isAiReady, Func<string> getAiResult,
+                             Action<int> beforeFlip = null, Action onComplete = null)
+    {
+        StartCoroutine(RevealRoutine(cardIndices, isReversed, userWorry,
+                                     isAiReady, getAiResult, beforeFlip, onComplete));
+    }
+
     public void StartReveal(int[] cardIndices, bool[] isReversed, string userWorry,
                              Action<int> beforeFlip = null, Action onComplete = null)
     {
-        StartCoroutine(RevealRoutine(cardIndices, isReversed, userWorry, beforeFlip, onComplete));
+        StartCoroutine(RevealRoutine(cardIndices, isReversed, userWorry,
+                                     null, null, beforeFlip, onComplete));
     }
 
     // 기존 호환용 오버로드 (전부 정방향)
@@ -50,6 +61,7 @@ public class CardResultController : MonoBehaviour
     }
 
     private IEnumerator RevealRoutine(int[] cardIndices, bool[] isReversed, string userWorry,
+                                       Func<bool> isAiReady, Func<string> getAiResult,
                                        Action<int> beforeFlip, Action onComplete = null)
     {
         // 결과 패널 활성화 + 텍스트 초기화
@@ -84,21 +96,24 @@ public class CardResultController : MonoBehaviour
             yield return new WaitForSeconds(pauseBetweenCards);
         }
 
-        // ── AI 해설 요청 ──
+        // ── AI 해설 대기 (PhaseManager에서 미리 요청한 결과를 수령) ──
         resultText.text += "[해설]\n\n";
         resultText.text += "점괘를 읽는 중...";
         ScrollToBottom();
 
-        bool done = false;
-        string aiResult = null;
-
-        aiService.GetTarotReading(cardIndices, userWorry, result =>
+        // 미리 요청한 결과가 없으면 직접 요청 (폴백)
+        if (isAiReady == null)
         {
-            aiResult = result;
-            done     = true;
-        });
+            bool done = false;
+            string fallbackResult = null;
+            aiService.GetTarotReading(cardIndices, userWorry, r => { fallbackResult = r; done = true; });
+            yield return new WaitUntil(() => done);
+            isAiReady   = () => true;
+            getAiResult = () => fallbackResult;
+        }
 
-        yield return new WaitUntil(() => done);
+        yield return new WaitUntil(isAiReady);
+        string aiResult = getAiResult();
 
         // "점괘를 읽는 중..." 제거 후 AI 결과 삽입
         resultText.text = resultText.text.Replace("점괘를 읽는 중...", aiResult);
