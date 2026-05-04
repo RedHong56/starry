@@ -9,5 +9,9 @@ class Settings(BaseSettings):
     use_mock: bool = False
     port: int = 8000
 
+    jwt_secret: str = "change-me-in-production"
+    jwt_expire_hours: int = 720  # 30 days
+    free_coupon_interval_hours: int = 24
+
 
 settings = Settings()
