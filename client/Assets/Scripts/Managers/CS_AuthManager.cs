@@ -8,7 +8,7 @@ public class AuthManager : MonoBehaviour
 {
     public static AuthManager Instance { get; private set; }
 
-    [SerializeField] private string authApiUrl = "http://localhost:8000/api/auth";
+    [SerializeField] private string authApiUrl = "http://127.0.0.1:8000/api/auth";
 
     private const string TokenKey = "jwt_token";
 
@@ -20,6 +20,25 @@ public class AuthManager : MonoBehaviour
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    // 저장된 토큰이 서버에서 여전히 유효한지 확인
+    public IEnumerator ValidateTokenRoutine(Action<bool> onResult)
+    {
+        if (!IsLoggedIn) { onResult?.Invoke(false); yield break; }
+
+        using var req = UnityWebRequest.Get($"{authApiUrl.Replace("/auth", "/user/me")}");
+        req.SetRequestHeader("Authorization", $"Bearer {Token}");
+        yield return req.SendWebRequest();
+
+        if (req.result == UnityWebRequest.Result.Success)
+            onResult?.Invoke(true);
+        else
+        {
+            // 토큰이 서버에서 거부됨 (서버 재시작 등) → 로그아웃
+            Logout();
+            onResult?.Invoke(false);
+        }
     }
 
     public IEnumerator AuthenticateRoutine(string provider, string socialToken, Action<bool> onResult)

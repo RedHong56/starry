@@ -17,7 +17,7 @@ public class PaymentController : MonoBehaviour
 {
     public static PaymentController Instance { get; private set; }
 
-    [SerializeField] private string purchaseApiUrl = "http://localhost:8000/api/payment/purchase";
+    [SerializeField] private string purchaseApiUrl = "http://127.0.0.1:8000/api/payment/purchase";
 
     // TODO: Unity IAP 상품 ID 설정
     public CoinProduct[] products = new CoinProduct[]
