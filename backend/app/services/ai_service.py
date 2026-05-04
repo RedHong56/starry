@@ -152,23 +152,24 @@ def _build_simple_prompt(worry: str, cards: list[CardInput]) -> str:
 [카드 배열]
 {chr(10).join(card_lines)}
 
-[작성 지침]
-1. 과거 카드: 이 고민의 뿌리나 배경, 지금까지의 흐름을 설명하세요.
-2. 현재 카드: 지금 상담자가 처한 상황과 내면 상태를 짚어주세요.
-3. 미래 카드: 앞으로의 흐름과 상담자가 취할 수 있는 구체적인 행동을 제안하세요.
-4. 세 카드를 고민과 유기적으로 엮어 하나의 이야기처럼 서술하세요.
-5. 한국어 350~500자, 따뜻하고 희망적인 톤으로 작성하세요.
-6. 순수 텍스트만 출력하세요 (마크다운·JSON 불가)."""
+[작성 구조 - 아래 순서대로 단락을 나눠 작성하세요]
+1. 과거: 이 고민의 뿌리와 배경, 지금까지의 흐름을 설명하세요. (2~3문장)
+2. 현재: 지금 상담자가 처한 상황과 내면 상태를 짚어주세요. (2~3문장)
+3. 미래: 앞으로의 흐름과 상담자가 취할 수 있는 구체적인 행동을 제안하세요. (2~3문장)
+4. 종합: 과거·현재·미래 세 카드가 이 고민에 대해 함께 전하는 하나의 메시지로 마무리하세요. (2~3문장, 희망적으로)
+
+[주의사항]
+- 각 단락은 자연스럽게 이어지는 하나의 이야기여야 합니다.
+- 단락 구분 시 줄바꿈만 사용하고 번호·제목·기호는 넣지 마세요.
+- 한국어 400~500자, 따뜻하고 희망적인 톤으로 작성하세요.
+- 순수 텍스트만 출력하세요 (마크다운·JSON 불가)."""
 
 
 async def generate_tarot_simple(card_ids: list[int], worry: str) -> str:
     cards = [CardInput(id=cid, is_reversed=False) for cid in card_ids]
 
-    if settings.use_mock:
-        return _mock_simple_response(worry, cards)
-
     if not settings.openai_api_key:
-        raise HTTPException(status_code=503, detail="OPENAI_API_KEY가 설정되지 않았습니다.")
+        return _mock_simple_response(worry, cards)
 
     client = AsyncOpenAI(api_key=settings.openai_api_key)
     prompt = _build_simple_prompt(worry, cards)
