@@ -103,39 +103,69 @@ def _parse_response(text: str, cards: list[CardInput]) -> ReadingResponse:
         )
 
 
+_POSITIONS = ["과거", "현재", "미래"]
+
+
+def _mock_simple_response(worry: str, cards: list[CardInput]) -> str:
+    lines = []
+    for i, c in enumerate(cards[:3]):
+        card_data = get_card(c.id)
+        name = card_data["displayName"] if card_data else f"카드 {c.id}"
+        pos = _POSITIONS[i] if i < len(_POSITIONS) else f"카드 {i + 1}"
+        lines.append(f"{pos}: {name}")
+
+    card_summary = " / ".join(lines)
+    return (
+        f"[{card_summary}]\n\n"
+        f"'{worry}'에 대한 별의 답입니다.\n\n"
+        f"{lines[0]}의 카드는 이 고민이 시작된 배경을 보여줍니다. "
+        "당신이 걸어온 길 위에 이미 답의 씨앗이 있었습니다.\n\n"
+        f"{lines[1]}의 카드는 지금 당신이 서 있는 자리를 비춥니다. "
+        "흔들릴 수 있지만 이 순간이 변화의 분기점입니다.\n\n"
+        f"{lines[2]}의 카드는 앞으로 펼쳐질 흐름을 가리킵니다. "
+        "자신을 믿고 한 걸음씩 나아간다면 원하는 방향으로 나아갈 수 있습니다."
+    )
+
+
 def _build_simple_prompt(worry: str, cards: list[CardInput]) -> str:
     card_lines: list[str] = []
-    for i, c in enumerate(cards, 1):
+    for i, c in enumerate(cards[:3]):
         card_data = get_card(c.id)
         if card_data is None:
             raise HTTPException(status_code=422, detail=f"Card id {c.id} not found in deck")
-        keywords = ", ".join(card_data["keywords"]["upright"])
-        meaning = card_data["meaning"]["upright"]
+        direction_key = "reversed" if c.is_reversed else "upright"
+        keywords = ", ".join(card_data["keywords"][direction_key])
+        meaning = card_data["meaning"][direction_key]
+        pos = _POSITIONS[i] if i < len(_POSITIONS) else f"카드 {i + 1}"
         card_lines.append(
-            f"카드 {i}: {card_data['displayName']}\n"
+            f"[{pos}] {card_data['displayName']}\n"
             f"  키워드: {keywords}\n"
             f"  의미: {meaning}"
         )
 
-    return f"""당신은 한국어로 타로 점괘를 해석하는 전문 타로 리더입니다.
-아래 정보를 바탕으로 깊이 있는 타로 점괘를 200~400자로 작성하세요.
+    return f"""당신은 깊은 통찰력을 지닌 한국어 타로 상담사입니다.
+상담자의 고민에 진심으로 공감하고, 과거·현재·미래 카드를 통해 구체적이고 따뜻한 조언을 전하세요.
 
-[고민]
+[상담자의 고민]
 {worry}
 
-[뽑힌 카드]
+[카드 배열]
 {chr(10).join(card_lines)}
 
-주의사항:
-- 순수한 텍스트만 출력하고 마크다운이나 JSON 형식을 사용하지 마세요.
-- 희망적이고 건설적인 방향으로 해석하세요."""
+[작성 지침]
+1. 과거 카드: 이 고민의 뿌리나 배경, 지금까지의 흐름을 설명하세요.
+2. 현재 카드: 지금 상담자가 처한 상황과 내면 상태를 짚어주세요.
+3. 미래 카드: 앞으로의 흐름과 상담자가 취할 수 있는 구체적인 행동을 제안하세요.
+4. 세 카드를 고민과 유기적으로 엮어 하나의 이야기처럼 서술하세요.
+5. 한국어 350~500자, 따뜻하고 희망적인 톤으로 작성하세요.
+6. 순수 텍스트만 출력하세요 (마크다운·JSON 불가)."""
 
 
 async def generate_tarot_simple(card_ids: list[int], worry: str) -> str:
     cards = [CardInput(id=cid, is_reversed=False) for cid in card_ids]
 
     if settings.use_mock:
-        return _mock_response(cards).reading
+        return _mock_simple_response(worry, cards)
 
     if not settings.openai_api_key:
         raise HTTPException(status_code=503, detail="OPENAI_API_KEY가 설정되지 않았습니다.")
