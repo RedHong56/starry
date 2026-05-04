@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routers import reading
+from app.routers import auth, horoscope, payment, tarot, user
 from app.services.card_loader import load_cards
 
 
@@ -16,7 +17,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
 app = FastAPI(
     title="Starry Tarot API",
-    version="0.1.0",
+    version="0.2.0",
     lifespan=lifespan,
 )
 
@@ -27,7 +28,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(reading.router)
+app.include_router(reading.router)                   # /reading  (legacy)
+app.include_router(auth.router,      prefix="/api")  # /api/auth/{provider}
+app.include_router(user.router,      prefix="/api")  # /api/user/me|consume|ad-reward
+app.include_router(payment.router,   prefix="/api")  # /api/payment/purchase
+app.include_router(tarot.router,     prefix="/api")  # /api/tarot/reading
+app.include_router(horoscope.router, prefix="/api")  # /api/horoscope
 
 
 @app.get("/health", tags=["health"])
