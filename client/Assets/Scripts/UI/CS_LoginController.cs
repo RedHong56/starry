@@ -16,6 +16,26 @@ public class LoginController : MonoBehaviour
         kakaoButton.onClick.AddListener(OnKakaoClicked);
         googleButton.onClick.AddListener(OnGoogleClicked);
         appleButton.onClick.AddListener(OnAppleClicked);
+        StartCoroutine(AutoLoginRoutine());
+    }
+
+    private IEnumerator AutoLoginRoutine()
+    {
+        if (!AuthManager.Instance.IsLoggedIn) yield break;
+
+        SetLoading(true);
+        bool valid = false;
+        yield return AuthManager.Instance.ValidateTokenRoutine(result => valid = result);
+
+        if (valid)
+        {
+            yield return UserDataManager.Instance.FetchUserDataRoutine();
+            SceneManager.LoadScene("03_Main");
+        }
+        else
+        {
+            SetLoading(false); // 토큰 만료/서버 재시작 → 로그인 화면 표시
+        }
     }
 
     private void OnKakaoClicked()
@@ -56,7 +76,7 @@ public class LoginController : MonoBehaviour
         yield return UserDataManager.Instance.FetchUserDataRoutine();
 
         SetLoading(false);
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("03_Main");
     }
 
     private void SetLoading(bool on)
