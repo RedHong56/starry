@@ -6,8 +6,8 @@ using UnityEngine.Networking;
 
 public class TarotAIService : MonoBehaviour
 {
-    [SerializeField] private string apiUrl          = "https://your-backend.com/api/tarot/reading";
-    [SerializeField] private string horoscopeApiUrl = "https://your-backend.com/api/horoscope";
+    [SerializeField] private string apiUrl          = "http://localhost:8000/api/tarot/reading";
+    [SerializeField] private string horoscopeApiUrl = "http://localhost:8000/api/horoscope";
 
     // 타로 해설 요청
     public void GetTarotReading(int[] cardIds, string worry, Action<string> onComplete)

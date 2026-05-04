@@ -8,7 +8,7 @@ public class AuthManager : MonoBehaviour
 {
     public static AuthManager Instance { get; private set; }
 
-    [SerializeField] private string authApiUrl = "https://your-backend.com/api/auth";
+    [SerializeField] private string authApiUrl = "http://localhost:8000/api/auth";
 
     private const string TokenKey = "jwt_token";
 
