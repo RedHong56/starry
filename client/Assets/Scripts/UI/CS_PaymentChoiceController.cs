@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,8 +9,8 @@ public class PaymentChoiceController : MonoBehaviour
     [SerializeField] private GameObject choicePanel;
 
     [Header("별가루")]
-    [SerializeField] private Button starDustButton;
-    [SerializeField] private TMP_Text starDustCoinText;
+    [SerializeField] private Button    starDustButton;
+    [SerializeField] private TMP_Text  starDustCoinText;
 
     [Header("광고")]
     [SerializeField] private Button adButton;
@@ -23,7 +24,6 @@ public class PaymentChoiceController : MonoBehaviour
     private void Awake()
     {
         choicePanel.SetActive(false);
-
         starDustButton.onClick.AddListener(OnStarDustClicked);
         adButton.onClick.AddListener(OnAdClicked);
         cancelButton.onClick.AddListener(OnCancelClicked);
@@ -47,17 +47,36 @@ public class PaymentChoiceController : MonoBehaviour
     private void OnStarDustClicked()
     {
         SoundManager.Instance?.PlayBtn();
-        UserDataManager.Instance?.ConsumeReading();
-        choicePanel.SetActive(false);
-        _onConfirm?.Invoke();
+        SetButtons(false);
+        StartCoroutine(ConsumeRoutine());
+    }
+
+    private IEnumerator ConsumeRoutine()
+    {
+        yield return UserDataManager.Instance.ConsumeReadingRoutine(success =>
+        {
+            choicePanel.SetActive(false);
+            if (success) _onConfirm?.Invoke();
+            else         _onCancel?.Invoke();
+        });
     }
 
     private void OnAdClicked()
     {
         SoundManager.Instance?.PlayBtn();
-        // TODO: 광고 SDK 연결 후 콜백에서 호출
-        choicePanel.SetActive(false);
-        _onConfirm?.Invoke();
+        SetButtons(false);
+
+        AdRewardController.Instance.ShowRewardedAd(
+            onSuccess: () =>
+            {
+                choicePanel.SetActive(false);
+                _onConfirm?.Invoke();
+            },
+            onFail: () =>
+            {
+                SetButtons(true);
+            }
+        );
     }
 
     private void OnCancelClicked()
@@ -65,5 +84,12 @@ public class PaymentChoiceController : MonoBehaviour
         SoundManager.Instance?.PlayBtn();
         choicePanel.SetActive(false);
         _onCancel?.Invoke();
+    }
+
+    private void SetButtons(bool interactable)
+    {
+        starDustButton.interactable = interactable && (UserDataManager.Instance?.CanUseTarot() ?? false);
+        adButton.interactable       = interactable;
+        cancelButton.interactable   = interactable;
     }
 }
