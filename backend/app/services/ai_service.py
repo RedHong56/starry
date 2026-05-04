@@ -103,6 +103,62 @@ def _parse_response(text: str, cards: list[CardInput]) -> ReadingResponse:
         )
 
 
+def _build_simple_prompt(worry: str, cards: list[CardInput]) -> str:
+    card_lines: list[str] = []
+    for i, c in enumerate(cards, 1):
+        card_data = get_card(c.id)
+        if card_data is None:
+            raise HTTPException(status_code=422, detail=f"Card id {c.id} not found in deck")
+        keywords = ", ".join(card_data["keywords"]["upright"])
+        meaning = card_data["meaning"]["upright"]
+        card_lines.append(
+            f"카드 {i}: {card_data['displayName']}\n"
+            f"  키워드: {keywords}\n"
+            f"  의미: {meaning}"
+        )
+
+    return f"""당신은 한국어로 타로 점괘를 해석하는 전문 타로 리더입니다.
+아래 정보를 바탕으로 깊이 있는 타로 점괘를 200~400자로 작성하세요.
+
+[고민]
+{worry}
+
+[뽑힌 카드]
+{chr(10).join(card_lines)}
+
+주의사항:
+- 순수한 텍스트만 출력하고 마크다운이나 JSON 형식을 사용하지 마세요.
+- 희망적이고 건설적인 방향으로 해석하세요."""
+
+
+async def generate_tarot_simple(card_ids: list[int], worry: str) -> str:
+    cards = [CardInput(id=cid, is_reversed=False) for cid in card_ids]
+
+    if settings.use_mock:
+        return _mock_response(cards).reading
+
+    if not settings.openai_api_key:
+        raise HTTPException(status_code=503, detail="OPENAI_API_KEY가 설정되지 않았습니다.")
+
+    client = AsyncOpenAI(api_key=settings.openai_api_key)
+    prompt = _build_simple_prompt(worry, cards)
+
+    try:
+        completion = await client.chat.completions.create(
+            model=settings.openai_model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.8,
+            max_tokens=800,
+        )
+        return completion.choices[0].message.content or "점괘 해석을 준비 중입니다. 잠시 후 다시 시도해주세요."
+    except Exception as e:
+        logger.error("OpenAI API 호출 실패: %s", e)
+        raise HTTPException(
+            status_code=503,
+            detail=f"OpenAI API 호출에 실패했습니다: {type(e).__name__}",
+        ) from e
+
+
 async def generate_reading(concern: str, birth_date: str, cards: list[CardInput]) -> ReadingResponse:
     if settings.use_mock:
         return _mock_response(cards)
