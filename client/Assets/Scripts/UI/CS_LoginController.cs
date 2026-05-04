@@ -20,30 +20,39 @@ public class LoginController : MonoBehaviour
 
     private void OnKakaoClicked()
     {
-        // TODO: Kakao Unity SDK 연결
-        // KakaoGame.Login(onSuccess: token => StartCoroutine(LoginRoutine(token, "kakao")));
-        StartCoroutine(LoginRoutine("kakao_dummy_token", "kakao"));
+        // TODO: Kakao Unity SDK 연결 후 실제 토큰으로 교체
+        // KakaoGame.Login(onSuccess: token => StartCoroutine(LoginRoutine("kakao", token)));
+        StartCoroutine(LoginRoutine("kakao", "kakao_dummy_token"));
     }
 
     private void OnGoogleClicked()
     {
-        // TODO: Google Sign-In SDK 연결
-        // GoogleSignIn.Login(onSuccess: token => StartCoroutine(LoginRoutine(token, "google")));
-        StartCoroutine(LoginRoutine("google_dummy_token", "google"));
+        // TODO: Google Sign-In SDK 연결 후 실제 토큰으로 교체
+        // GoogleSignIn.Login(onSuccess: token => StartCoroutine(LoginRoutine("google", token)));
+        StartCoroutine(LoginRoutine("google", "google_dummy_token"));
     }
 
     private void OnAppleClicked()
     {
-        // TODO: Sign in with Apple SDK 연결
-        // AppleAuthManager.Login(onSuccess: token => StartCoroutine(LoginRoutine(token, "apple")));
-        StartCoroutine(LoginRoutine("apple_dummy_token", "apple"));
+        // TODO: Sign in with Apple SDK 연결 후 실제 토큰으로 교체
+        // AppleAuthManager.Login(onSuccess: token => StartCoroutine(LoginRoutine("apple", token)));
+        StartCoroutine(LoginRoutine("apple", "apple_dummy_token"));
     }
 
-    private IEnumerator LoginRoutine(string token, string provider)
+    private IEnumerator LoginRoutine(string provider, string socialToken)
     {
         SetLoading(true);
 
-        // TODO: 백엔드에 토큰 전달 → JWT 발급 → UserDataManager에 저장
+        bool authSuccess = false;
+        yield return AuthManager.Instance.AuthenticateRoutine(provider, socialToken, result => authSuccess = result);
+
+        if (!authSuccess)
+        {
+            SetLoading(false);
+            Debug.LogWarning("[LoginController] 인증 실패");
+            yield break;
+        }
+
         yield return UserDataManager.Instance.FetchUserDataRoutine();
 
         SetLoading(false);
