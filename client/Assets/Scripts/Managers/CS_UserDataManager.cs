@@ -8,11 +8,13 @@ public class UserDataManager : MonoBehaviour
 {
     public static UserDataManager Instance { get; private set; }
 
-    public string UserId   { get; private set; }
-    public int    Coins    { get; private set; }
+    public string UserId       { get; private set; }
+    public int    Coins        { get; private set; }
     public bool   HasFreeCoupon { get; private set; }
 
-    [SerializeField] private string userDataApiUrl = "https://your-backend.com/api/user/me";
+    [SerializeField] private string userDataApiUrl  = "https://your-backend.com/api/user/me";
+    [SerializeField] private string consumeApiUrl   = "https://your-backend.com/api/user/consume";
+    [SerializeField] private string adRewardApiUrl  = "https://your-backend.com/api/user/ad-reward";
 
     private void Awake()
     {
@@ -23,12 +25,13 @@ public class UserDataManager : MonoBehaviour
 
     public IEnumerator FetchUserDataRoutine()
     {
-        UnityWebRequest req = UnityWebRequest.Get(userDataApiUrl);
+        using var req = UnityWebRequest.Get(userDataApiUrl);
+        AddAuthHeader(req);
         yield return req.SendWebRequest();
 
         if (req.result == UnityWebRequest.Result.Success)
         {
-            var data = JsonUtility.FromJson<UserDataResponse>(req.downloadHandler.text);
+            var data   = JsonUtility.FromJson<UserDataResponse>(req.downloadHandler.text);
             UserId       = data.userId;
             Coins        = data.coins;
             HasFreeCoupon = data.hasFreeCoupon;
@@ -36,22 +39,65 @@ public class UserDataManager : MonoBehaviour
         else
         {
             Debug.LogWarning($"[UserDataManager] fetch failed: {req.error}. Using defaults.");
-            UserId       = "guest";
-            Coins        = 0;
+            UserId        = "guest";
+            Coins         = 0;
             HasFreeCoupon = false;
         }
+    }
 
-        req.Dispose();
+    public IEnumerator ConsumeReadingRoutine(Action<bool> onResult)
+    {
+        using var req = new UnityWebRequest(consumeApiUrl, "POST")
+        {
+            uploadHandler   = new UploadHandlerRaw(Array.Empty<byte>()),
+            downloadHandler = new DownloadHandlerBuffer()
+        };
+        req.SetRequestHeader("Content-Type", "application/json");
+        AddAuthHeader(req);
+        yield return req.SendWebRequest();
+
+        if (req.result == UnityWebRequest.Result.Success)
+        {
+            if (HasFreeCoupon) HasFreeCoupon = false;
+            else Coins = Mathf.Max(0, Coins - 1);
+            onResult?.Invoke(true);
+        }
+        else
+        {
+            Debug.LogWarning($"[UserDataManager] consume failed: {req.error}");
+            onResult?.Invoke(false);
+        }
+    }
+
+    public IEnumerator AdRewardRoutine(Action<bool> onResult)
+    {
+        using var req = new UnityWebRequest(adRewardApiUrl, "POST")
+        {
+            uploadHandler   = new UploadHandlerRaw(Array.Empty<byte>()),
+            downloadHandler = new DownloadHandlerBuffer()
+        };
+        req.SetRequestHeader("Content-Type", "application/json");
+        AddAuthHeader(req);
+        yield return req.SendWebRequest();
+
+        if (req.result == UnityWebRequest.Result.Success)
+        {
+            onResult?.Invoke(true);
+        }
+        else
+        {
+            Debug.LogWarning($"[UserDataManager] ad reward failed: {req.error}");
+            onResult?.Invoke(false);
+        }
     }
 
     public bool CanUseTarot() => HasFreeCoupon || Coins > 0;
 
-    public void ConsumeReading()
+    private void AddAuthHeader(UnityWebRequest req)
     {
-        if (HasFreeCoupon)
-            HasFreeCoupon = false;
-        else
-            Coins = Mathf.Max(0, Coins - 1);
+        string token = AuthManager.Instance?.Token;
+        if (!string.IsNullOrEmpty(token))
+            req.SetRequestHeader("Authorization", $"Bearer {token}");
     }
 
     [Serializable]
