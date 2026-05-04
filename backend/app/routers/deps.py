@@ -5,9 +5,9 @@ from app.services import auth_service, user_service
 from app.services.user_service import UserRecord
 
 
-async def get_current_user(authorization: str = Header(...)) -> UserRecord:
-    if not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Authorization 헤더 형식이 올바르지 않습니다.")
+async def get_current_user(authorization: str | None = Header(default=None)) -> UserRecord:
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Authorization 헤더가 없거나 형식이 올바르지 않습니다.")
     token = authorization[len("Bearer "):]
     try:
         payload = auth_service.decode_jwt(token)

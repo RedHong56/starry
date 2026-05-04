@@ -1491,9 +1491,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453ad490cf0009546bbabe61a94b6414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UserDataManager
-  userDataApiUrl: https://your-backend.com/api/user/me
-  consumeApiUrl: https://your-backend.com/api/user/consume
-  adRewardApiUrl: https://your-backend.com/api/user/ad-reward
+  userDataApiUrl: http://127.0.0.1:8000/api/user/me
+  consumeApiUrl: http://127.0.0.1:8000/api/user/consume
+  adRewardApiUrl: http://127.0.0.1:8000/api/user/ad-reward
 --- !u!4 &813646701
 Transform:
   m_ObjectHideFlags: 0
@@ -3374,7 +3374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de66baa96aa21af449cb9813870af6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AuthManager
-  authApiUrl: https://your-backend.com/api/auth
+  authApiUrl: http://127.0.0.1:8000/api/auth
 --- !u!4 &2073075085
 Transform:
   m_ObjectHideFlags: 0
