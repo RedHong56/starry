@@ -1,14 +1,25 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Advertisements;
 
-public class AdRewardController : MonoBehaviour
+public class AdRewardController : MonoBehaviour,
+    IUnityAdsInitializationListener,
+    IUnityAdsLoadListener,
+    IUnityAdsShowListener
 {
     public static AdRewardController Instance { get; private set; }
 
-    // TODO: Unity Ads 설정
-    // [SerializeField] private string gameId = "your-unity-game-id";
-    // [SerializeField] private string adUnitId = "Rewarded_Android";
+    [SerializeField] private string androidGameId = "your-android-game-id";
+    [SerializeField] private string iosGameId     = "your-ios-game-id";
+    [SerializeField] private string androidAdUnit = "Rewarded_Android";
+    [SerializeField] private string iosAdUnit     = "Rewarded_iOS";
+    [SerializeField] private bool   testMode      = true;
+
+    private string _adUnitId;
+    private bool   _adLoaded;
+    private Action _onSuccess;
+    private Action _onFail;
 
     private void Awake()
     {
@@ -16,26 +27,75 @@ public class AdRewardController : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // TODO: Unity Ads 초기화
-        // Advertisement.Initialize(gameId, testMode: false);
+        _adUnitId = Application.platform == RuntimePlatform.IPhonePlayer ? iosAdUnit : androidAdUnit;
+        string gameId = Application.platform == RuntimePlatform.IPhonePlayer ? iosGameId : androidGameId;
+        Advertisement.Initialize(gameId, testMode, this);
     }
+
+    // ── IUnityAdsInitializationListener ──────────────────────────────────────
+
+    public void OnInitializationComplete()
+    {
+        Advertisement.Load(_adUnitId, this);
+    }
+
+    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+    {
+        Debug.LogWarning($"[AdRewardController] Init failed: {error} - {message}");
+    }
+
+    // ── IUnityAdsLoadListener ─────────────────────────────────────────────────
+
+    public void OnUnityAdsAdLoaded(string adUnitId)
+    {
+        _adLoaded = true;
+    }
+
+    public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
+    {
+        Debug.LogWarning($"[AdRewardController] Load failed: {error} - {message}");
+        _adLoaded = false;
+    }
+
+    // ── 광고 표시 ─────────────────────────────────────────────────────────────
 
     public void ShowRewardedAd(Action onSuccess, Action onFail)
     {
-        // TODO: Unity Ads SDK 연결 후 아래 주석 해제
-        // if (!Advertisement.IsReady(adUnitId)) { onFail?.Invoke(); return; }
-        // var options = new ShowOptions { resultCallback = result =>
-        // {
-        //     if (result == ShowResult.Finished)
-        //         StartCoroutine(RewardRoutine(onSuccess, onFail));
-        //     else
-        //         onFail?.Invoke();
-        // }};
-        // Advertisement.Show(adUnitId, options);
+        if (!_adLoaded)
+        {
+            Debug.LogWarning("[AdRewardController] 광고가 아직 로드되지 않았습니다.");
+            onFail?.Invoke();
+            return;
+        }
 
-        // 임시: SDK 없을 때 바로 성공 처리
-        StartCoroutine(RewardRoutine(onSuccess, onFail));
+        _onSuccess = onSuccess;
+        _onFail    = onFail;
+        Advertisement.Show(_adUnitId, this);
     }
+
+    // ── IUnityAdsShowListener ─────────────────────────────────────────────────
+
+    public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState completionState)
+    {
+        _adLoaded = false;
+        Advertisement.Load(_adUnitId, this); // 다음 광고 미리 로드
+
+        if (completionState == UnityAdsShowCompletionState.COMPLETED)
+            StartCoroutine(RewardRoutine(_onSuccess, _onFail));
+        else
+            _onFail?.Invoke();
+    }
+
+    public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
+    {
+        Debug.LogWarning($"[AdRewardController] Show failed: {error} - {message}");
+        _onFail?.Invoke();
+    }
+
+    public void OnUnityAdsShowStart(string adUnitId)  { }
+    public void OnUnityAdsShowClick(string adUnitId)  { }
+
+    // ── 백엔드 보상 처리 ──────────────────────────────────────────────────────
 
     private IEnumerator RewardRoutine(Action onSuccess, Action onFail)
     {
