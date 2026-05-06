@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -26,6 +28,7 @@ public class PhaseManager : MonoBehaviour
     [SerializeField] private StarFieldController      starField;
     [SerializeField] private TarotAIService           aiService;
     [SerializeField] private PaymentChoiceController  paymentChoiceController;
+    [SerializeField] private StarSpinner               starSpinner;
 
     [Header("Buttons")]
     [SerializeField] private Button startButton;
@@ -46,6 +49,7 @@ public class PhaseManager : MonoBehaviour
 
     private void Start()
     {
+        starSpinner.Hide();
         startButton.onClick.AddListener(OnStartButtonClicked);
         EnterPhase(GamePhase.Intro);
     }
@@ -93,11 +97,10 @@ public class PhaseManager : MonoBehaviour
 
     private void HandleWelcome()
     {
-        cameraController.GoToSeat(() =>
-        {
-            SoundManager.Instance?.PlayDia(DiaType.Come);
-            uiController.ShowDialogue("어서 오게나...", () => EnterPhase(GamePhase.Question));
-        });
+        cameraController.GoToSeat(() => { });
+        SoundManager.Instance?.PlayDia(DiaType.Come);
+        uiController.ShowDialogue("어서 오게나...", () => EnterPhase(GamePhase.Question));
+        
     }
 
     private void HandleQuestion()
@@ -160,19 +163,27 @@ public class PhaseManager : MonoBehaviour
         cardDeck.gameObject.SetActive(true);
         characterController.PlayClapping();
         SoundManager.Instance?.PlayDia(DiaType.Umm);
+        starSpinner.Show();
         uiController.ShowDialogue("흠…", () =>
         {
-            SoundManager.Instance?.PlayDia(DiaType.Result);
-            uiController.ShowDialogue("결과를 말해주겠다", () =>
-            {
-                uiController.HideDialogue();
-                cardResultController.StartReveal(
-                    _selectedCardIndices, _isReversed, _userWorry,
-                    isAiReady:   () => aiReady,
-                    getAiResult: () => aiResult,
-                    beforeFlip:  i => cardDeckController.HideSelectedCard(i),
-                    onComplete:  OnReadingComplete);
-            });
+            StartCoroutine(WaitForAiThenReveal(() => aiReady, () => aiResult));
+        });
+    }
+
+    private IEnumerator WaitForAiThenReveal(Func<bool> isAiReady, Func<string> getAiResult)
+    {
+        yield return new WaitUntil(isAiReady);
+        starSpinner.Hide();
+        SoundManager.Instance?.PlayDia(DiaType.Result);
+        uiController.ShowDialogue("결과를 말해주겠다", () =>
+        {
+            uiController.HideDialogue();
+            cardResultController.StartReveal(
+                _selectedCardIndices, _isReversed, _userWorry,
+                isAiReady:   isAiReady,
+                getAiResult: getAiResult,
+                beforeFlip:  i => cardDeckController.HideSelectedCard(i),
+                onComplete:  OnReadingComplete);
         });
     }
 
@@ -188,7 +199,7 @@ public class PhaseManager : MonoBehaviour
         cardResultController.HideResultPanel();
         
         cardDeckController.HideSelectedCards();
-        var data = starField.HighlightConstellation(uiController.BirthMonth, uiController.BirthDay);
+        var data = starField.ShowConstellationResult(uiController.BirthMonth, uiController.BirthDay);
         string constellationName = data != null ? data.constellationName : string.Empty;
         string koreanName        = data != null ? data.koreanName        : string.Empty;
 
