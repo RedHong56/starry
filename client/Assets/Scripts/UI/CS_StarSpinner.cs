@@ -10,6 +10,7 @@ public class StarSpinner : MonoBehaviour
 
     private void Start()
     {
+        Hide();
         for (int i = 0; i < stars.Length; i++)
         {
             float angle = i * (360f / stars.Length) * Mathf.Deg2Rad;
