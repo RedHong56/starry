@@ -22,12 +22,12 @@ public class UserStatusHUD : MonoBehaviour
         if (mgr == null) return;
 
         if (coinText != null)
-            coinText.text = $"별가루  {mgr.Coins}";
+            coinText.text = $"{mgr.Coins}";
 
         if (freeCouponIcon != null)
             freeCouponIcon.SetActive(mgr.HasFreeCoupon);
 
         if (freeCouponText != null)
-            freeCouponText.text = mgr.HasFreeCoupon ? "무료 티켓 보유" : "";
+            freeCouponText.text = mgr.HasFreeCoupon ? "사용 가능" : "사용 불가능";
     }
 }
