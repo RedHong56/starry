@@ -90,17 +90,15 @@ public class CardResultController : MonoBehaviour
             // ── 누적 스크롤에 설명 추가 ──
             string meaning = GetMeaning(info, reversed);
             string section = $"[{SlotLabels[i]}]\n\n{meaning}\n\n";
-            resultText.text += section;
+            bool sectionDone = false;
+            typewriter.Append(section, () => sectionDone = true);
+            yield return new WaitUntil(() => sectionDone);
             ScrollToBottom();
 
             yield return new WaitForSeconds(pauseBetweenCards);
         }
 
         // ── AI 해설 대기 (PhaseManager에서 미리 요청한 결과를 수령) ──
-        resultText.text += "[해설]\n\n";
-        resultText.text += "점괘를 읽는 중...";
-        ScrollToBottom();
-
         // 미리 요청한 결과가 없으면 직접 요청 (폴백)
         if (isAiReady == null)
         {
@@ -115,8 +113,9 @@ public class CardResultController : MonoBehaviour
         yield return new WaitUntil(isAiReady);
         string aiResult = getAiResult();
 
-        // "점괘를 읽는 중..." 제거 후 AI 결과 삽입
-        resultText.text = resultText.text.Replace("점괘를 읽는 중...", aiResult);
+        bool aiDone = false;
+        typewriter.Append($"[해설]\n\n{aiResult}\n\n", () => aiDone = true);
+        yield return new WaitUntil(() => aiDone);
         ScrollToBottom();
 
         onComplete?.Invoke();
@@ -138,7 +137,14 @@ public class CardResultController : MonoBehaviour
 
     private void ScrollToBottom()
     {
+        StartCoroutine(ScrollToBottomNextFrame());
+    }
+
+    private IEnumerator ScrollToBottomNextFrame()
+    {
+        yield return null;
         Canvas.ForceUpdateCanvases();
+        resultScroll.movementType = ScrollRect.MovementType.Clamped;
         resultScroll.normalizedPosition = new Vector2(0f, 0f);
     }
 }

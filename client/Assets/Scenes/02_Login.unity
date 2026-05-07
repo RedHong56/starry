@@ -660,6 +660,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bab908324774c44c94d1ceaae56d106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AdRewardController
+  androidGameId: your-android-game-id
+  iosGameId: your-ios-game-id
+  androidAdUnit: Rewarded_Android
+  iosAdUnit: Rewarded_iOS
+  testMode: 1
 --- !u!4 &253453480
 Transform:
   m_ObjectHideFlags: 0
@@ -1967,7 +1972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1267825359
 Transform:
   m_ObjectHideFlags: 0
