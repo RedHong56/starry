@@ -3379,7 +3379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de66baa96aa21af449cb9813870af6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AuthManager
-  authApiUrl: http://127.0.0.1:8000/api/auth
+  userApiUrl: http://127.0.0.1:8000/api/user/me
 --- !u!4 &2073075085
 Transform:
   m_ObjectHideFlags: 0
