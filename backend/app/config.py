@@ -15,6 +15,14 @@ class Settings(BaseSettings):
 
     database_url: str = "postgresql+asyncpg://starry:starry@localhost:5432/starry"
 
+    def asyncpg_url(self) -> str:
+        url = self.database_url
+        if url.startswith("postgres://"):
+            url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+        elif url.startswith("postgresql://") and "+asyncpg" not in url:
+            url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        return url
+
     jwt_secret: str = "change-me-in-production"
     jwt_expire_hours: int = 720  # 30 days
     free_coupon_interval_hours: int = 24
