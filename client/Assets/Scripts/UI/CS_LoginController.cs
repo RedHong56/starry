@@ -37,7 +37,7 @@ public class LoginController : MonoBehaviour
 
     private IEnumerator AutoLoginRoutine()
     {
-        if (!AuthManager.Instance.IsLoggedIn) yield break;
+        if (AuthManager.Instance == null || !AuthManager.Instance.IsLoggedIn) yield break;
 
         SetLoading(true);
         bool valid = false;
