@@ -10,8 +10,8 @@ public class AdRewardController : MonoBehaviour,
 {
     public static AdRewardController Instance { get; private set; }
 
-    [SerializeField] private string androidGameId = "your-android-game-id";
-    [SerializeField] private string iosGameId     = "your-ios-game-id";
+    [SerializeField] private string androidGameId = "6111463";
+    [SerializeField] private string iosGameId     = "6111462";
     [SerializeField] private string androidAdUnit = "Rewarded_Android";
     [SerializeField] private string iosAdUnit     = "Rewarded_iOS";
     [SerializeField] private bool   testMode      = true;
@@ -77,8 +77,9 @@ public class AdRewardController : MonoBehaviour,
 
     public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState completionState)
     {
+        Debug.Log($"[AdRewardController] ShowComplete: {completionState}");
         _adLoaded = false;
-        Advertisement.Load(_adUnitId, this); // 다음 광고 미리 로드
+        Advertisement.Load(_adUnitId, this);
 
         if (completionState == UnityAdsShowCompletionState.COMPLETED)
             StartCoroutine(RewardRoutine(_onSuccess, _onFail));
@@ -92,7 +93,7 @@ public class AdRewardController : MonoBehaviour,
         _onFail?.Invoke();
     }
 
-    public void OnUnityAdsShowStart(string adUnitId)  { }
+    public void OnUnityAdsShowStart(string adUnitId)  => Debug.Log("[AdRewardController] ShowStart");
     public void OnUnityAdsShowClick(string adUnitId)  { }
 
     // ── 백엔드 보상 처리 ──────────────────────────────────────────────────────

@@ -8052,8 +8052,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1038931091}
-  - {fileID: 2141936153}
   - {fileID: 1846967182}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8586,11 +8584,11 @@ Transform:
   m_GameObject: {fileID: 1038931090}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 720, y: 1544, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 908484212}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1038931092
 MonoBehaviour:
@@ -8604,7 +8602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de66baa96aa21af449cb9813870af6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AuthManager
-  authApiUrl: http://127.0.0.1:8000/api/auth
+  userApiUrl: http://127.0.0.1:8000/api/user/me
 --- !u!1 &1043925318
 GameObject:
   m_ObjectHideFlags: 0
@@ -9797,6 +9795,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112452534}
   m_CullTransparentMesh: 1
+--- !u!1 &1124628663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1124628665}
+  - component: {fileID: 1124628664}
+  m_Layer: 0
+  m_Name: UserDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1124628664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124628663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 453ad490cf0009546bbabe61a94b6414, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UserDataManager
+  userDataApiUrl: http://127.0.0.1:8000/api/user/me
+  consumeApiUrl: http://127.0.0.1:8000/api/user/consume
+  adRewardApiUrl: http://127.0.0.1:8000/api/user/ad-reward
+--- !u!4 &1124628665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124628663}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 720, y: 1544, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1135343115
 GameObject:
   m_ObjectHideFlags: 0
@@ -11859,8 +11904,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bab908324774c44c94d1ceaae56d106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AdRewardController
-  androidGameId: your-android-game-id
-  iosGameId: your-ios-game-id
+  androidGameId: 6111463
+  iosGameId: 6111462
   androidAdUnit: Rewarded_Android
   iosAdUnit: Rewarded_iOS
   testMode: 1
@@ -17847,58 +17892,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Mask
   m_ShowMaskGraphic: 0
---- !u!1 &2141936151
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2141936153}
-  - component: {fileID: 2141936152}
-  m_Layer: 0
-  m_Name: UserDataManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2141936152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2141936151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 453ad490cf0009546bbabe61a94b6414, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UserDataManager
-  userDataApiUrl: http://127.0.0.1:8000/api/user/me
-  consumeApiUrl: http://127.0.0.1:8000/api/user/consume
-  adRewardApiUrl: http://127.0.0.1:8000/api/user/ad-reward
---- !u!4 &2141936153
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2141936151}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -720.10785, y: -1542.9525, z: -3.96017}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 908484212}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1054950792}
+  - {fileID: 1124628665}
+  - {fileID: 1038931091}
+  - {fileID: 125193296}
   - {fileID: 1428056936}
   - {fileID: 833463863}
   - {fileID: 1945098931}
@@ -17907,5 +17908,4 @@ SceneRoots:
   - {fileID: 518390449}
   - {fileID: 1402603116}
   - {fileID: 401708903}
-  - {fileID: 125193296}
   - {fileID: 908484212}

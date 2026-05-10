@@ -82,6 +82,7 @@ public class UserDataManager : MonoBehaviour
 
         if (req.result == UnityWebRequest.Result.Success)
         {
+            Debug.Log("[UserDataManager] ad reward success");
             onResult?.Invoke(true);
         }
         else
