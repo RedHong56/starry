@@ -9,6 +9,10 @@ class Settings(BaseSettings):
     use_mock: bool = False
     port: int = 8000
 
+    kakao_app_key: str = ""        # REST API 키
+    kakao_client_secret: str = ""
+    base_url: str = "http://localhost:8000"
+
     jwt_secret: str = "change-me-in-production"
     jwt_expire_hours: int = 720  # 30 days
     free_coupon_interval_hours: int = 24
