@@ -9,6 +9,11 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U starry -d starry"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   backend:
     build: .
@@ -20,7 +25,8 @@ services:
       - ./app:/app/app
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
 volumes:
   postgres_data:
