@@ -24,12 +24,13 @@ public class StarSpinner : MonoBehaviour
                 },
                 angle + Mathf.PI * 2,
                 duration
-            ).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+            ).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear).SetLink(gameObject);
 
             stars[i].transform
                 .DOScale(0.5f, duration * 0.5f)
                 .SetLoops(-1, LoopType.Yoyo)
-                .SetDelay(i * (duration / stars.Length));
+                .SetDelay(i * (duration / stars.Length))
+                .SetLink(gameObject);
         }
     }
 
