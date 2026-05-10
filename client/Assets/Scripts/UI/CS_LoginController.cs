@@ -56,14 +56,18 @@ public class LoginController : MonoBehaviour
 
     private void OnKakaoClicked()
     {
-        SetLoading(true);
-        var encodedRedirect = Uri.EscapeDataString(KakaoRedirectUri);
-        Application.OpenURL(
-            $"https://kauth.kakao.com/oauth/authorize" +
-            $"?client_id={KakaoRestApiKey}" +
-            $"&redirect_uri={encodedRedirect}" +
-            $"&response_type=code"
-        );
+        // TODO: Mock 해제 후 아래 웹 OAuth 블록으로 교체
+        StartCoroutine(TokenLoginRoutine("kakao", "kakao_dummy_token"));
+
+        // 실제 카카오 웹 OAuth (APK 빌드 후 딥링크 테스트 시 사용)
+        // SetLoading(true);
+        // var encodedRedirect = Uri.EscapeDataString(KakaoRedirectUri);
+        // Application.OpenURL(
+        //     $"https://kauth.kakao.com/oauth/authorize" +
+        //     $"?client_id={KakaoRestApiKey}" +
+        //     $"&redirect_uri={encodedRedirect}" +
+        //     $"&response_type=code"
+        // );
     }
 
     private void OnGoogleClicked()
