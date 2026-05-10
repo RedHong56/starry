@@ -4,6 +4,7 @@ from typing import AsyncGenerator
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.database import Base, engine
 from app.routers import reading
 from app.routers import auth, horoscope, payment, tarot, user
 from app.services.card_loader import load_cards
@@ -11,6 +12,8 @@ from app.services.card_loader import load_cards
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
     load_cards()
     yield
 

@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     kakao_client_secret: str = ""
     base_url: str = "http://localhost:8000"
 
+    database_url: str = "postgresql+asyncpg://starry:starry@localhost:5432/starry"
+
     jwt_secret: str = "change-me-in-production"
     jwt_expire_hours: int = 720  # 30 days
     free_coupon_interval_hours: int = 24
