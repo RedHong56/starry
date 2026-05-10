@@ -42,6 +42,12 @@ firebase-config.json
 service-account.json
 
 # ============================================
+# Unity 앱 시크릿 (키 직접 포함, 커밋 금지)
+# ============================================
+client/Assets/Scripts/Config/CS_AppSecrets.cs
+client/Assets/Scripts/Config/CS_AppSecrets.cs.meta
+
+# ============================================
 # Unity
 # ============================================
 client/[Ll]ibrary/

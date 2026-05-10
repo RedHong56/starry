@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,13 +11,28 @@ public class LoginController : MonoBehaviour
     [SerializeField] private Button appleButton;
     [SerializeField] private StarSpinner loadingSpinner;
 
+    private static readonly string KakaoRestApiKey  = AppSecrets.KakaoRestApiKey;
+    private static readonly string KakaoRedirectUri = AppSecrets.KakaoRedirectUri;
+
     private void Awake()
     {
         loadingSpinner.Hide();
         kakaoButton.onClick.AddListener(OnKakaoClicked);
         googleButton.onClick.AddListener(OnGoogleClicked);
         appleButton.onClick.AddListener(OnAppleClicked);
+
+        Application.deepLinkActivated += OnDeepLinkActivated;
+
+        // 앱이 딥링크로 콜드 스타트된 경우
+        if (!string.IsNullOrEmpty(Application.absoluteURL))
+            HandleDeepLink(Application.absoluteURL);
+
         StartCoroutine(AutoLoginRoutine());
+    }
+
+    private void OnDestroy()
+    {
+        Application.deepLinkActivated -= OnDeepLinkActivated;
     }
 
     private IEnumerator AutoLoginRoutine()
@@ -34,47 +50,74 @@ public class LoginController : MonoBehaviour
         }
         else
         {
-            SetLoading(false); // 토큰 만료/서버 재시작 → 로그인 화면 표시
+            SetLoading(false);
         }
     }
 
     private void OnKakaoClicked()
     {
-        // TODO: Kakao Unity SDK 연결 후 실제 토큰으로 교체
-        // KakaoGame.Login(onSuccess: token => StartCoroutine(LoginRoutine("kakao", token)));
-        StartCoroutine(LoginRoutine("kakao", "kakao_dummy_token"));
+        SetLoading(true);
+        var encodedRedirect = Uri.EscapeDataString(KakaoRedirectUri);
+        Application.OpenURL(
+            $"https://kauth.kakao.com/oauth/authorize" +
+            $"?client_id={KakaoRestApiKey}" +
+            $"&redirect_uri={encodedRedirect}" +
+            $"&response_type=code"
+        );
     }
 
     private void OnGoogleClicked()
     {
-        // TODO: Google Sign-In SDK 연결 후 실제 토큰으로 교체
-        // GoogleSignIn.Login(onSuccess: token => StartCoroutine(LoginRoutine("google", token)));
-        StartCoroutine(LoginRoutine("google", "google_dummy_token"));
+        // TODO: Google Sign-In SDK 연결 후 교체
+        StartCoroutine(TokenLoginRoutine("google", "google_dummy_token"));
     }
 
     private void OnAppleClicked()
     {
-        // TODO: Sign in with Apple SDK 연결 후 실제 토큰으로 교체
-        // AppleAuthManager.Login(onSuccess: token => StartCoroutine(LoginRoutine("apple", token)));
-        StartCoroutine(LoginRoutine("apple", "apple_dummy_token"));
+        // TODO: Apple Sign-In SDK 연결 후 교체
+        StartCoroutine(TokenLoginRoutine("apple", "apple_dummy_token"));
     }
 
-    private IEnumerator LoginRoutine(string provider, string socialToken)
+    private void OnDeepLinkActivated(string url) => HandleDeepLink(url);
+
+    private void HandleDeepLink(string url)
+    {
+        // 예상 URL: starry://auth?jwt=XXXXX  또는  starry://auth?error=...
+        if (!url.StartsWith("starry://auth")) return;
+
+        var jwt   = ExtractQueryParam(url, "jwt");
+        var error = ExtractQueryParam(url, "error");
+
+        if (!string.IsNullOrEmpty(jwt))
+            StartCoroutine(FinishLoginWithJwt(jwt));
+        else
+        {
+            Debug.LogWarning("[LoginController] 카카오 로그인 실패: " + error);
+            SetLoading(false);
+        }
+    }
+
+    private IEnumerator FinishLoginWithJwt(string jwt)
+    {
+        AuthManager.Instance.StoreToken(jwt);
+        yield return UserDataManager.Instance.FetchUserDataRoutine();
+        SetLoading(false);
+        SceneManager.LoadScene("03_Main");
+    }
+
+    private IEnumerator TokenLoginRoutine(string provider, string token)
     {
         SetLoading(true);
+        bool success = false;
+        yield return AuthManager.Instance.AuthenticateRoutine(provider, token, r => success = r);
 
-        bool authSuccess = false;
-        yield return AuthManager.Instance.AuthenticateRoutine(provider, socialToken, result => authSuccess = result);
-
-        if (!authSuccess)
+        if (!success)
         {
             SetLoading(false);
             Debug.LogWarning("[LoginController] 인증 실패");
             yield break;
         }
-
         yield return UserDataManager.Instance.FetchUserDataRoutine();
-
         SetLoading(false);
         SceneManager.LoadScene("03_Main");
     }
@@ -82,8 +125,20 @@ public class LoginController : MonoBehaviour
     private void SetLoading(bool on)
     {
         if (on) loadingSpinner.Show(); else loadingSpinner.Hide();
-        kakaoButton.interactable = !on;
+        kakaoButton.interactable  = !on;
         googleButton.interactable = !on;
         appleButton.interactable  = !on;
+    }
+
+    private static string ExtractQueryParam(string url, string key)
+    {
+        var query = url.Contains("?") ? url.Substring(url.IndexOf('?') + 1) : string.Empty;
+        foreach (var pair in query.Split('&'))
+        {
+            var kv = pair.Split('=');
+            if (kv.Length == 2 && kv[0] == key)
+                return Uri.UnescapeDataString(kv[1]);
+        }
+        return null;
     }
 }
