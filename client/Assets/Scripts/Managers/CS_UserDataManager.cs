@@ -12,9 +12,9 @@ public class UserDataManager : MonoBehaviour
     public int    Coins        { get; private set; }
     public bool   HasFreeCoupon { get; private set; }
 
-    [SerializeField] private string userDataApiUrl  = "http://127.0.0.1:8000/api/user/me";
-    [SerializeField] private string consumeApiUrl   = "http://127.0.0.1:8000/api/user/consume";
-    [SerializeField] private string adRewardApiUrl  = "http://127.0.0.1:8000/api/user/ad-reward";
+    private readonly string userDataApiUrl = AppSecrets.BackendBaseUrl + "/api/user/me";
+    private readonly string consumeApiUrl  = AppSecrets.BackendBaseUrl + "/api/user/consume";
+    private readonly string adRewardApiUrl = AppSecrets.BackendBaseUrl + "/api/user/ad-reward";
 
     private void Awake()
     {

@@ -18,7 +18,7 @@ public class PaymentController : MonoBehaviour, IDetailedStoreListener
 {
     public static PaymentController Instance { get; private set; }
 
-    [SerializeField] private string purchaseApiUrl = "http://127.0.0.1:8000/api/payment/purchase";
+    private readonly string purchaseApiUrl = AppSecrets.BackendBaseUrl + "/api/payment/purchase";
 
     public CoinProduct[] products = new CoinProduct[]
     {

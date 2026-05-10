@@ -8,7 +8,7 @@ public class AuthManager : MonoBehaviour
 {
     public static AuthManager Instance { get; private set; }
 
-    [SerializeField] private string userApiUrl = "http://127.0.0.1:8000/api/user/me";
+    private readonly string userApiUrl = AppSecrets.BackendBaseUrl + "/api/user/me";
 
     private const string TokenKey = "jwt_token";
 
@@ -51,7 +51,7 @@ public class AuthManager : MonoBehaviour
     {
         var body = JsonUtility.ToJson(new AuthTokenRequest { token = socialToken });
 
-        using var req = new UnityWebRequest($"http://127.0.0.1:8000/api/auth/{provider}", "POST")
+        using var req = new UnityWebRequest($"{AppSecrets.BackendBaseUrl}/api/auth/{provider}", "POST")
         {
             uploadHandler   = new UploadHandlerRaw(Encoding.UTF8.GetBytes(body)),
             downloadHandler = new DownloadHandlerBuffer()
