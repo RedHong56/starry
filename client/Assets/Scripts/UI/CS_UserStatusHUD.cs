@@ -54,7 +54,7 @@ public class UserStatusHUD : MonoBehaviour
             TimeSpan remaining = refreshAt - DateTime.UtcNow;
             if (remaining.TotalSeconds <= 0)
             {
-                freeCouponText.text = "사용 가능";
+                freeCouponText.text = "Free";
                 yield break;
             }
 
