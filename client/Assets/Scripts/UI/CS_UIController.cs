@@ -104,7 +104,7 @@ public class UIController : MonoBehaviour
     public void ShowConstellationPanel(string koreanName, Action onRestart)
     {
         constellationNameText.text = koreanName ?? string.Empty;
-        constellationDescText.text = "오늘의 운세를 읽는 중...";
+        constellationDescText.text = LocalizationManager.LoadingHoroscope;
 
         restartButton.onClick.RemoveAllListeners();
         restartButton.onClick.AddListener(() =>

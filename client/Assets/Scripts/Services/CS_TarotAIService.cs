@@ -23,7 +23,7 @@ public class TarotAIService : MonoBehaviour
 
     private IEnumerator TarotRoutine(int[] cardIds, string worry, Action<string> onComplete)
     {
-        var body = JsonUtility.ToJson(new TarotRequest { cardIds = cardIds, worry = worry });
+        var body = JsonUtility.ToJson(new TarotRequest { cardIds = cardIds, worry = worry, language = LocalizationManager.Code });
 
         using var req = new UnityWebRequest(apiUrl, "POST")
         {
@@ -38,13 +38,13 @@ public class TarotAIService : MonoBehaviour
         else
         {
             Debug.LogError($"[TarotAIService] {req.error}");
-            onComplete?.Invoke("별의 언어를 읽는 데 문제가 생겼다. 다시 시도해보게.");
+            onComplete?.Invoke(LocalizationManager.TarotError);
         }
     }
 
     private IEnumerator HoroscopeRoutine(string constellationName, Action<string> onComplete)
     {
-        var body = JsonUtility.ToJson(new HoroscopeRequest { constellation = constellationName });
+        var body = JsonUtility.ToJson(new HoroscopeRequest { constellation = constellationName, language = LocalizationManager.Code });
 
         using var req = new UnityWebRequest(horoscopeApiUrl, "POST")
         {
@@ -59,11 +59,11 @@ public class TarotAIService : MonoBehaviour
         else
         {
             Debug.LogError($"[TarotAIService] horoscope {req.error}");
-            onComplete?.Invoke("오늘의 별자리 운세를 불러오지 못했습니다.");
+            onComplete?.Invoke(LocalizationManager.HoroscopeError);
         }
     }
 
-    [Serializable] private class TarotRequest     { public int[] cardIds; public string worry; }
-    [Serializable] private class HoroscopeRequest { public string constellation; }
+    [Serializable] private class TarotRequest     { public int[] cardIds; public string worry; public string language; }
+    [Serializable] private class HoroscopeRequest { public string constellation; public string language; }
     [Serializable] private class TextResponse     { public string result; }
 }
