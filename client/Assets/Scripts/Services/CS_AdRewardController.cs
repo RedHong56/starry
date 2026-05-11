@@ -14,7 +14,7 @@ public class AdRewardController : MonoBehaviour,
     [SerializeField] private string iosGameId     = "6111462";
     [SerializeField] private string androidAdUnit = "Rewarded_Android";
     [SerializeField] private string iosAdUnit     = "Rewarded_iOS";
-    [SerializeField] private bool   testMode      = true;
+    [SerializeField] private bool   testMode      = false;
 
     private string _adUnitId;
     private bool   _adLoaded;
