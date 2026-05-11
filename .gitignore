@@ -107,4 +107,5 @@ pipeline/output/optimized/
 # ============================================
 .DS_Store
 Thumbs.db
-desktop.iniclient/.utmp/
+desktop.ini
+client/.utmp/
