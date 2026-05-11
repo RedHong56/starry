@@ -31,6 +31,7 @@ public class PhaseManager : MonoBehaviour
 
     [Header("Object")]
     [SerializeField] private GameObject cardDeck;
+    [SerializeField] private GameObject startArea;  // 버튼 + 쿠폰 상태 묶음 오브젝트
 
     private GamePhase _currentPhase;
     private string    _userWorry;
@@ -66,16 +67,16 @@ public class PhaseManager : MonoBehaviour
 
     private void HandleIntro()
     {
-        startButton.gameObject.SetActive(false);
+        SetStartArea(false);
         cameraController.GoToBegin();
-        cameraController.GoToWalk(() => startButton.gameObject.SetActive(true));
+        cameraController.GoToWalk(() => SetStartArea(true));
     }
 
     private void OnStartButtonClicked()
     {
         if (_currentPhase != GamePhase.Intro) return;
         SoundManager.Instance?.PlayBtn();
-        startButton.gameObject.SetActive(false);
+        SetStartArea(false);
         StartCoroutine(StartRoutine());
     }
 
@@ -115,13 +116,20 @@ public class PhaseManager : MonoBehaviour
 
     private void Proceed()
     {
+        SetStartArea(false);
         characterController.PlayBeckoning();
         EnterPhase(GamePhase.Welcome);
     }
 
     private void RestoreStartButton()
     {
-        startButton.gameObject.SetActive(true);
+        SetStartArea(true);
+    }
+
+    private void SetStartArea(bool active)
+    {
+        if (startArea != null) startArea.SetActive(active);
+        else startButton.gameObject.SetActive(active);
     }
 
     private void HandleWelcome()
