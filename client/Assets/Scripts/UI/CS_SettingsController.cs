@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SettingsController : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class SettingsController : MonoBehaviour
     [Header("SFX")]
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private Toggle sfxToggle;
+
+    [Header("언어 세그먼트")]
+    [SerializeField] private Button korButton;
+    [SerializeField] private Button engButton;
+    [SerializeField] private Color  selectedColor   = new Color(1f, 1f, 1f, 1f);
+    [SerializeField] private Color  unselectedColor = new Color(0.5f, 0.5f, 0.5f, 1f);
 
     [Header("Button")]
     [SerializeField] private Button closeButton;
@@ -27,6 +34,9 @@ public class SettingsController : MonoBehaviour
 
         bgmToggle.onValueChanged.AddListener(isOn => SoundManager.Instance?.SetBgmMute(!isOn));
         sfxToggle.onValueChanged.AddListener(isOn => SoundManager.Instance?.SetSfxMute(!isOn));
+
+        if (korButton != null) korButton.onClick.AddListener(() => SelectLanguage(AppLanguage.Korean));
+        if (engButton != null) engButton.onClick.AddListener(() => SelectLanguage(AppLanguage.English));
     }
 
     private void OnEnable()
@@ -35,6 +45,32 @@ public class SettingsController : MonoBehaviour
         sfxSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("sfxVolume", 1f));
         bgmToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("bgmMute", 0) == 0);
         sfxToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("sfxMute", 0) == 0);
+
+        RefreshLangButtons(LocalizationManager.Language);
+    }
+
+    private void SelectLanguage(AppLanguage lang)
+    {
+        SoundManager.Instance?.PlayBtn();
+        LocalizationManager.SetLanguage(lang);
+        RefreshLangButtons(lang);
+    }
+
+    private void RefreshLangButtons(AppLanguage lang)
+    {
+        if (korButton == null || engButton == null) return;
+        bool isKor = lang == AppLanguage.Korean;
+        SetButtonSelected(korButton, isKor);
+        SetButtonSelected(engButton, !isKor);
+    }
+
+    private void SetButtonSelected(Button btn, bool selected)
+    {
+        var img = btn.GetComponent<Image>();
+        if (img != null) img.color = selected ? selectedColor : unselectedColor;
+
+        var tmp = btn.GetComponentInChildren<TMP_Text>();
+        if (tmp != null) tmp.color = selected ? selectedColor : unselectedColor;
     }
 
     public void Open()
