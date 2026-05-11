@@ -103,47 +103,62 @@ def _parse_response(text: str, cards: list[CardInput]) -> ReadingResponse:
         )
 
 
-_POSITIONS = ["과거", "현재", "미래"]
+_POSITIONS_KO = ["과거", "현재", "미래"]
+_POSITIONS_EN = ["Past", "Present", "Future"]
 
 
-def _mock_simple_response(worry: str, cards: list[CardInput]) -> str:
+def _mock_simple_response(worry: str, cards: list[CardInput], lang: str = "ko") -> str:
+    positions = _POSITIONS_KO if lang == "ko" else _POSITIONS_EN
     lines = []
     for i, c in enumerate(cards[:3]):
-        card_data = get_card(c.id)
-        name = card_data["displayName"] if card_data else f"카드 {c.id}"
-        pos = _POSITIONS[i] if i < len(_POSITIONS) else f"카드 {i + 1}"
+        card_data = get_card(c.id, lang)
+        name = card_data["displayName"] if card_data else f"Card {c.id}"
+        pos = positions[i] if i < len(positions) else f"Card {i + 1}"
         lines.append(f"{pos}: {name}")
 
     card_summary = " / ".join(lines)
+    if lang == "ko":
+        return (
+            f"[{card_summary}]\n\n"
+            f"'{worry}'에 대한 별의 답입니다.\n\n"
+            f"{lines[0]}의 카드는 이 고민이 시작된 배경을 보여줍니다. "
+            "당신이 걸어온 길 위에 이미 답의 씨앗이 있었습니다.\n\n"
+            f"{lines[1]}의 카드는 지금 당신이 서 있는 자리를 비춥니다. "
+            "흔들릴 수 있지만 이 순간이 변화의 분기점입니다.\n\n"
+            f"{lines[2]}의 카드는 앞으로 펼쳐질 흐름을 가리킵니다. "
+            "자신을 믿고 한 걸음씩 나아간다면 원하는 방향으로 나아갈 수 있습니다."
+        )
     return (
         f"[{card_summary}]\n\n"
-        f"'{worry}'에 대한 별의 답입니다.\n\n"
-        f"{lines[0]}의 카드는 이 고민이 시작된 배경을 보여줍니다. "
-        "당신이 걸어온 길 위에 이미 답의 씨앗이 있었습니다.\n\n"
-        f"{lines[1]}의 카드는 지금 당신이 서 있는 자리를 비춥니다. "
-        "흔들릴 수 있지만 이 순간이 변화의 분기점입니다.\n\n"
-        f"{lines[2]}의 카드는 앞으로 펼쳐질 흐름을 가리킵니다. "
-        "자신을 믿고 한 걸음씩 나아간다면 원하는 방향으로 나아갈 수 있습니다."
+        f"The stars answer your question: '{worry}'\n\n"
+        f"The {lines[0]} card reveals the roots of this concern. "
+        "The seeds of your answer were already present in the path you have walked.\n\n"
+        f"The {lines[1]} card reflects where you stand right now. "
+        "Though you may feel uncertain, this moment is a turning point.\n\n"
+        f"The {lines[2]} card points to what lies ahead. "
+        "Trust yourself and take one step at a time — you can move toward what you desire."
     )
 
 
-def _build_simple_prompt(worry: str, cards: list[CardInput]) -> str:
+def _build_simple_prompt(worry: str, cards: list[CardInput], lang: str = "ko") -> str:
+    positions = _POSITIONS_KO if lang == "ko" else _POSITIONS_EN
     card_lines: list[str] = []
     for i, c in enumerate(cards[:3]):
-        card_data = get_card(c.id)
+        card_data = get_card(c.id, lang)
         if card_data is None:
             raise HTTPException(status_code=422, detail=f"Card id {c.id} not found in deck")
         direction_key = "reversed" if c.is_reversed else "upright"
         keywords = ", ".join(card_data["keywords"][direction_key])
         meaning = card_data["meaning"][direction_key]
-        pos = _POSITIONS[i] if i < len(_POSITIONS) else f"카드 {i + 1}"
+        pos = positions[i] if i < len(positions) else f"Card {i + 1}"
         card_lines.append(
             f"[{pos}] {card_data['displayName']}\n"
-            f"  키워드: {keywords}\n"
-            f"  의미: {meaning}"
+            f"  Keywords: {keywords}\n"
+            f"  Meaning: {meaning}"
         )
 
-    return f"""당신은 깊은 통찰력을 지닌 한국어 타로 상담사입니다.
+    if lang == "ko":
+        return f"""당신은 깊은 통찰력을 지닌 한국어 타로 상담사입니다.
 상담자의 고민에 진심으로 공감하고, 과거·현재·미래 카드를 통해 구체적이고 조언을 전하세요.
 
 [상담자의 고민]
@@ -164,15 +179,36 @@ def _build_simple_prompt(worry: str, cards: list[CardInput]) -> str:
 - 한국어 400~500자, 따뜻하고 희망적인 톤으로 작성하세요.
 - 순수 텍스트만 출력하세요 (마크다운·JSON 불가)."""
 
+    return f"""You are an empathetic tarot reader with deep insight.
+Respond with compassion to the querent's concern, offering guidance through the Past, Present, and Future cards.
 
-async def generate_tarot_simple(card_ids: list[int], worry: str) -> str:
+[Querent's concern]
+{worry}
+
+[Card spread]
+{chr(10).join(card_lines)}
+
+[Structure — write in this order]
+1. Past: Describe the roots and background of this concern, and the journey so far. (2-3 sentences)
+2. Present: Reflect the querent's current situation and inner state. (2-3 sentences)
+3. Future: Outline what lies ahead and suggest a concrete action the querent can take. (2-3 sentences)
+4. Summary: Close with a single unified message from all three cards about this concern. (2-3 sentences)
+
+[Guidelines]
+- Each paragraph should flow naturally into the next as one cohesive story.
+- Use only line breaks between paragraphs — no numbers, headings, or symbols.
+- 150-200 words, warm and hopeful tone.
+- Output plain text only (no markdown or JSON)."""
+
+
+async def generate_tarot_simple(card_ids: list[int], worry: str, lang: str = "ko") -> str:
     cards = [CardInput(id=cid, is_reversed=False) for cid in card_ids]
 
     if not settings.openai_api_key:
-        return _mock_simple_response(worry, cards)
+        return _mock_simple_response(worry, cards, lang)
 
     client = AsyncOpenAI(api_key=settings.openai_api_key)
-    prompt = _build_simple_prompt(worry, cards)
+    prompt = _build_simple_prompt(worry, cards, lang)
 
     try:
         completion = await client.chat.completions.create(

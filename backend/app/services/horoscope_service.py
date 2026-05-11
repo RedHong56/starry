@@ -23,12 +23,12 @@ _MOCK: dict[str, str] = {
     "Pisces":      "풍부한 상상력이 빛을 발하는 하루입니다. 창의적인 활동에 집중하면 놀라운 결과가 나타납니다.",
 }
 
-_cache: dict[tuple[str, str], str] = {}
+_cache: dict[tuple[str, str, str], str] = {}
 
 
-async def get_horoscope(constellation: str) -> str:
+async def get_horoscope(constellation: str, lang: str = "ko") -> str:
     today = date.today().isoformat()
-    cache_key = (constellation.lower(), today)
+    cache_key = (constellation.lower(), today, lang)
 
     if cache_key in _cache:
         return _cache[cache_key]
@@ -42,11 +42,18 @@ async def get_horoscope(constellation: str) -> str:
         raise HTTPException(status_code=503, detail="OPENAI_API_KEY가 설정되지 않았습니다.")
 
     client = AsyncOpenAI(api_key=settings.openai_api_key)
-    prompt = (
-        f"당신은 한국어로 별자리 운세를 해석하는 전문 점성술사입니다.\n"
-        f"오늘({today}) {constellation}자리의 운세를 한국어로 100~200자 내외로 작성하세요.\n"
-        f"희망적이고 건설적인 방향으로 해석하고, 순수한 텍스트만 출력하세요."
-    )
+    if lang == "ko":
+        prompt = (
+            f"당신은 한국어로 별자리 운세를 해석하는 전문 점성술사입니다.\n"
+            f"오늘({today}) {constellation}자리의 운세를 한국어로 100~200자 내외로 작성하세요.\n"
+            f"희망적이고 건설적인 방향으로 해석하고, 순수한 텍스트만 출력하세요."
+        )
+    else:
+        prompt = (
+            f"You are a professional astrologer.\n"
+            f"Write today's ({today}) horoscope for {constellation} in English, around 50-100 words.\n"
+            f"Keep it hopeful and constructive. Output plain text only."
+        )
 
     try:
         completion = await client.chat.completions.create(
@@ -55,7 +62,7 @@ async def get_horoscope(constellation: str) -> str:
             temperature=0.7,
             max_tokens=300,
         )
-        result = completion.choices[0].message.content or "오늘의 운세를 준비 중입니다."
+        result = completion.choices[0].message.content or ("오늘의 운세를 준비 중입니다." if lang == "ko" else "Your horoscope is being prepared.")
         _cache[cache_key] = result
         return result
     except Exception as e:

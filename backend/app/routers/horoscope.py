@@ -10,5 +10,5 @@ router = APIRouter(prefix="/horoscope", tags=["horoscope"])
 @router.post("", response_model=HoroscopeResponse)
 @limiter.limit("30/hour")
 async def horoscope(request: Request, body: HoroscopeRequest) -> HoroscopeResponse:
-    result = await get_horoscope(body.constellation)
+    result = await get_horoscope(body.constellation, body.language)
     return HoroscopeResponse(result=result)

@@ -2,22 +2,22 @@ import json
 from pathlib import Path
 from typing import Any
 
-_cards_cache: dict[int, dict[str, Any]] | None = None
+_cache: dict[str, dict[int, dict[str, Any]]] = {}
 
-DATA_PATH = Path(__file__).parent.parent / "data" / "cards.json"
-
-
-def load_cards() -> dict[int, dict[str, Any]]:
-    global _cards_cache
-    if _cards_cache is not None:
-        return _cards_cache
-
-    with DATA_PATH.open(encoding="utf-8") as f:
-        raw = json.load(f)
-
-    _cards_cache = {card["id"]: card for card in raw["cards"]}
-    return _cards_cache
+_DATA_FILES = {
+    "ko": Path(__file__).parent.parent / "data" / "cards.json",
+    "en": Path(__file__).parent.parent / "data" / "cards_en.json",
+}
 
 
-def get_card(card_id: int) -> dict[str, Any] | None:
-    return load_cards().get(card_id)
+def load_cards(lang: str = "ko") -> dict[int, dict[str, Any]]:
+    key = lang if lang in _DATA_FILES else "ko"
+    if key not in _cache:
+        with _DATA_FILES[key].open(encoding="utf-8") as f:
+            raw = json.load(f)
+        _cache[key] = {card["id"]: card for card in raw["cards"]}
+    return _cache[key]
+
+
+def get_card(card_id: int, lang: str = "ko") -> dict[str, Any] | None:
+    return load_cards(lang).get(card_id)

@@ -10,5 +10,5 @@ router = APIRouter(prefix="/tarot", tags=["tarot"])
 @router.post("/reading", response_model=TarotReadingResponse)
 @limiter.limit("20/hour")
 async def tarot_reading(request: Request, body: TarotReadingRequest) -> TarotReadingResponse:
-    result = await generate_tarot_simple(body.cardIds, body.worry)
+    result = await generate_tarot_simple(body.cardIds, body.worry, body.language)
     return TarotReadingResponse(result=result)
