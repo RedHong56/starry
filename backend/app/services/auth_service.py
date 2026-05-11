@@ -94,8 +94,8 @@ async def _verify_google(token: str) -> tuple[str, str]:
 
     async with httpx.AsyncClient() as client:
         resp = await client.get(
-            "https://oauth2.googleapis.com/userinfo",
-            headers={"Authorization": f"Bearer {token}"},
+            "https://oauth2.googleapis.com/tokeninfo",
+            params={"id_token": token},
         )
     if resp.status_code != 200:
         raise PermissionError(f"Google token invalid: {resp.status_code}")
