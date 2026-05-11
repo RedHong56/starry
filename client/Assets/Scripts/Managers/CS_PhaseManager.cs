@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -25,8 +26,6 @@ public class PhaseManager : MonoBehaviour
     [SerializeField] private CardResultController     cardResultController;
     [SerializeField] private StarFieldController      starField;
     [SerializeField] private TarotAIService           aiService;
-    [SerializeField] private PaymentChoiceController  paymentChoiceController;
-
     [Header("Buttons")]
     [SerializeField] private Button startButton;
 
@@ -77,18 +76,52 @@ public class PhaseManager : MonoBehaviour
         if (_currentPhase != GamePhase.Intro) return;
         SoundManager.Instance?.PlayBtn();
         startButton.gameObject.SetActive(false);
+        StartCoroutine(StartRoutine());
+    }
 
-        paymentChoiceController.Open(
-            onConfirm: () =>
+    private IEnumerator StartRoutine()
+    {
+        var udm = UserDataManager.Instance;
+
+        if (udm != null && udm.CanUseTarot())
+        {
+            yield return udm.ConsumeReadingRoutine(success =>
             {
-                characterController.PlayBeckoning();
-                EnterPhase(GamePhase.Welcome);
-            },
-            onCancel: () =>
-            {
-                startButton.gameObject.SetActive(true);
-            }
-        );
+                if (success) Proceed();
+                else         RestoreStartButton();
+            });
+        }
+        else
+        {
+            AdRewardController.Instance.ShowRewardedAd(
+                onSuccess: () => StartCoroutine(AdProceedRoutine()),
+                onFail:    RestoreStartButton
+            );
+        }
+    }
+
+    private IEnumerator AdProceedRoutine()
+    {
+        yield return UserDataManager.Instance.AdRewardRoutine(success =>
+        {
+            if (!success) { RestoreStartButton(); return; }
+        });
+        yield return UserDataManager.Instance.ConsumeReadingRoutine(success =>
+        {
+            if (success) Proceed();
+            else         RestoreStartButton();
+        });
+    }
+
+    private void Proceed()
+    {
+        characterController.PlayBeckoning();
+        EnterPhase(GamePhase.Welcome);
+    }
+
+    private void RestoreStartButton()
+    {
+        startButton.gameObject.SetActive(true);
     }
 
     private void HandleWelcome()

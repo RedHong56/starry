@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Globalization;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -8,9 +9,10 @@ public class UserDataManager : MonoBehaviour
 {
     public static UserDataManager Instance { get; private set; }
 
-    public string UserId       { get; private set; }
-    public int    Coins        { get; private set; }
-    public bool   HasFreeCoupon { get; private set; }
+    public string   UserId             { get; private set; }
+    public int      Coins              { get; private set; }
+    public bool     HasFreeCoupon      { get; private set; }
+    public DateTime? FreeCouponRefreshAt { get; private set; }
 
     private readonly string userDataApiUrl = AppSecrets.BackendBaseUrl + "/api/user/me";
     private readonly string consumeApiUrl  = AppSecrets.BackendBaseUrl + "/api/user/consume";
@@ -32,16 +34,20 @@ public class UserDataManager : MonoBehaviour
         if (req.result == UnityWebRequest.Result.Success)
         {
             var data   = JsonUtility.FromJson<UserDataResponse>(req.downloadHandler.text);
-            UserId       = data.userId;
-            Coins        = data.coins;
-            HasFreeCoupon = data.hasFreeCoupon;
+            UserId             = data.userId;
+            Coins              = data.coins;
+            HasFreeCoupon      = data.hasFreeCoupon;
+            FreeCouponRefreshAt = string.IsNullOrEmpty(data.freeCouponRefreshAt)
+                ? (DateTime?)null
+                : DateTime.Parse(data.freeCouponRefreshAt, null, DateTimeStyles.RoundtripKind).ToUniversalTime();
         }
         else
         {
             Debug.LogWarning($"[UserDataManager] fetch failed: {req.error}. Using defaults.");
-            UserId        = "guest";
-            Coins         = 0;
-            HasFreeCoupon = false;
+            UserId              = "guest";
+            Coins               = 0;
+            HasFreeCoupon       = false;
+            FreeCouponRefreshAt = null;
         }
     }
 
@@ -107,5 +113,6 @@ public class UserDataManager : MonoBehaviour
         public string userId;
         public int    coins;
         public bool   hasFreeCoupon;
+        public string freeCouponRefreshAt;
     }
 }

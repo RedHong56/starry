@@ -1,20 +1,21 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
-/// <summary>
-/// Main 씬 상단 HUD: 별가루(코인) 수량과 무료 티켓 여부를 표시.
-/// Refresh()를 호출하면 UserDataManager 최신값으로 갱신.
-/// </summary>
 public class UserStatusHUD : MonoBehaviour
 {
     [Header("별가루 (코인)")]
     [SerializeField] private TMP_Text coinText;
 
     [Header("무료 티켓")]
-    [SerializeField] private GameObject freeCouponIcon;   // 보유 시 활성화할 오브젝트 (이미지/텍스트 등)
-    [SerializeField] private TMP_Text   freeCouponText;   // "무료 티켓 보유" / "무료 티켓 없음" 표시용 (선택)
+    [SerializeField] private GameObject freeCouponIcon;
+    [SerializeField] private TMP_Text   freeCouponText;
 
-    private void OnEnable() => Refresh();
+    private Coroutine _countdownCoroutine;
+
+    private void OnEnable()  => Refresh();
+    private void OnDisable() => StopCountdown();
 
     public void Refresh()
     {
@@ -27,7 +28,50 @@ public class UserStatusHUD : MonoBehaviour
         if (freeCouponIcon != null)
             freeCouponIcon.SetActive(mgr.HasFreeCoupon);
 
-        if (freeCouponText != null)
-            freeCouponText.text = mgr.HasFreeCoupon ? "사용 가능" : "사용 불가능";
+        StopCountdown();
+
+        if (freeCouponText == null) return;
+
+        if (mgr.HasFreeCoupon)
+        {
+            freeCouponText.text = "사용 가능";
+        }
+        else if (mgr.FreeCouponRefreshAt.HasValue)
+        {
+            _countdownCoroutine = StartCoroutine(CountdownRoutine(mgr.FreeCouponRefreshAt.Value));
+        }
+        else
+        {
+            freeCouponText.text = "—";
+        }
+    }
+
+    private IEnumerator CountdownRoutine(DateTime refreshAt)
+    {
+        var wait = new WaitForSeconds(1f);
+        while (true)
+        {
+            TimeSpan remaining = refreshAt - DateTime.UtcNow;
+            if (remaining.TotalSeconds <= 0)
+            {
+                freeCouponText.text = "사용 가능";
+                yield break;
+            }
+
+            freeCouponText.text = remaining.TotalHours >= 1
+                ? $"{(int)remaining.TotalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}"
+                : $"{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+
+            yield return wait;
+        }
+    }
+
+    private void StopCountdown()
+    {
+        if (_countdownCoroutine != null)
+        {
+            StopCoroutine(_countdownCoroutine);
+            _countdownCoroutine = null;
+        }
     }
 }
