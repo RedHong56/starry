@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Google;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -72,8 +73,24 @@ public class LoginController : MonoBehaviour
 
     private void OnGoogleClicked()
     {
-        // TODO: Google Sign-In SDK 연결 후 교체
-        StartCoroutine(TokenLoginRoutine("google", "google_dummy_token"));
+        GoogleSignIn.Configuration = new GoogleSignInConfiguration
+        {
+            WebClientId    = AppSecrets.GoogleWebClientId,
+            RequestIdToken = true,
+            UseGameSignIn  = false,
+        };
+        SetLoading(true);
+        GoogleSignIn.DefaultInstance.SignIn().ContinueWith(task =>
+        {
+            if (task.IsFaulted || task.IsCanceled)
+            {
+                Debug.LogWarning("[LoginController] Google 로그인 실패: " + task.Exception);
+                SetLoading(false);
+                return;
+            }
+            var idToken = task.Result.IdToken;
+            StartCoroutine(TokenLoginRoutine("google", idToken));
+        });
     }
 
     private void OnAppleClicked()
