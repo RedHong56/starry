@@ -18,6 +18,7 @@ public class LoginController : MonoBehaviour
     private void Awake()
     {
         loadingSpinner.Hide();
+        appleButton.gameObject.SetActive(Application.platform == RuntimePlatform.IPhonePlayer);
         kakaoButton.onClick.AddListener(OnKakaoClicked);
         googleButton.onClick.AddListener(OnGoogleClicked);
         appleButton.onClick.AddListener(OnAppleClicked);
