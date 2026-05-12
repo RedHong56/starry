@@ -12,7 +12,7 @@ public class PaymentChoiceController : MonoBehaviour
     [SerializeField] private Button    starDustButton;
     [SerializeField] private TMP_Text  starDustCoinText;
 
-    [Header("광고")]
+    [Header("광고")] 
     [SerializeField] private Button adButton;
 
     [Header("취소")]
