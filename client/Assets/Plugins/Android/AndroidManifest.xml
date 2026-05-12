@@ -4,9 +4,10 @@
     package="com.StarryStudio.StarryTarot">
     <application>
         <activity
-            android:name="com.unity3d.player.UnityPlayerActivity"
-            android:theme="@style/UnityThemeSelector"
-            android:launchMode="singleTask">
+            android:name="com.unity3d.player.UnityPlayerGameActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:launchMode="singleTask"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
