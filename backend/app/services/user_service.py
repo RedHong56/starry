@@ -11,9 +11,9 @@ from app.config import settings
 from app.database import User
 
 COIN_PRODUCTS: dict[str, int] = {
-    "coins_10": 10,
-    "coins_30": 30,
-    "coins_60": 60,
+    "stardust_10": 10,
+    "stardust_30": 30,
+    "stardust_70": 70,
 }
 
 
@@ -63,11 +63,6 @@ async def consume(db: AsyncSession, user: User) -> bool:
         await db.commit()
         return True
     return False
-
-
-async def ad_reward(db: AsyncSession, user: User) -> None:
-    user.coins += 1
-    await db.commit()
 
 
 async def add_coins(db: AsyncSession, user: User, coins: int) -> None:

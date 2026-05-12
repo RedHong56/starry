@@ -30,5 +30,8 @@ class Settings(BaseSettings):
     jwt_expire_hours: int = 720  # 30 days
     free_coupon_interval_hours: int = 24
 
+    google_package_name: str = ""           # com.yourcompany.starry
+    google_service_account_json: str = ""   # 서비스 계정 JSON 전체 (한 줄)
+
 
 settings = Settings()
