@@ -35,7 +35,8 @@ public class ShopController : MonoBehaviour
             int idx = i;
             productButtons[i].onClick.AddListener(() => OnProductClicked(idx));
             if (productLabels != null && i < productLabels.Length)
-                productLabels[i].text = $"별가루 {ProductCoins[i]}개\n{ProductPrices[i]}";
+                // productLabels[i].text = $"별가루 {ProductCoins[i]}개\n{ProductPrices[i]}";
+                productLabels[i].text = $" +{ProductCoins[i]}\n{ProductPrices[i]}";
         }
     }
 
