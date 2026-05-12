@@ -46,6 +46,8 @@ public class PhaseManager : MonoBehaviour
     {
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
+        SetStartArea(false);
+        loadingSpinner?.Hide();
     }
 
     private void Start()
