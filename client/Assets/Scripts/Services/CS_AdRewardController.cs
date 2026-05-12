@@ -1,25 +1,23 @@
 using System;
 using System.Collections;
+using GoogleMobileAds.Api;
 using UnityEngine;
-using UnityEngine.Advertisements;
 
-public class AdRewardController : MonoBehaviour,
-    IUnityAdsInitializationListener,
-    IUnityAdsLoadListener,
-    IUnityAdsShowListener
+public class AdRewardController : MonoBehaviour
 {
     public static AdRewardController Instance { get; private set; }
 
-    [SerializeField] private string androidGameId = "6111463";
-    [SerializeField] private string iosGameId     = "6111462";
-    [SerializeField] private string androidAdUnit = "Rewarded_Android";
-    [SerializeField] private string iosAdUnit     = "Rewarded_iOS";
-    [SerializeField] private bool   testMode      = false;
+    private const string AndroidAdUnitId = "ca-app-pub-5297356763431131/9112153007";
+    private const string IosAdUnitId     = "ca-app-pub-3940256099942544/1712485313"; // TODO: iOS 단위 ID 교체
 
-    private string _adUnitId;
-    private bool   _adLoaded;
-    private Action _onSuccess;
-    private Action _onFail;
+    // 테스트 광고 단위 (항상 광고 채워짐)
+    private const string TestAndroidAdUnitId = "ca-app-pub-3940256099942544/5224354917";
+    private const string TestIosAdUnitId     = "ca-app-pub-3940256099942544/1712485313";
+
+    [SerializeField] private bool testMode = false;
+
+    private RewardedAd _rewardedAd;
+    private string     _adUnitId;
 
     private void Awake()
     {
@@ -27,76 +25,57 @@ public class AdRewardController : MonoBehaviour,
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        _adUnitId = Application.platform == RuntimePlatform.IPhonePlayer ? iosAdUnit : androidAdUnit;
-        string gameId = Application.platform == RuntimePlatform.IPhonePlayer ? iosGameId : androidGameId;
-        Advertisement.Initialize(gameId, testMode, this);
-    }
+#if UNITY_IOS
+        _adUnitId = testMode ? TestIosAdUnitId : IosAdUnitId;
+#else
+        _adUnitId = testMode ? TestAndroidAdUnitId : AndroidAdUnitId;
+#endif
 
-    // ── IUnityAdsInitializationListener ──────────────────────────────────────
-
-    public void OnInitializationComplete()
-    {
-        Advertisement.Load(_adUnitId, this);
-    }
-
-    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
-    {
-        Debug.LogWarning($"[AdRewardController] Init failed: {error} - {message}");
-    }
-
-    // ── IUnityAdsLoadListener ─────────────────────────────────────────────────
-
-    public void OnUnityAdsAdLoaded(string adUnitId)
-    {
-        _adLoaded = true;
-    }
-
-    public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
-    {
-        Debug.LogWarning($"[AdRewardController] Load failed: {error} - {message}");
-        _adLoaded = false;
-    }
-
-    // ── 광고 표시 ─────────────────────────────────────────────────────────────
-
-    public void ShowRewardedAd(Action onSuccess, Action onFail)
-    {
-        if (!_adLoaded)
+        MobileAds.Initialize(_ =>
         {
-            Debug.LogWarning("[AdRewardController] 광고가 아직 로드되지 않았습니다.");
-            onFail?.Invoke();
+            Debug.Log("[AdRewardController] AdMob 초기화 완료");
+            LoadAd();
+        });
+    }
+
+    private void LoadAd()
+    {
+        _rewardedAd?.Destroy();
+        RewardedAd.Load(_adUnitId, new AdRequest(), OnAdLoaded);
+    }
+
+    private void OnAdLoaded(RewardedAd ad, LoadAdError error)
+    {
+        if (error != null)
+        {
+            Debug.LogWarning($"[AdRewardController] 광고 로드 실패: {error.GetMessage()}. 5초 후 재시도.");
+            Invoke(nameof(LoadAd), 5f);
             return;
         }
 
-        _onSuccess = onSuccess;
-        _onFail    = onFail;
-        Advertisement.Show(_adUnitId, this);
+        _rewardedAd = ad;
+        _rewardedAd.OnAdFullScreenContentFailed += e =>
+        {
+            Debug.LogWarning($"[AdRewardController] 광고 표시 실패: {e.GetMessage()}");
+            LoadAd();
+        };
+        _rewardedAd.OnAdFullScreenContentClosed += LoadAd;
+
+        Debug.Log("[AdRewardController] 광고 로드 완료");
     }
 
-    // ── IUnityAdsShowListener ─────────────────────────────────────────────────
-
-    public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState completionState)
+    public void ShowRewardedAd(Action onSuccess, Action onFail)
     {
-        Debug.Log($"[AdRewardController] ShowComplete: {completionState}");
-        _adLoaded = false;
-        Advertisement.Load(_adUnitId, this);
+        if (_rewardedAd == null || !_rewardedAd.CanShowAd())
+        {
+            Debug.LogWarning("[AdRewardController] 광고 준비 안됨. 로드 재시도.");
+            onFail?.Invoke();
+            LoadAd();
+            return;
+        }
 
-        if (completionState == UnityAdsShowCompletionState.COMPLETED)
-            StartCoroutine(RewardRoutine(_onSuccess, _onFail));
-        else
-            _onFail?.Invoke();
+        _rewardedAd.Show(_ => StartCoroutine(RewardRoutine(onSuccess, onFail)));
     }
-
-    public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
-    {
-        Debug.LogWarning($"[AdRewardController] Show failed: {error} - {message}");
-        _onFail?.Invoke();
-    }
-
-    public void OnUnityAdsShowStart(string adUnitId)  => Debug.Log("[AdRewardController] ShowStart");
-    public void OnUnityAdsShowClick(string adUnitId)  { }
-
-    // ── 백엔드 보상 처리 ──────────────────────────────────────────────────────
 
     private IEnumerator RewardRoutine(Action onSuccess, Action onFail)
     {

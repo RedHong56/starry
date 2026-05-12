@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.StarryStudio.StarryTarot">
     <application>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5297356763431131~7001379422"/>
         <activity
             android:name="com.unity3d.player.UnityPlayerGameActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
