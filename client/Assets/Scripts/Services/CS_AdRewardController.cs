@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using GoogleMobileAds.Api;
 using UnityEngine;
 
@@ -74,15 +73,6 @@ public class AdRewardController : MonoBehaviour
             return;
         }
 
-        _rewardedAd.Show(_ => StartCoroutine(RewardRoutine(onSuccess, onFail)));
-    }
-
-    private IEnumerator RewardRoutine(Action onSuccess, Action onFail)
-    {
-        yield return UserDataManager.Instance.AdRewardRoutine(success =>
-        {
-            if (success) onSuccess?.Invoke();
-            else         onFail?.Invoke();
-        });
+        _rewardedAd.Show(_ => onSuccess?.Invoke());
     }
 }
