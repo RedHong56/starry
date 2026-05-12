@@ -68,6 +68,13 @@ public class StarFieldController : MonoBehaviour
 
     // ── 공개 API ──────────────────────────────────────────────────────────────
 
+    /// 생년월일로 별자리 이름만 조회 (시각 연출 없음)
+    public string GetConstellationName(int month, int day)
+    {
+        var data = FindByDate(month, day);
+        return data != null ? data.constellationName : string.Empty;
+    }
+
     /// 별자리 결과 연출: 해당 별자리만 중앙에 별 → 선 순서로 등장
     public ConstellationData ShowConstellationResult(int month, int day)
     {
