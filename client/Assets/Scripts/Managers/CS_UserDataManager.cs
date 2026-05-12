@@ -36,6 +36,7 @@ public class UserDataManager : MonoBehaviour
     public IEnumerator FetchUserDataRoutine()
     {
         using var req = UnityWebRequest.Get(userDataApiUrl);
+        req.timeout = 15;
         AddAuthHeader(req);
         yield return req.SendWebRequest();
 
@@ -64,7 +65,8 @@ public class UserDataManager : MonoBehaviour
         using var req = new UnityWebRequest(consumeApiUrl, "POST")
         {
             uploadHandler   = new UploadHandlerRaw(Array.Empty<byte>()),
-            downloadHandler = new DownloadHandlerBuffer()
+            downloadHandler = new DownloadHandlerBuffer(),
+            timeout         = 15,
         };
         req.SetRequestHeader("Content-Type", "application/json");
         AddAuthHeader(req);
@@ -88,7 +90,8 @@ public class UserDataManager : MonoBehaviour
         using var req = new UnityWebRequest(adRewardApiUrl, "POST")
         {
             uploadHandler   = new UploadHandlerRaw(Array.Empty<byte>()),
-            downloadHandler = new DownloadHandlerBuffer()
+            downloadHandler = new DownloadHandlerBuffer(),
+            timeout         = 15,
         };
         req.SetRequestHeader("Content-Type", "application/json");
         AddAuthHeader(req);

@@ -92,6 +92,7 @@ public class PhaseManager : MonoBehaviour
     private void OnStartButtonClicked()
     {
         if (_currentPhase != GamePhase.Intro) return;
+        startButton.interactable = false;
         SoundManager.Instance?.PlayBtn();
         SetStartArea(false);
         loadingSpinner?.Hide();
@@ -141,6 +142,7 @@ public class PhaseManager : MonoBehaviour
 
     private void RestoreStartButton()
     {
+        startButton.interactable = true;
         SetStartArea(true);
         loadingSpinner?.Show();
     }
