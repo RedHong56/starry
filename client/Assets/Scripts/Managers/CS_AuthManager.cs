@@ -15,6 +15,14 @@ public class AuthManager : MonoBehaviour
     public string Token      => PlayerPrefs.GetString(TokenKey, string.Empty);
     public bool   IsLoggedIn => !string.IsNullOrEmpty(Token);
 
+    [UnityEngine.RuntimeInitializeOnLoadMethod(UnityEngine.RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void AutoInit()
+    {
+        if (Instance != null) return;
+        var go = new GameObject("[AuthManager]");
+        go.AddComponent<AuthManager>();
+    }
+
     private void Awake()
     {
         if (Instance != null) { Destroy(gameObject); return; }

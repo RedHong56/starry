@@ -18,6 +18,14 @@ public class UserDataManager : MonoBehaviour
     private readonly string consumeApiUrl  = AppSecrets.BackendBaseUrl + "/api/user/consume";
     private readonly string adRewardApiUrl = AppSecrets.BackendBaseUrl + "/api/user/ad-reward";
 
+    [UnityEngine.RuntimeInitializeOnLoadMethod(UnityEngine.RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void AutoInit()
+    {
+        if (Instance != null) return;
+        var go = new GameObject("[UserDataManager]");
+        go.AddComponent<UserDataManager>();
+    }
+
     private void Awake()
     {
         if (Instance != null) { Destroy(gameObject); return; }
