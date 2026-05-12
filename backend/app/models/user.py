@@ -16,11 +16,6 @@ class ConsumeResponse(BaseModel):
     freeCouponRefreshAt: str | None = None
 
 
-class AdRewardResponse(BaseModel):
-    ok: bool
-    coins: int
-
-
 class PurchaseRequest(BaseModel):
     productId: str
     receipt: str

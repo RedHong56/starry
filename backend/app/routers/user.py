@@ -2,8 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import User
-from app.limiter import limiter
-from app.models.user import AdRewardResponse, ConsumeResponse, UserMeResponse
+from app.models.user import ConsumeResponse, UserMeResponse
 from app.routers.deps import get_current_user, get_db
 from app.services import user_service
 
@@ -35,14 +34,3 @@ async def consume(
         hasFreeCoupon=current_user.has_free_coupon,
         freeCouponRefreshAt=user_service.free_coupon_refresh_iso(current_user),
     )
-
-
-@router.post("/ad-reward", response_model=AdRewardResponse)
-@limiter.limit("10/hour")
-async def ad_reward(
-    request: Request,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db),
-) -> AdRewardResponse:
-    await user_service.ad_reward(db, current_user)
-    return AdRewardResponse(ok=True, coins=current_user.coins)
