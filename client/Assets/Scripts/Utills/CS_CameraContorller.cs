@@ -19,11 +19,13 @@ public class CameraContorller : MonoBehaviour
 
     public void GoToBegin()
     {
+        cameraTransform.DOKill();
         cameraTransform.SetPositionAndRotation(beginTarget.position, beginTarget.rotation);
     }
 
     public void GoToWalk(Action onComplete)
     {
+        cameraTransform.DOKill();
         Sequence seq = DOTween.Sequence();
         seq.Append(cameraTransform.DOMove(walkTarget.position, walkDuration).SetEase(Ease.InOutSine));
         seq.Join(cameraTransform.DORotateQuaternion(walkTarget.rotation, walkDuration).SetEase(Ease.InOutSine));
@@ -33,6 +35,7 @@ public class CameraContorller : MonoBehaviour
     // Z축 이동 먼저 → 이후 최종 위치 + X 회전
     public void GoToSeat(Action onComplete)
     {
+        cameraTransform.DOKill();
         SoundManager.Instance?.PlayChair();
         Sequence seq = DOTween.Sequence();
         seq.Append(cameraTransform.DOMoveZ(seatTarget.position.z, seatZDuration).SetEase(Ease.InOutSine));
@@ -44,6 +47,7 @@ public class CameraContorller : MonoBehaviour
     // 현재 위치에서 beginTarget(하늘)으로 부드럽게 복귀
     public void GoToSky(Action onComplete)
     {
+        cameraTransform.DOKill();
         Sequence seq = DOTween.Sequence();
         seq.Append(cameraTransform.DOMove(beginTarget.position, walkDuration * 1.5f).SetEase(Ease.InOutSine));
         seq.Join(cameraTransform.DORotateQuaternion(beginTarget.rotation, walkDuration * 1.5f).SetEase(Ease.InOutSine));
