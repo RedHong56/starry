@@ -101,9 +101,9 @@ public class UIController : MonoBehaviour
     // ── 별자리 패널 (양피지) ──────────────────────────────────────────────────
 
     /// 별자리 이름을 양피지 패널에 표시. 설명은 로딩 중 placeholder를 먼저 보여줌.
-    public void ShowConstellationPanel(string koreanName, Action onRestart)
+    public void ShowConstellationPanel(string koreanName, string englishName, Action onRestart)
     {
-        constellationNameText.text = koreanName ?? string.Empty;
+        constellationNameText.text = LocalizationManager.HoroscopeTitle(koreanName, englishName);
         constellationDescText.text = LocalizationManager.LoadingHoroscope;
 
         restartButton.onClick.RemoveAllListeners();

@@ -260,7 +260,7 @@ public class PhaseManager : MonoBehaviour
         // 카메라 이동 완료 후 패널 표시. 운세가 이미 준비됐으면 즉시 표시, 아니면 도착 시 업데이트
         cameraController.GoToSky(() =>
         {
-            uiController.ShowConstellationPanel(koreanName, onRestart: OnRestartClicked);
+            uiController.ShowConstellationPanel(koreanName, constellationName, onRestart: OnRestartClicked);
             if (_horoscopeResult != null)
                 uiController.UpdateConstellationDesc(_horoscopeResult);
             else

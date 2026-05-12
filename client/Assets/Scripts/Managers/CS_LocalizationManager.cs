@@ -44,6 +44,14 @@ public class LocalizationManager : MonoBehaviour
     // ── UI 텍스트 ─────────────────────────────────────────────────────────────
 
     public static string LoadingHoroscope => IsKorean ? "오늘의 운세를 읽는 중..."        : "Reading your horoscope...";
+
+    public static string HoroscopeTitle(string koreanName, string englishName)
+    {
+        string date = System.DateTime.Now.ToString("MM.dd");
+        return IsKorean
+            ? $"{koreanName} {date} 운세"
+            : $"{englishName} {date} Horoscope";
+    }
     public static string TarotError       => IsKorean ? "별의 언어를 읽는 데 문제가 생겼다. 다시 시도해보게." : "The stars could not be read. Please try again.";
     public static string HoroscopeError   => IsKorean ? "오늘의 별자리 운세를 불러오지 못했습니다." : "Could not load today's horoscope.";
 }
