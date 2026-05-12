@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,6 +38,8 @@ public class PhaseManager : MonoBehaviour
     private string    _userWorry;
     private int[]     _selectedCardIndices;
     private bool[]    _isReversed;
+    private string    _horoscopeResult;
+    private Action    _onHoroscopeReady;
 
     private void Awake()
     {
@@ -47,6 +50,13 @@ public class PhaseManager : MonoBehaviour
     private void Start()
     {
         startButton.onClick.AddListener(OnStartButtonClicked);
+        StartCoroutine(InitRoutine());
+    }
+
+    private IEnumerator InitRoutine()
+    {
+        if (UserDataManager.Instance != null)
+            yield return UserDataManager.Instance.FetchUserDataRoutine();
         EnterPhase(GamePhase.Intro);
     }
 
@@ -196,6 +206,18 @@ public class PhaseManager : MonoBehaviour
             aiReady  = true;
         });
 
+        // 카드 공개 중 운세도 미리 요청 → 별자리 패널 열릴 때 이미 준비돼 있을 가능성 ↑
+        _horoscopeResult   = null;
+        _onHoroscopeReady  = null;
+        string constName = starField.GetConstellationName(uiController.BirthMonth, uiController.BirthDay);
+        if (!string.IsNullOrEmpty(constName))
+            aiService.GetHoroscope(constName, result =>
+            {
+                _horoscopeResult = result;
+                _onHoroscopeReady?.Invoke();
+                _onHoroscopeReady = null;
+            });
+
         cardDeck.gameObject.SetActive(true);
         characterController.PlayClapping();
         SoundManager.Instance?.PlayDia(DiaType.Umm);
@@ -231,12 +253,14 @@ public class PhaseManager : MonoBehaviour
         string constellationName = data != null ? data.constellationName : string.Empty;
         string koreanName        = data != null ? data.koreanName        : string.Empty;
 
-        // 카메라 이동 완료 후 패널 표시 + 운세 요청
+        // 카메라 이동 완료 후 패널 표시. 운세가 이미 준비됐으면 즉시 표시, 아니면 도착 시 업데이트
         cameraController.GoToSky(() =>
         {
             uiController.ShowConstellationPanel(koreanName, onRestart: OnRestartClicked);
-            aiService.GetHoroscope(constellationName, result =>
-                uiController.UpdateConstellationDesc(result));
+            if (_horoscopeResult != null)
+                uiController.UpdateConstellationDesc(_horoscopeResult);
+            else
+                _onHoroscopeReady = () => uiController.UpdateConstellationDesc(_horoscopeResult);
         });
     }
 
