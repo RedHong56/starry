@@ -877,13 +877,14 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2075863272}
-  - {fileID: 774628179}
-  - {fileID: 1107594930}
   - {fileID: 1976144567}
   - {fileID: 1575880329}
   - {fileID: 1043925319}
   - {fileID: 533643479}
   - {fileID: 1047430486}
+  - {fileID: 1107594930}
+  - {fileID: 774628179}
+  - {fileID: 817208013}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &144972213
@@ -6665,7 +6666,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 817208013}
   - {fileID: 2105764216}
   m_Father: {fileID: 137398230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7394,14 +7394,14 @@ Transform:
   m_GameObject: {fileID: 817208012}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 729.12354, y: 1544, z: -5.37309}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 984930977}
   - {fileID: 583865237}
   - {fileID: 363924597}
-  m_Father: {fileID: 774628179}
+  m_Father: {fileID: 137398230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &817208014
 MonoBehaviour:
@@ -12607,10 +12607,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bab908324774c44c94d1ceaae56d106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AdRewardController
-  androidGameId: 6111463
-  iosGameId: 6111462
-  androidAdUnit: Rewarded_Android
-  iosAdUnit: Rewarded_iOS
   testMode: 1
 --- !u!1 &1435536218
 GameObject:

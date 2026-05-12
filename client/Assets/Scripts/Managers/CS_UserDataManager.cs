@@ -52,11 +52,8 @@ public class UserDataManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"[UserDataManager] fetch failed: {req.error}. Using defaults.");
-            UserId              = "guest";
-            Coins               = 0;
-            HasFreeCoupon       = false;
-            FreeCouponRefreshAt = null;
+            Debug.LogWarning($"[UserDataManager] fetch failed: {req.error}. Keeping cached values.");
+            if (string.IsNullOrEmpty(UserId)) UserId = "guest";
         }
     }
 

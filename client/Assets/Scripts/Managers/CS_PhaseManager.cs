@@ -95,7 +95,7 @@ public class PhaseManager : MonoBehaviour
         startButton.interactable = false;
         SoundManager.Instance?.PlayBtn();
         SetStartArea(false);
-        loadingSpinner?.Hide();
+        // spinner는 광고 로딩 대기 중 표시기로 유지
         StartCoroutine(StartRoutine());
     }
 
@@ -113,10 +113,14 @@ public class PhaseManager : MonoBehaviour
         }
         else
         {
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+            Proceed();
+#else
             AdRewardController.Instance.ShowRewardedAd(
                 onSuccess: () => StartCoroutine(AdProceedRoutine()),
                 onFail:    RestoreStartButton
             );
+#endif
         }
     }
 
