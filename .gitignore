@@ -38,6 +38,7 @@ htmlcov/
 .env.*.local
 secrets.json
 firebase-config.json
+client_secret*.json
 *.keystore
 service-account.json
 
