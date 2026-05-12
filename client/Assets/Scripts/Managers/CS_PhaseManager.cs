@@ -33,6 +33,7 @@ public class PhaseManager : MonoBehaviour
     [Header("Object")]
     [SerializeField] private GameObject cardDeck;
     [SerializeField] private GameObject startArea;  // 버튼 + 쿠폰 상태 묶음 오브젝트
+    [SerializeField] private StarSpinner loadingSpinner;
 
     private GamePhase _currentPhase;
     private string    _userWorry;
@@ -87,6 +88,7 @@ public class PhaseManager : MonoBehaviour
         if (_currentPhase != GamePhase.Intro) return;
         SoundManager.Instance?.PlayBtn();
         SetStartArea(false);
+        loadingSpinner?.Show();
         StartCoroutine(StartRoutine());
     }
 
@@ -126,6 +128,7 @@ public class PhaseManager : MonoBehaviour
 
     private void Proceed()
     {
+        loadingSpinner?.Hide();
         SetStartArea(false);
         characterController.PlayBeckoning();
         EnterPhase(GamePhase.Welcome);
@@ -133,6 +136,7 @@ public class PhaseManager : MonoBehaviour
 
     private void RestoreStartButton()
     {
+        loadingSpinner?.Hide();
         SetStartArea(true);
     }
 
