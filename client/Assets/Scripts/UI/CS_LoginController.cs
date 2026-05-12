@@ -11,6 +11,9 @@ public class LoginController : MonoBehaviour
     [SerializeField] private Button appleButton;
     [SerializeField] private StarSpinner loadingSpinner;
 
+    // 앱 콜드스타트 딥링크는 한 번만 처리 (로그아웃 후 씬 재로드 시 재실행 방지)
+    private static bool _coldStartUrlConsumed = false;
+
     private static readonly string KakaoRestApiKey  = AppSecrets.KakaoRestApiKey;
     private static readonly string KakaoRedirectUri = AppSecrets.KakaoRedirectUri;
 
@@ -24,9 +27,12 @@ public class LoginController : MonoBehaviour
 
         Application.deepLinkActivated += OnDeepLinkActivated;
 
-        // 앱이 딥링크로 콜드 스타트된 경우
-        if (!string.IsNullOrEmpty(Application.absoluteURL))
+        // 앱이 딥링크로 콜드 스타트된 경우 (씬 재로드 시에는 무시)
+        if (!_coldStartUrlConsumed && !string.IsNullOrEmpty(Application.absoluteURL))
+        {
+            _coldStartUrlConsumed = true;
             HandleDeepLink(Application.absoluteURL);
+        }
 
         StartCoroutine(AutoLoginRoutine());
     }
