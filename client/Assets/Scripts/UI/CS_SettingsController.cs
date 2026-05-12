@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class SettingsController : MonoBehaviour
@@ -20,6 +21,7 @@ public class SettingsController : MonoBehaviour
 
     [Header("Button")]
     [SerializeField] private Button closeButton;
+    [SerializeField] private Button logoutButton;
 
     [SerializeField] private GameObject settingsPanel;
 
@@ -28,6 +30,7 @@ public class SettingsController : MonoBehaviour
         settingsPanel.SetActive(false);
 
         closeButton.onClick.AddListener(Close);
+        if (logoutButton != null) logoutButton.onClick.AddListener(OnLogoutClicked);
 
         bgmSlider.onValueChanged.AddListener(v => SoundManager.Instance?.SetBgmVolume(v));
         sfxSlider.onValueChanged.AddListener(v => SoundManager.Instance?.SetSfxVolume(v));
@@ -83,5 +86,12 @@ public class SettingsController : MonoBehaviour
     {
         SoundManager.Instance?.PlayBtn();
         settingsPanel.SetActive(false);
+    }
+
+    private void OnLogoutClicked()
+    {
+        SoundManager.Instance?.PlayBtn();
+        AuthManager.Instance.Logout();
+        SceneManager.LoadScene("02_Login");
     }
 }
