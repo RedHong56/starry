@@ -22,9 +22,9 @@ public class PaymentController : MonoBehaviour, IDetailedStoreListener
 
     public CoinProduct[] products = new CoinProduct[]
     {
-        new CoinProduct { productId = "coins_10", coins = 10, priceLabel = "₩1,200" },
-        new CoinProduct { productId = "coins_30", coins = 30, priceLabel = "₩3,300" },
-        new CoinProduct { productId = "coins_60", coins = 60, priceLabel = "₩5,900" },
+        new CoinProduct { productId = "stardust_10", coins = 10, priceLabel = "₩1,200" },
+        new CoinProduct { productId = "stardust_30", coins = 30, priceLabel = "₩3,300" },
+        new CoinProduct { productId = "stardust_70", coins = 70, priceLabel = "₩6,600" },
     };
 
     private IStoreController _storeController;

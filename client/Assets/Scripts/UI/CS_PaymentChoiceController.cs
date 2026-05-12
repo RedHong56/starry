@@ -18,6 +18,9 @@ public class PaymentChoiceController : MonoBehaviour
     [Header("취소")]
     [SerializeField] private Button cancelButton;
 
+    [Header("상점")]
+    [SerializeField] private ShopController shopController;
+
     private Action _onConfirm;
     private Action _onCancel;
 
@@ -34,21 +37,32 @@ public class PaymentChoiceController : MonoBehaviour
         _onConfirm = onConfirm;
         _onCancel  = onCancel;
 
-        bool canUse = UserDataManager.Instance != null && UserDataManager.Instance.CanUseTarot();
-        starDustButton.interactable = canUse;
-
-        if (starDustCoinText != null && UserDataManager.Instance != null)
-            starDustCoinText.text = $"별가루 {UserDataManager.Instance.Coins}개 보유";
+        RefreshStarDustButton();
 
         SoundManager.Instance?.PlayPannel();
         choicePanel.SetActive(true);
     }
 
+    private void RefreshStarDustButton()
+    {
+        int coins = UserDataManager.Instance != null ? UserDataManager.Instance.Coins : 0;
+        if (starDustCoinText != null)
+            starDustCoinText.text = coins > 0 ? $"{coins}개 보유" : "구매하기";
+    }
+
     private void OnStarDustClicked()
     {
         SoundManager.Instance?.PlayBtn();
-        SetButtons(false);
-        StartCoroutine(ConsumeRoutine());
+        int coins = UserDataManager.Instance != null ? UserDataManager.Instance.Coins : 0;
+        if (coins > 0)
+        {
+            SetButtons(false);
+            StartCoroutine(ConsumeRoutine());
+        }
+        else
+        {
+            shopController.Open(onClose: RefreshStarDustButton);
+        }
     }
 
     private IEnumerator ConsumeRoutine()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ public class ShopController : MonoBehaviour
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private Button     closeButton;
 
-    [Header("상품 버튼 (coins_10 / coins_30 / coins_60 순)")]
+    [Header("상품 버튼 (stardust_10 / stardust_30 / stardust_70 순)")]
     [SerializeField] private Button[]   productButtons;
     [SerializeField] private TMP_Text[] productLabels;
 
@@ -18,9 +19,11 @@ public class ShopController : MonoBehaviour
     [Header("로딩")]
     [SerializeField] private StarSpinner loadingSpinner;
 
-    private static readonly string[] ProductIds    = { "coins_10", "coins_30", "coins_60" };
-    private static readonly int[]    ProductCoins  = { 10, 30, 60 };
-    private static readonly string[] ProductPrices = { "₩1,200", "₩3,300", "₩5,900" };
+    private static readonly string[] ProductIds    = { "stardust_10", "stardust_30", "stardust_70" };
+    private static readonly int[]    ProductCoins  = { 10, 30, 70 };
+    private static readonly string[] ProductPrices = { "₩1,200", "₩3,300", "₩6,600" };
+
+    private Action _onClose;
 
     private void Awake()
     {
@@ -36,8 +39,9 @@ public class ShopController : MonoBehaviour
         }
     }
 
-    public void Open()
+    public void Open(Action onClose = null)
     {
+        _onClose = onClose;
         RefreshCoinsDisplay();
         SetButtons(true);
         loadingSpinner?.Hide();
@@ -49,6 +53,8 @@ public class ShopController : MonoBehaviour
     {
         SoundManager.Instance?.PlayBtn();
         shopPanel.SetActive(false);
+        _onClose?.Invoke();
+        _onClose = null;
     }
 
     private void OnProductClicked(int idx)
@@ -70,7 +76,6 @@ public class ShopController : MonoBehaviour
         RefreshCoinsDisplay();
         loadingSpinner?.Hide();
         SetButtons(true);
-        FindObjectOfType<UserStatusHUD>()?.Refresh();
     }
 
     private IEnumerator OnPurchaseFail()
