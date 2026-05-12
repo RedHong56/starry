@@ -13,6 +13,9 @@ class Settings(BaseSettings):
     kakao_client_secret: str = ""
     base_url: str = "http://localhost:8000"
 
+    google_client_id: str = ""
+    google_client_secret: str = ""
+
     database_url: str = "postgresql+asyncpg://starry:starry@localhost:5432/starry"
 
     def asyncpg_url(self) -> str:

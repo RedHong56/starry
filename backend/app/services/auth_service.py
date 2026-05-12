@@ -44,6 +44,8 @@ async def verify_social_code(provider: str, code: str, redirect_uri: str) -> tup
 
     if provider == "kakao":
         return await _exchange_kakao_code(code, redirect_uri)
+    if provider == "google":
+        return await _exchange_google_code(code, redirect_uri)
 
     raise ValueError(f"코드 방식 미지원 provider: {provider}")
 
@@ -87,6 +89,27 @@ async def _verify_kakao(token: str) -> tuple[str, str]:
     sub = str(data["id"])
     nickname = data.get("kakao_account", {}).get("profile", {}).get("nickname", "")
     return sub, nickname
+
+
+async def _exchange_google_code(code: str, redirect_uri: str) -> tuple[str, str]:
+    import httpx
+
+    async with httpx.AsyncClient() as client:
+        token_resp = await client.post(
+            "https://oauth2.googleapis.com/token",
+            data={
+                "code": code,
+                "client_id": settings.google_client_id,
+                "client_secret": settings.google_client_secret,
+                "redirect_uri": redirect_uri,
+                "grant_type": "authorization_code",
+            },
+        )
+    if token_resp.status_code != 200:
+        raise PermissionError(f"Google code exchange failed: {token_resp.status_code} {token_resp.text}")
+
+    id_token = token_resp.json().get("id_token")
+    return await _verify_google(id_token)
 
 
 async def _verify_google(token: str) -> tuple[str, str]:
