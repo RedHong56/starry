@@ -84,16 +84,17 @@ public class LoginController : MonoBehaviour
             UseGameSignIn  = false,
         };
         SetLoading(true);
+        var mainThread = System.Threading.SynchronizationContext.Current;
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(task =>
         {
             if (task.IsFaulted || task.IsCanceled)
             {
                 Debug.LogWarning("[LoginController] Google 로그인 실패: " + task.Exception);
-                SetLoading(false);
+                mainThread.Post(_ => SetLoading(false), null);
                 return;
             }
             var idToken = task.Result.IdToken;
-            StartCoroutine(TokenLoginRoutine("google", idToken));
+            mainThread.Post(_ => StartCoroutine(TokenLoginRoutine("google", idToken)), null);
         });
 #endif
     }
