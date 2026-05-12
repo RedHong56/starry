@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Google;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -77,25 +76,8 @@ public class LoginController : MonoBehaviour
 #if UNITY_EDITOR
         StartCoroutine(TokenLoginRoutine("google", "google_dummy_token"));
 #else
-        GoogleSignIn.Configuration = new GoogleSignInConfiguration
-        {
-            WebClientId    = AppSecrets.GoogleWebClientId,
-            RequestIdToken = true,
-            UseGameSignIn  = false,
-        };
         SetLoading(true);
-        var mainThread = System.Threading.SynchronizationContext.Current;
-        GoogleSignIn.DefaultInstance.SignIn().ContinueWith(task =>
-        {
-            if (task.IsFaulted || task.IsCanceled)
-            {
-                Debug.LogWarning("[LoginController] Google 로그인 실패: " + task.Exception);
-                mainThread.Post(_ => SetLoading(false), null);
-                return;
-            }
-            var idToken = task.Result.IdToken;
-            mainThread.Post(_ => StartCoroutine(TokenLoginRoutine("google", idToken)), null);
-        });
+        Application.OpenURL($"{AppSecrets.BackendBaseUrl}/api/auth/google");
 #endif
     }
 
