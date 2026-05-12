@@ -80,7 +80,11 @@ public class PhaseManager : MonoBehaviour
     {
         SetStartArea(false);
         cameraController.GoToBegin();
-        cameraController.GoToWalk(() => SetStartArea(true));
+        cameraController.GoToWalk(() =>
+        {
+            SetStartArea(true);
+            loadingSpinner?.Show();
+        });
     }
 
     private void OnStartButtonClicked()
@@ -88,7 +92,7 @@ public class PhaseManager : MonoBehaviour
         if (_currentPhase != GamePhase.Intro) return;
         SoundManager.Instance?.PlayBtn();
         SetStartArea(false);
-        loadingSpinner?.Show();
+        loadingSpinner?.Hide();
         StartCoroutine(StartRoutine());
     }
 
@@ -128,7 +132,6 @@ public class PhaseManager : MonoBehaviour
 
     private void Proceed()
     {
-        loadingSpinner?.Hide();
         SetStartArea(false);
         characterController.PlayBeckoning();
         EnterPhase(GamePhase.Welcome);
@@ -136,8 +139,8 @@ public class PhaseManager : MonoBehaviour
 
     private void RestoreStartButton()
     {
-        loadingSpinner?.Hide();
         SetStartArea(true);
+        loadingSpinner?.Show();
     }
 
     private void SetStartArea(bool active)
