@@ -268,7 +268,7 @@ PlayerSettings:
   AndroidAllowedArchitectures: -1
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/User/Desktop/starry/user.keystore
+  AndroidKeystoreName: '{inproject}: user.keystore'
   AndroidKeyaliasName: starry
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidEnableArm64MTE: 0
@@ -889,7 +889,7 @@ PlayerSettings:
   vrEditorSettings: {}
   cloudServicesEnabled:
     Purchasing: 0
-    Unity Ads: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -915,7 +915,7 @@ PlayerSettings:
   cloudProjectId: 0f5469d2-74dc-4a2f-a15a-ee8f3eb46ecc
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: client
+  projectName: Starry Tarot
   organizationId: redhong9956
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
