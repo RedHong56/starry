@@ -41,6 +41,7 @@ firebase-config.json
 client_secret*.json
 *.keystore
 service-account.json
+starry-tarot-*.json
 
 # ============================================
 # Unity 앱 시크릿 (키 직접 포함, 커밋 금지)
