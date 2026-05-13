@@ -43,6 +43,7 @@ public class AuthManager : MonoBehaviour
 
         using var req = UnityWebRequest.Get(userApiUrl);
         req.SetRequestHeader("Authorization", $"Bearer {Token}");
+        req.timeout = 10;
         yield return req.SendWebRequest();
 
         if (req.result == UnityWebRequest.Result.Success)
