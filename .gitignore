@@ -40,6 +40,7 @@ secrets.json
 firebase-config.json
 client_secret*.json
 *.keystore
+client/Assets/Editor/KeystoreSetup.cs
 service-account.json
 starry-tarot-*.json
 
