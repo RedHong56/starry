@@ -116,13 +116,10 @@ public class PhaseManager : MonoBehaviour
         }
         else
         {
-#if UNITY_EDITOR
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
             Proceed();
 #else
-            AdRewardController.Instance.ShowRewardedAd(
-                onSuccess: Proceed,
-                onFail:    RestoreStartButton
-            );
+            paymentChoiceController.Open(Proceed, RestoreStartButton);
 #endif
         }
     }
