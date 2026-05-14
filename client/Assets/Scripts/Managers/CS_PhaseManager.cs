@@ -36,6 +36,8 @@ public class PhaseManager : MonoBehaviour
     [SerializeField] private GameObject startArea;  // 버튼 + 쿠폰 상태 묶음 오브젝트
     [SerializeField] private StarSpinner loadingSpinner;
 
+    public bool IsInSession => _currentPhase != GamePhase.Intro;
+
     private GamePhase _currentPhase;
     private string    _userWorry;
     private int[]     _selectedCardIndices;

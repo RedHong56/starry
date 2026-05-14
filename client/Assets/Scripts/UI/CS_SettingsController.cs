@@ -14,8 +14,9 @@ public class SettingsController : MonoBehaviour
     [SerializeField] private Toggle sfxToggle;
 
     [Header("언어 세그먼트")]
-    [SerializeField] private Button korButton;
-    [SerializeField] private Button engButton;
+    [SerializeField] private Button   korButton;
+    [SerializeField] private Button   engButton;
+    [SerializeField] private TMP_Text langLockedText;
     [SerializeField] private Color  selectedColor   = new Color(1f, 1f, 1f, 1f);
     [SerializeField] private Color  unselectedColor = new Color(0.5f, 0.5f, 0.5f, 1f);
 
@@ -54,6 +55,16 @@ public class SettingsController : MonoBehaviour
 
     private void SelectLanguage(AppLanguage lang)
     {
+        if (PhaseManager.Instance != null && PhaseManager.Instance.IsInSession)
+        {
+            if (langLockedText != null)
+            {
+                langLockedText.text = LocalizationManager.LangLocked;
+                langLockedText.gameObject.SetActive(true);
+            }
+            return;
+        }
+        if (langLockedText != null) langLockedText.gameObject.SetActive(false);
         SoundManager.Instance?.PlayBtn();
         LocalizationManager.SetLanguage(lang);
         RefreshLangButtons(lang);
