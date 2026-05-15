@@ -10,8 +10,19 @@ public class FreeTicketDisplay : MonoBehaviour
 
     private Coroutine _countdownCoroutine;
 
-    private void OnEnable()  => Refresh();
-    private void OnDisable() => StopCountdown();
+    private void OnEnable()
+    {
+        if (UserDataManager.Instance != null)
+            UserDataManager.Instance.OnDataRefreshed += Refresh;
+        Refresh();
+    }
+
+    private void OnDisable()
+    {
+        if (UserDataManager.Instance != null)
+            UserDataManager.Instance.OnDataRefreshed -= Refresh;
+        StopCountdown();
+    }
 
     public void Refresh()
     {

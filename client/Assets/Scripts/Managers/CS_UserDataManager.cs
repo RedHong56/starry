@@ -9,6 +9,8 @@ public class UserDataManager : MonoBehaviour
 {
     public static UserDataManager Instance { get; private set; }
 
+    public event Action OnDataRefreshed;
+
     public string   UserId             { get; private set; }
     public int      Coins              { get; private set; }
     public bool     HasFreeCoupon      { get; private set; }
@@ -49,6 +51,7 @@ public class UserDataManager : MonoBehaviour
             FreeCouponRefreshAt = string.IsNullOrEmpty(data.freeCouponRefreshAt)
                 ? (DateTime?)null
                 : DateTime.Parse(data.freeCouponRefreshAt, null, DateTimeStyles.RoundtripKind).ToUniversalTime();
+            OnDataRefreshed?.Invoke();
         }
         else
         {
