@@ -91,7 +91,7 @@ public class CardResultController : MonoBehaviour
             string meaning = GetMeaning(info, reversed);
             string section = $"[{SlotLabels[i]}]\n\n{meaning}\n\n";
             bool sectionDone = false;
-            typewriter.Append(section, () => sectionDone = true);
+            typewriter.Append(section, () => sectionDone = true, ScrollToBottom);
             yield return new WaitUntil(() => sectionDone);
             ScrollToBottom();
 
@@ -114,7 +114,7 @@ public class CardResultController : MonoBehaviour
         string aiResult = getAiResult();
 
         bool aiDone = false;
-        typewriter.Append($"[해설]\n\n{aiResult}\n\n", () => aiDone = true);
+        typewriter.Append($"[해설]\n\n{aiResult}\n\n", () => aiDone = true, ScrollToBottom);
         yield return new WaitUntil(() => aiDone);
         ScrollToBottom();
 

@@ -22,17 +22,18 @@ public class TypewriterEffect : MonoBehaviour
         if (_routine != null) StopCoroutine(_routine);
     }
 
-    public void Append(string text, Action onComplete = null)
+    public void Append(string text, Action onComplete = null, Action onEachChar = null)
     {
         if (_routine != null) StopCoroutine(_routine);
-        _routine = StartCoroutine(AppendRoutine(text, onComplete));
+        _routine = StartCoroutine(AppendRoutine(text, onComplete, onEachChar));
     }
 
-    private IEnumerator AppendRoutine(string text, Action onComplete)
+    private IEnumerator AppendRoutine(string text, Action onComplete, Action onEachChar = null)
     {
         foreach (char c in text)
         {
             target.text += c;
+            onEachChar?.Invoke();
             yield return new WaitForSeconds(speed);
         }
         if (onComplete != null)
