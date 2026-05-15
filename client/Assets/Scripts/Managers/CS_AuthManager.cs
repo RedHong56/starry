@@ -84,6 +84,7 @@ public class AuthManager : MonoBehaviour
     public void Logout()
     {
         PlayerPrefs.DeleteKey(TokenKey);
+        PlayerPrefs.Save();
     }
 
     [Serializable] private class AuthTokenRequest { public string token; }

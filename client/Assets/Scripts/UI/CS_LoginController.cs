@@ -12,7 +12,9 @@ public class LoginController : MonoBehaviour
     [SerializeField] private StarSpinner loadingSpinner;
 
     // 앱 콜드스타트 딥링크는 한 번만 처리 (로그아웃 후 씬 재로드 시 재실행 방지)
-    private static bool _coldStartUrlConsumed = false;
+    private static bool   _coldStartUrlConsumed = false;
+    // 동일 JWT 재처리 방지 (Android에서 deepLinkActivated 이중 호출 대응)
+    private static string _lastHandledJwt = null;
 
     private static readonly string KakaoRestApiKey  = AppSecrets.KakaoRestApiKey;
     private static readonly string KakaoRedirectUri = AppSecrets.KakaoRedirectUri;
@@ -114,6 +116,8 @@ public class LoginController : MonoBehaviour
 
     private IEnumerator FinishLoginWithJwt(string jwt)
     {
+        if (jwt == _lastHandledJwt) { SetLoading(false); yield break; }
+        _lastHandledJwt = jwt;
         AuthManager.Instance.StoreToken(jwt);
         yield return UserDataManager.Instance.FetchUserDataRoutine();
         SetLoading(false);
