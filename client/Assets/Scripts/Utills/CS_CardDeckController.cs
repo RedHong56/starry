@@ -45,6 +45,7 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
     private Action<int>           _onEachConfirm;
     private RectTransform[]       _placedCards;
 
+    private bool  _isAnimating;
     private float _dragStartX;
     private float _containerStartAngle;
     private float _currentAngle;
@@ -106,6 +107,7 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     private void PlayShuffleAnimation()
     {
+        _isAnimating = true;
         SoundManager.Instance?.PlayCard(CardSFX.Animation);
         cardContainer.localEulerAngles = Vector3.zero;
 
@@ -134,6 +136,7 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
     private IEnumerator EnableConfirmAfter(float delay)
     {
         yield return new WaitForSeconds(delay);
+        _isAnimating = false;
         confirmButton.interactable = true;
         HighlightCurrent(animated: true);
     }
@@ -142,6 +145,7 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     public void OnBeginDrag(PointerEventData e)
     {
+        if (_isAnimating) return;
         SoundManager.Instance?.PlayCard(CardSFX.Swipe);
         _dragStartX          = e.position.x;
         _containerStartAngle = _currentAngle;
