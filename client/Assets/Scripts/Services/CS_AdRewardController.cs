@@ -17,6 +17,7 @@ public class AdRewardController : MonoBehaviour
 
     private RewardedAd _rewardedAd;
     private string     _adUnitId;
+    private Action     _pendingOnFail;
 
     private void Awake()
     {
@@ -56,6 +57,9 @@ public class AdRewardController : MonoBehaviour
         _rewardedAd.OnAdFullScreenContentFailed += e =>
         {
             Debug.LogWarning($"[AdRewardController] 광고 표시 실패: {e.GetMessage()}");
+            var fail = _pendingOnFail;
+            _pendingOnFail = null;
+            fail?.Invoke();
             LoadAd();
         };
         _rewardedAd.OnAdFullScreenContentClosed += LoadAd;
@@ -73,6 +77,11 @@ public class AdRewardController : MonoBehaviour
             return;
         }
 
-        _rewardedAd.Show(_ => onSuccess?.Invoke());
+        _pendingOnFail = onFail;
+        _rewardedAd.Show(_ =>
+        {
+            _pendingOnFail = null;
+            onSuccess?.Invoke();
+        });
     }
 }
