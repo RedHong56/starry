@@ -126,7 +126,6 @@ public class PaymentController : MonoBehaviour, IDetailedStoreListener
                 _storeController.ConfirmPendingPurchase(_pendingProduct);
                 _pendingProduct = null;
             }
-            yield return UserDataManager.Instance.FetchUserDataRoutine();
             onSuccess?.Invoke();
         }
         else

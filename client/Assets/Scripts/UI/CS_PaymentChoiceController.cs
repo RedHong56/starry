@@ -21,6 +21,9 @@ public class PaymentChoiceController : MonoBehaviour
     [Header("상점")]
     [SerializeField] private ShopController shopController;
 
+    [Header("로딩")]
+    [SerializeField] private StarSpinner loadingSpinner;
+
     private Action _onConfirm;
     private Action _onCancel;
 
@@ -67,6 +70,7 @@ public class PaymentChoiceController : MonoBehaviour
 
     private IEnumerator ConsumeRoutine()
     {
+        if (loadingSpinner != null) loadingSpinner.Show();
         yield return UserDataManager.Instance.ConsumeReadingRoutine(success =>
         {
             choicePanel.SetActive(false);

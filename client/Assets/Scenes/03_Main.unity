@@ -8884,6 +8884,7 @@ MonoBehaviour:
   adButton: {fileID: 1219753101}
   cancelButton: {fileID: 420872060}
   shopController: {fileID: 2001688803}
+  loadingSpinner: {fileID: 817208014}
 --- !u!4 &947571094
 Transform:
   m_ObjectHideFlags: 0
