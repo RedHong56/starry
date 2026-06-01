@@ -16,6 +16,8 @@ public class LoginController : MonoBehaviour
     // 동일 JWT 재처리 방지 (Android에서 deepLinkActivated 이중 호출 대응)
     private static string _lastHandledJwt = null;
 
+    private bool _waitingForDeepLink = false;
+
     private static readonly string KakaoRestApiKey  = AppSecrets.KakaoRestApiKey;
     private static readonly string KakaoRedirectUri = AppSecrets.KakaoRedirectUri;
 
@@ -70,6 +72,7 @@ public class LoginController : MonoBehaviour
 
         // 실제 카카오 웹 OAuth (APK 빌드 후 딥링크 테스트 시 사용)
         SetLoading(true);
+        _waitingForDeepLink = true;
         var encodedRedirect = Uri.EscapeDataString(KakaoRedirectUri);
         Application.OpenURL(
             $"https://kauth.kakao.com/oauth/authorize" +
@@ -85,6 +88,7 @@ public class LoginController : MonoBehaviour
         StartCoroutine(TokenLoginRoutine("google", "google_dummy_token"));
 #else
         SetLoading(true);
+        _waitingForDeepLink = true;
         Application.OpenURL($"{AppSecrets.BackendBaseUrl}/api/auth/google");
 #endif
     }
@@ -97,11 +101,28 @@ public class LoginController : MonoBehaviour
 
     private void OnDeepLinkActivated(string url) => HandleDeepLink(url);
 
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus && _waitingForDeepLink)
+            StartCoroutine(ResetIfNoDeepLink());
+    }
+
+    private IEnumerator ResetIfNoDeepLink()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (_waitingForDeepLink)
+        {
+            _waitingForDeepLink = false;
+            SetLoading(false);
+        }
+    }
+
     private void HandleDeepLink(string url)
     {
         // 예상 URL: starry://auth?jwt=XXXXX  또는  starry://auth?error=...
         if (!url.StartsWith("starry://auth")) return;
 
+        _waitingForDeepLink = false;
         var jwt   = ExtractQueryParam(url, "jwt");
         var error = ExtractQueryParam(url, "error");
 
