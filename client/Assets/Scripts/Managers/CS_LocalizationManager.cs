@@ -53,6 +53,7 @@ public class LocalizationManager : MonoBehaviour
             : $"{englishName} {date} Horoscope";
     }
     public static string LangLocked       => IsKorean ? "타로 리딩 중에는 언어를 변경할 수 없습니다." : "Language cannot be changed during a reading.";
+    public static string WorryPrivacyNote  => IsKorean ? "입력하신 내용은 타로 해석에만 사용되며 저장되지 않습니다." : "Your input is only used for the reading and is never stored.";
     public static string TarotError       => IsKorean ? "별의 언어를 읽는 데 문제가 생겼다. 다시 시도해보게." : "The stars could not be read. Please try again.";
     public static string HoroscopeError   => IsKorean ? "오늘의 별자리 운세를 불러오지 못했습니다." : "Could not load today's horoscope.";
 }
