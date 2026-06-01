@@ -65,9 +65,9 @@ starry/
 
 ## 블로그 포스트
 
-- [AI로 타로카드 78장 자동 생성 파이프라인 구축기](링크)
-- [Unity IAP + Google Play 서버 검증 구현기](링크)
-- [모바일 앱 소셜 로그인 딥링크 연동 (Kakao · Google · Apple)](링크)
+- [AI로 타로카드 78장 자동 생성 파이프라인 구축기]
+- [Unity IAP + Google Play 서버 검증 구현기]
+- [모바일 앱 소셜 로그인 딥링크 연동 (Kakao · Google · Apple)]
 
 ## 다운로드
 
