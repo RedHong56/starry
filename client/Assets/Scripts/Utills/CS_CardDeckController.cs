@@ -32,6 +32,12 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
     [SerializeField] private GameObject deckPanel;
     [SerializeField] private Button     confirmButton;
 
+    [Header("Guide Arrows")]
+    [SerializeField] private Image leftArrow;
+    [SerializeField] private Image rightArrow;
+
+    private const string GuideShownKey = "card_guide_shown";
+
     [Header("Reversed Card")]
     [SerializeField, Range(0f, 1f)] private float reversedChance = 0.3f; // 역방향 확률 (30%)
 
@@ -57,6 +63,8 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
     {
         confirmButton.onClick.AddListener(OnConfirm);
         deckPanel.SetActive(false);
+        leftArrow?.gameObject.SetActive(false);
+        rightArrow?.gameObject.SetActive(false);
     }
 
     public void StartSelection(Action<int[], bool[]> onComplete, Action<int> onEachConfirm = null)
@@ -139,6 +147,32 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
         _isAnimating = false;
         confirmButton.interactable = true;
         HighlightCurrent(animated: true);
+
+        if (PlayerPrefs.GetInt(GuideShownKey, 0) == 0)
+            ShowGuideArrows();
+    }
+
+    private void ShowGuideArrows()
+    {
+        foreach (var arrow in new[] { leftArrow, rightArrow })
+        {
+            if (arrow == null) continue;
+            var c = arrow.color;
+            arrow.color = new Color(c.r, c.g, c.b, 1f);
+            arrow.gameObject.SetActive(true);
+            arrow.DOFade(0f, 0.7f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+        }
+    }
+
+    private void HideGuideArrows()
+    {
+        PlayerPrefs.SetInt(GuideShownKey, 1);
+        foreach (var arrow in new[] { leftArrow, rightArrow })
+        {
+            if (arrow == null) continue;
+            arrow.DOKill();
+            arrow.DOFade(0f, 0.3f).OnComplete(() => arrow.gameObject.SetActive(false));
+        }
     }
 
     // ── Drag 처리 ────────────────────────────────────────────────────────────
@@ -146,6 +180,7 @@ public class CardDeckController : MonoBehaviour, IBeginDragHandler, IDragHandler
     public void OnBeginDrag(PointerEventData e)
     {
         if (_isAnimating) return;
+        HideGuideArrows();
         SoundManager.Instance?.PlayCard(CardSFX.Swipe);
         _dragStartX          = e.position.x;
         _containerStartAngle = _currentAngle;
