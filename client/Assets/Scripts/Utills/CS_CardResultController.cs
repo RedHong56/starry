@@ -24,23 +24,12 @@ public class CardResultController : MonoBehaviour
     [SerializeField] private TarotAIService   aiService;
     [SerializeField] private TypewriterEffect typewriter;
 
-    private bool _autoScroll = true;
-    private bool _settingScroll = false;
-
     private void Awake()
     {
         foreach (var slot in cardSlots)
             slot.Clear();
 
         resultPanel.SetActive(false);
-        resultScroll.onValueChanged.AddListener(OnScrollValueChanged);
-    }
-
-    private void OnScrollValueChanged(Vector2 pos)
-    {
-        if (_settingScroll) return;
-        // y=0이 맨 아래, 사용자가 위로 올리면 y > 0
-        _autoScroll = pos.y <= 0.05f;
     }
 
     /// <summary>
@@ -76,7 +65,6 @@ public class CardResultController : MonoBehaviour
                                        Action<int> beforeFlip, Action onComplete = null)
     {
         // 결과 패널 활성화 + 텍스트 초기화
-        _autoScroll = true;
         resultPanel.SetActive(true);
         resultText.text = string.Empty;
 
@@ -103,9 +91,8 @@ public class CardResultController : MonoBehaviour
             string meaning = GetMeaning(info, reversed);
             string section = $"[{SlotLabels[i]}]\n\n{meaning}\n\n";
             bool sectionDone = false;
-            typewriter.Append(section, () => sectionDone = true, ScrollToBottom);
+            typewriter.Append(section, () => sectionDone = true);
             yield return new WaitUntil(() => sectionDone);
-            ScrollToBottom();
 
             yield return new WaitForSeconds(pauseBetweenCards);
         }
@@ -126,9 +113,8 @@ public class CardResultController : MonoBehaviour
         string aiResult = getAiResult();
 
         bool aiDone = false;
-        typewriter.Append($"[해설]\n\n{aiResult}\n\n", () => aiDone = true, ScrollToBottom);
+        typewriter.Append($"[해설]\n\n{aiResult}\n\n", () => aiDone = true);
         yield return new WaitUntil(() => aiDone);
-        ScrollToBottom();
 
         onComplete?.Invoke();
     }
@@ -147,19 +133,4 @@ public class CardResultController : MonoBehaviour
         return reversed ? info.meaning.reversed : info.meaning.upright;
     }
 
-    private void ScrollToBottom()
-    {
-        if (!_autoScroll) return;
-        StartCoroutine(ScrollToBottomNextFrame());
-    }
-
-    private IEnumerator ScrollToBottomNextFrame()
-    {
-        yield return null;
-        _settingScroll = true;
-        Canvas.ForceUpdateCanvases();
-        resultScroll.movementType = ScrollRect.MovementType.Clamped;
-        resultScroll.normalizedPosition = new Vector2(0f, 0f);
-        _settingScroll = false;
-    }
 }
