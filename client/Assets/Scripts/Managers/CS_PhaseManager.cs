@@ -49,6 +49,7 @@ public class PhaseManager : MonoBehaviour
     {
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
+        cameraController.GoToBegin();
         SetStartArea(false);
         loadingSpinner?.Hide();
     }
