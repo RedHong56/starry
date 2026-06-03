@@ -21,8 +21,17 @@ public class SettingsController : MonoBehaviour
     [SerializeField] private Color  unselectedColor = new Color(0.5f, 0.5f, 0.5f, 1f);
 
     [Header("Button")]
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Button logoutButton;
+    [SerializeField] private Button  closeButton;
+    [SerializeField] private Button  logoutButton;
+
+    [Header("Localized Labels")]
+    [SerializeField] private TMP_Text titleText;
+    [SerializeField] private TMP_Text soundLabel;
+    [SerializeField] private TMP_Text bgmLabel;
+    [SerializeField] private TMP_Text sfxLabel;
+    [SerializeField] private TMP_Text languageLabel;
+    [SerializeField] private TMP_Text closeButtonText;
+    [SerializeField] private TMP_Text logoutButtonText;
 
     [SerializeField] private GameObject settingsPanel;
 
@@ -50,7 +59,27 @@ public class SettingsController : MonoBehaviour
         bgmToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("bgmMute", 0) == 0);
         sfxToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("sfxMute", 0) == 0);
 
+        LocalizationManager.OnLanguageChanged += RefreshTexts;
         RefreshLangButtons(LocalizationManager.Language);
+        RefreshTexts();
+    }
+
+    private void OnDisable()
+    {
+        LocalizationManager.OnLanguageChanged -= RefreshTexts;
+    }
+
+    private void RefreshTexts()
+    {
+        if (titleText       != null) titleText.text       = LocalizationManager.SettingsTitle;
+        if (soundLabel      != null) soundLabel.text      = LocalizationManager.SoundLabel;
+        if (bgmLabel        != null) bgmLabel.text        = LocalizationManager.BgmLabel;
+        if (sfxLabel        != null) sfxLabel.text        = LocalizationManager.SfxLabel;
+        if (languageLabel   != null) languageLabel.text   = LocalizationManager.LanguageLabel;
+        if (closeButtonText != null) closeButtonText.text = LocalizationManager.CloseButton;
+        if (logoutButtonText != null) logoutButtonText.text = LocalizationManager.LogoutButton;
+        if (langLockedText  != null && langLockedText.gameObject.activeSelf)
+            langLockedText.text = LocalizationManager.LangLocked;
     }
 
     private void SelectLanguage(AppLanguage lang)

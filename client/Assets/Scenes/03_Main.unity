@@ -4048,8 +4048,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Restart
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5af6d4a0fad1f2745a144d1dabf8be12, type: 2}
+  m_sharedMaterial: {fileID: -8219237794661064267, guid: 5af6d4a0fad1f2745a144d1dabf8be12, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4814,8 +4814,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Setting
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5af6d4a0fad1f2745a144d1dabf8be12, type: 2}
+  m_sharedMaterial: {fileID: -8219237794661064267, guid: 5af6d4a0fad1f2745a144d1dabf8be12, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8709,7 +8709,10 @@ MonoBehaviour:
   constellationNameText: {fileID: 2092386254}
   constellationDescText: {fileID: 1062408296}
   restartButton: {fileID: 780855455}
+  restartButtonText: {fileID: 437520316}
+  viewConstellationButtonText: {fileID: 0}
   settingsButton: {fileID: 2105764217}
+  settingsButtonText: {fileID: 518016222}
   settingsController: {fileID: 1903432980}
 --- !u!1 &898504258
 GameObject:
@@ -10582,8 +10585,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: START
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5af6d4a0fad1f2745a144d1dabf8be12, type: 2}
+  m_sharedMaterial: {fileID: -8219237794661064267, guid: 5af6d4a0fad1f2745a144d1dabf8be12, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -16130,7 +16133,7 @@ GameObject:
   - component: {fileID: 1715999903}
   - component: {fileID: 1715999902}
   m_Layer: 0
-  m_Name: TXT_Sound
+  m_Name: TXT_Language
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17812,6 +17815,13 @@ MonoBehaviour:
   unselectedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   closeButton: {fileID: 1987810015}
   logoutButton: {fileID: 2136766027}
+  titleText: {fileID: 1791652901}
+  soundLabel: {fileID: 854436749}
+  bgmLabel: {fileID: 1598805223}
+  sfxLabel: {fileID: 1536652662}
+  languageLabel: {fileID: 1715999902}
+  closeButtonText: {fileID: 1456704427}
+  logoutButtonText: {fileID: 1132922044}
   settingsPanel: {fileID: 1107594929}
 --- !u!4 &1907699312 stripped
 Transform:
@@ -18490,6 +18500,7 @@ MonoBehaviour:
   aiService: {fileID: 1846967181}
   paymentChoiceController: {fileID: 947571093}
   startButton: {fileID: 179845449}
+  startButtonText: {fileID: 1073559032}
   cardDeck: {fileID: 1055002573}
   startArea: {fileID: 1575880328}
   loadingSpinner: {fileID: 817208014}

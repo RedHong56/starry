@@ -43,6 +43,18 @@ public class LocalizationManager : MonoBehaviour
 
     // ── UI 텍스트 ─────────────────────────────────────────────────────────────
 
+    public static string SettingsTitle     => IsKorean ? "설정"        : "Settings";
+    public static string SettingsButton    => IsKorean ? "설정"        : "Setting";
+    public static string SoundLabel        => IsKorean ? "소리"        : "Sound";
+    public static string BgmLabel          => IsKorean ? "배경음악"    : "BGM";
+    public static string SfxLabel          => IsKorean ? "효과음"      : "SFX";
+    public static string LanguageLabel     => IsKorean ? "언어"        : "Language";
+    public static string CloseButton       => IsKorean ? "닫기"        : "Close";
+    public static string LogoutButton      => IsKorean ? "로그아웃"    : "Logout";
+    public static string StartButton       => IsKorean ? "시작하기"    : "Start";
+    public static string RestartButton     => IsKorean ? "처음으로"    : "Restart";
+    public static string ViewConstellation => IsKorean ? "별자리 확인" : "View Constellation";
+
     public static string LoadingHoroscope => IsKorean ? "오늘의 운세를 읽는 중..."        : "Reading your horoscope...";
 
     public static string HoroscopeTitle(string koreanName, string englishName)

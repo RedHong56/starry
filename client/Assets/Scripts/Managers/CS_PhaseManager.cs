@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public enum GamePhase
 {
@@ -29,7 +30,8 @@ public class PhaseManager : MonoBehaviour
     [SerializeField] private TarotAIService           aiService;
     [SerializeField] private PaymentChoiceController  paymentChoiceController;
     [Header("Buttons")]
-    [SerializeField] private Button startButton;
+    [SerializeField] private Button   startButton;
+    [SerializeField] private TMP_Text startButtonText;
 
     [Header("Object")]
     [SerializeField] private GameObject cardDeck;
@@ -52,6 +54,20 @@ public class PhaseManager : MonoBehaviour
         cameraController.GoToBegin();
         SetStartArea(false);
         loadingSpinner?.Hide();
+
+        LocalizationManager.OnLanguageChanged += RefreshTexts;
+        RefreshTexts();
+    }
+
+    private void OnDestroy()
+    {
+        LocalizationManager.OnLanguageChanged -= RefreshTexts;
+    }
+
+    private void RefreshTexts()
+    {
+        if (startButtonText != null)
+            startButtonText.text = LocalizationManager.StartButton;
     }
 
     private void Start()

@@ -24,9 +24,12 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text   constellationNameText;
     [SerializeField] private TMP_Text   constellationDescText;
     [SerializeField] private Button     restartButton;
+    [SerializeField] private TMP_Text   restartButtonText;
+    [SerializeField] private TMP_Text   viewConstellationButtonText;
 
     [Header("Settings")]
-    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button   settingsButton;
+    [SerializeField] private TMP_Text settingsButtonText;
     [SerializeField] private SettingsController settingsController;
 
     public int BirthMonth { get; private set; }
@@ -42,6 +45,21 @@ public class UIController : MonoBehaviour
         constellationPanel.SetActive(false);
         submitButton.onClick.AddListener(OnSubmitClicked);
         settingsButton.onClick.AddListener(settingsController.Open);
+
+        LocalizationManager.OnLanguageChanged += RefreshTexts;
+        RefreshTexts();
+    }
+
+    private void OnDestroy()
+    {
+        LocalizationManager.OnLanguageChanged -= RefreshTexts;
+    }
+
+    private void RefreshTexts()
+    {
+        if (settingsButtonText          != null) settingsButtonText.text          = LocalizationManager.SettingsButton;
+        if (viewConstellationButtonText != null) viewConstellationButtonText.text = LocalizationManager.ViewConstellation;
+        if (restartButtonText           != null) restartButtonText.text           = LocalizationManager.RestartButton;
     }
 
     // ── 대화 ─────────────────────────────────────────────────────────────────
