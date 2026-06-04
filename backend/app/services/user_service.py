@@ -74,3 +74,8 @@ def free_coupon_refresh_iso(user: User) -> Optional[str]:
     if user.free_coupon_refresh_at is None:
         return None
     return user.free_coupon_refresh_at.isoformat()
+
+
+async def delete_user(db: AsyncSession, user: User) -> None:
+    await db.delete(user)
+    await db.commit()

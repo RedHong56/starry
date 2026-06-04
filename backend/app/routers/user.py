@@ -20,6 +20,14 @@ async def get_me(current_user: User = Depends(get_current_user)) -> UserMeRespon
     )
 
 
+@router.delete("/me", status_code=204)
+async def delete_me(
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> None:
+    await user_service.delete_user(db, current_user)
+
+
 @router.post("/consume", response_model=ConsumeResponse)
 async def consume(
     current_user: User = Depends(get_current_user),
